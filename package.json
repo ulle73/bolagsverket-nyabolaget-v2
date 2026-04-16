@@ -1,0 +1,12 @@
+{
+  "name": "bolagsverket-nyabolaget-v2",
+  "version": "0.2.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "process": "node src/cli.js"
+  },
+  "dependencies": {
+    "exceljs": "^4.4.0"
+  }
+}
