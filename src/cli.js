@@ -5,6 +5,7 @@ import { fetchAndSaveCompaniesByExactRegistrationDate } from './scb.js';
 import { writeSalesExports } from './sales-exports.js';
 import { writeDeliveryReady } from './delivery-ready.js';
 import { writeIndustryExports } from './industry-exports.js';
+import { resolveRuntimePaths } from './runtime-paths.js';
 
 function formatLocalDate(date) {
   const year = date.getFullYear();
@@ -47,18 +48,33 @@ export async function runCli(
   if (args.includes('--help') || args.includes('-h')) {
     write('Användning: node src/cli.js [YYYY-MM-DD]\n');
     write('Om inget datum anges används gårdagens datum i serverns lokala tid.\n');
+    write('Sätt DATA_DIR eller GOOGLE_DRIVE_DATA_DIR i .env för att skriva till delad Drive-mapp.\n');
     return 0;
   }
 
   const targetDate = resolveTargetDate(args, now);
+  const runtimePaths = await resolveRuntimePaths();
 
   try {
     write(`Kör SCB-pipeline för ${targetDate}\n`);
 
-    const result = await fetchRegistrationDate(targetDate);
-    const salesExports = await writeSales(result.companies, result.targetDate);
-    const deliveryReady = await writeDelivery(result.companies, result.targetDate);
-    const industryExports = await writeIndustry(result.companies, result.targetDate);
+    if (runtimePaths.baseDir) {
+      write(`Sparar filer till delad basmapp: ${runtimePaths.baseDir}\n`);
+    }
+
+    const result = await fetchRegistrationDate(targetDate, {
+      outputDir: runtimePaths.rawDir,
+    });
+    const salesExports = await writeSales(result.companies, result.targetDate, {
+      outputRoot: runtimePaths.exportsDir,
+    });
+    const deliveryReady = await writeDelivery(result.companies, result.targetDate, {
+      outputRoot: runtimePaths.exportsDir,
+      stateDir: runtimePaths.stateDir,
+    });
+    const industryExports = await writeIndustry(result.companies, result.targetDate, {
+      outputRoot: runtimePaths.exportsDir,
+    });
 
     write(
       `Sparade rådata från SCB (${result.count} rader) för ${result.targetDate} till ${result.filePath} och ${result.xlsxFilePath}\n`,
