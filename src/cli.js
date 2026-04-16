@@ -3,6 +3,8 @@ import { fileURLToPath } from 'node:url';
 
 import { fetchAndSaveCompaniesByExactRegistrationDate } from './scb.js';
 import { writeSalesExports } from './sales-exports.js';
+import { writeDeliveryReady } from './delivery-ready.js';
+import { writeIndustryExports } from './industry-exports.js';
 
 function formatLocalDate(date) {
   const year = date.getFullYear();
@@ -36,6 +38,8 @@ export async function runCli(
   {
     fetchRegistrationDate = fetchAndSaveCompaniesByExactRegistrationDate,
     writeSales = writeSalesExports,
+    writeDelivery = writeDeliveryReady,
+    writeIndustry = writeIndustryExports,
     write = (message) => process.stdout.write(message),
     now = new Date(),
   } = {},
@@ -53,14 +57,19 @@ export async function runCli(
 
     const result = await fetchRegistrationDate(targetDate);
     const salesExports = await writeSales(result.companies, result.targetDate);
+    const deliveryReady = await writeDelivery(result.companies, result.targetDate);
+    const industryExports = await writeIndustry(result.companies, result.targetDate);
 
     write(
       `Saved raw SCB data (${result.count} rows) for ${result.targetDate} to ${result.filePath} and ${result.xlsxFilePath}\n`,
     );
     write(`Created sales exports in ${salesExports.rootDir}\n`);
     write(`Master CSV: ${salesExports.files.master.csv}\n`);
-    write(`Master XLSX: ${salesExports.files.master.xlsx}\n`);
     write(`Mail-only CSV: ${salesExports.files['mail-only'].csv}\n`);
+    write(`Delivery-ready CSV: ${deliveryReady.files.csv}\n`);
+    write(`Delivery-ready manifest: ${deliveryReady.manifestPath}\n`);
+    write(`Delivery history: ${deliveryReady.deliveryHistoryFilePath}\n`);
+    write(`Industry manifest: ${industryExports.manifestPath}\n`);
     write(`Stats JSON: ${salesExports.statsFilePath}\n`);
     return 0;
   } catch (error) {
