@@ -1,0 +1,13 @@
+{
+  "name": "bolagsverket-nyabolaget-v2",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "process": "node src/index.js",
+    "process:excel": "node src/index.excel.js"
+  },
+  "dependencies": {
+    "exceljs": "^4.4.0"
+  }
+}
