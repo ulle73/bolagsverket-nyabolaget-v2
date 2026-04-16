@@ -1,0 +1,7 @@
+node_modules/
+.env
+raw/
+exports/
+state/
+scb/*.pfx
+.DS_Store
