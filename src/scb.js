@@ -361,7 +361,7 @@ export async function fetchCompaniesByExactRegistrationDate(targetDate, options 
   return fetchCompaniesByRegistrationDateSegment(targetDate, options);
 }
 
-export async function saveCompaniesJson(companies, targetDate, { outputDir = 'output' } = {}) {
+export async function saveCompaniesJson(companies, targetDate, { outputDir = 'raw' } = {}) {
   const datedFileName = `${formatOutputDate(targetDate)}.json`;
   const absoluteOutputDir = path.resolve(outputDir);
   const filePath = path.join(absoluteOutputDir, datedFileName);
@@ -372,7 +372,7 @@ export async function saveCompaniesJson(companies, targetDate, { outputDir = 'ou
   return filePath;
 }
 
-export async function saveCompaniesXlsx(companies, targetDate, { outputDir = 'output' } = {}) {
+export async function saveCompaniesXlsx(companies, targetDate, { outputDir = 'raw' } = {}) {
   const datedFileName = `${formatOutputDate(targetDate)}.xlsx`;
   const absoluteOutputDir = path.resolve(outputDir);
   const filePath = path.join(absoluteOutputDir, datedFileName);
