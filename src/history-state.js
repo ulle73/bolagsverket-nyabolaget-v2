@@ -23,8 +23,8 @@ async function readJsonFile(filePath, fallbackValue) {
 }
 
 export function buildDeliveryIdentity(row) {
-  const orgNr = normalizeText(row?.OrgNr ?? row?.orgnr);
-  const email = normalizeEmail(row?.['E-post'] ?? row?.email);
+  const orgNr = normalizeText(row?.OrgNr ?? row?.['OrgNr']);
+  const email = normalizeEmail(row?.['E-post'] ?? row?.['E-post']);
 
   if (orgNr && email) {
     return `${orgNr}::${email}`;
@@ -34,23 +34,23 @@ export function buildDeliveryIdentity(row) {
 }
 
 export async function loadDeliveryHistory({ stateDir = 'state' } = {}) {
-  const filePath = path.join(path.resolve(stateDir), 'delivery-history.json');
+  const filePath = path.join(path.resolve(stateDir), 'leveranshistorik.json');
   const data = await readJsonFile(filePath, {
     version: 1,
-    recipients: {},
+    mottagare: {},
   });
 
   return {
     filePath,
     data: {
       version: 1,
-      recipients: data?.recipients ?? {},
+      mottagare: data?.mottagare ?? data?.recipients ?? {},
     },
   };
 }
 
 export function buildDeliveryEntries(rows, historyData, targetDate) {
-  const recipients = historyData?.recipients ?? {};
+  const mottagare = historyData?.mottagare ?? historyData?.recipients ?? {};
   const entries = [];
   let skippedAlreadyQueuedCount = 0;
   let skippedMissingIdentityCount = 0;
@@ -63,9 +63,10 @@ export function buildDeliveryEntries(rows, historyData, targetDate) {
       continue;
     }
 
-    const existing = recipients[deliveryKey];
+    const existing = mottagare[deliveryKey];
+    const senasteKodag = existing?.SenasteKödatum ?? existing?.lastQueuedDate;
 
-    if (existing && existing.lastQueuedDate && existing.lastQueuedDate !== targetDate) {
+    if (senasteKodag && senasteKodag !== targetDate) {
       skippedAlreadyQueuedCount += 1;
       continue;
     }
@@ -85,33 +86,33 @@ export function buildDeliveryEntries(rows, historyData, targetDate) {
 
 export async function commitDeliveryHistory(entries, targetDate, { stateDir = 'state' } = {}) {
   const { filePath, data } = await loadDeliveryHistory({ stateDir });
-  const recipients = data.recipients ?? {};
-  const queuedAt = new Date().toISOString();
+  const mottagare = data.mottagare ?? {};
+  const kötid = new Date().toISOString();
 
   for (const entry of entries) {
     const row = entry.row;
-    const existing = recipients[entry.deliveryKey] ?? {};
+    const existing = mottagare[entry.deliveryKey] ?? {};
 
-    recipients[entry.deliveryKey] = {
-      deliveryKey: entry.deliveryKey,
-      orgNr: normalizeText(row?.OrgNr ?? row?.orgnr),
-      email: normalizeEmail(row?.['E-post'] ?? row?.email),
-      companyName: normalizeText(row?.['Företagsnamn'] ?? row?.company_name),
-      firstQueuedDate: existing.firstQueuedDate ?? targetDate,
-      lastQueuedDate: targetDate,
-      firstQueuedAt: existing.firstQueuedAt ?? queuedAt,
-      lastQueuedAt: queuedAt,
+    mottagare[entry.deliveryKey] = {
+      Leveransnyckel: entry.deliveryKey,
+      OrgNr: normalizeText(row?.OrgNr),
+      'E-post': normalizeEmail(row?.['E-post']),
+      Företagsnamn: normalizeText(row?.['Företagsnamn']),
+      FörstaKödatum: existing.FörstaKödatum ?? existing.firstQueuedDate ?? targetDate,
+      SenasteKödatum: targetDate,
+      FörstaKötid: existing.FörstaKötid ?? existing.firstQueuedAt ?? kötid,
+      SenasteKötid: kötid,
     };
   }
 
   data.version = 1;
-  data.recipients = recipients;
+  data.mottagare = mottagare;
 
   await mkdir(path.dirname(filePath), { recursive: true });
   await writeFile(filePath, JSON.stringify(data, null, 2), 'utf8');
 
   return {
     filePath,
-    recipientCount: Object.keys(recipients).length,
+    recipientCount: Object.keys(mottagare).length,
   };
 }

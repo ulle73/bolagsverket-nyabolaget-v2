@@ -101,12 +101,12 @@ async function writeGroupFiles(basePath, rows) {
     writeJson(jsonPath, rows),
     writeCsv(csvPath, rows),
     writeObjectsXlsx(xlsxPath, rows, {
-      sheetName: 'Industry',
+      sheetName: 'Bransch',
       headers: INDUSTRY_FIELDS,
     }),
   ]);
 
-  return { json: jsonPath, csv: csvPath, xlsx: xlsxPath };
+  return { Jsonfil: jsonPath, Csvfil: csvPath, Xlsxfil: xlsxPath };
 }
 
 async function writeAudience(rootDir, audienceFolder, rows, formattedDate) {
@@ -118,7 +118,7 @@ async function writeAudience(rootDir, audienceFolder, rows, formattedDate) {
       path.join(rootDir, 'by-industry-all', audienceFolder, slug, formattedDate),
       group.rows,
     );
-    written.push({ slug, label: group.label, count: group.rows.length, files });
+    written.push({ Slug: slug, Etikett: group.label, Antal: group.rows.length, Filer: files });
   }
 
   return written;
@@ -133,9 +133,9 @@ export async function writeIndustryExports(companies, targetDate, { outputRoot =
   const mailOnly = await writeAudience(rootDir, 'mail-only', segments['mail-only'], formattedDate);
 
   const manifest = {
-    targetDate: formattedDate,
-    masterGroupCount: master.length,
-    mailOnlyGroupCount: mailOnly.length,
+    Datum: formattedDate,
+    AntalBranschgrupperMaster: master.length,
+    AntalBranschgrupperEpost: mailOnly.length,
   };
   const manifestPath = path.join(rootDir, 'by-industry-all', 'manifest.json');
   await writeJson(manifestPath, manifest);

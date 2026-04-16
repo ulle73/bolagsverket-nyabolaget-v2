@@ -11,14 +11,14 @@ import {
 } from './history-state.js';
 
 const DELIVERY_READY_FIELDS = [
-  'email',
-  'company_name',
-  'orgnr',
-  'registration_date',
-  'county',
-  'municipality',
-  'industry',
-  'phone',
+  'E-post',
+  'Företagsnamn',
+  'OrgNr',
+  'Registreringsdatum',
+  'Säteslän',
+  'Säteskommun',
+  'Bransch',
+  'Telefon',
 ];
 
 function cleanValue(value) {
@@ -32,14 +32,14 @@ function fallbackValue(value, fallback) {
 
 function toDeliveryReadyRow(company) {
   return {
-    email: cleanValue(company['E-post'] ?? ''),
-    company_name: cleanValue(company['Företagsnamn'] ?? ''),
-    orgnr: cleanValue(company['OrgNr'] ?? ''),
-    registration_date: cleanValue(company['Registreringsdatum'] ?? ''),
-    county: fallbackValue(company['Säteslän'], 'Okänt län'),
-    municipality: fallbackValue(company['Säteskommun'], 'Okänd kommun'),
-    industry: fallbackValue(company['Bransch_1'], 'Okänd'),
-    phone: cleanValue(company['Telefon'] ?? ''),
+    'E-post': cleanValue(company['E-post'] ?? ''),
+    'Företagsnamn': cleanValue(company['Företagsnamn'] ?? ''),
+    'OrgNr': cleanValue(company['OrgNr'] ?? ''),
+    'Registreringsdatum': cleanValue(company['Registreringsdatum'] ?? ''),
+    'Säteslän': fallbackValue(company['Säteslän'], 'Okänt län'),
+    'Säteskommun': fallbackValue(company['Säteskommun'], 'Okänd kommun'),
+    'Bransch': fallbackValue(company['Bransch_1'], 'Okänd'),
+    'Telefon': cleanValue(company['Telefon'] ?? ''),
   };
 }
 
@@ -80,15 +80,15 @@ async function writeDeliveryReadyFiles(basePath, rows) {
     writeJson(jsonPath, rows),
     writeCsv(csvPath, rows, DELIVERY_READY_FIELDS),
     writeObjectsXlsx(xlsxPath, rows, {
-      sheetName: 'DeliveryReady',
+      sheetName: 'Utskicksklar',
       headers: DELIVERY_READY_FIELDS,
     }),
   ]);
 
   return {
-    json: jsonPath,
-    csv: csvPath,
-    xlsx: xlsxPath,
+    Jsonfil: jsonPath,
+    Csvfil: csvPath,
+    Xlsxfil: xlsxPath,
   };
 }
 
@@ -119,14 +119,14 @@ export async function writeDeliveryReady(companies, targetDate, options = {}) {
   );
 
   const manifest = {
-    targetDate: formattedDate,
-    eligibleMailOnlyCount: segments['mail-only'].length,
-    deliveryReadyCount: rows.length,
-    skippedAlreadyQueuedCount: deliveryBuild.skippedAlreadyQueuedCount,
-    skippedMissingIdentityCount: deliveryBuild.skippedMissingIdentityCount,
-    deliveryHistoryFilePath,
-    deliveryHistoryRecipientCount: deliveryHistoryCommit.recipientCount,
-    files,
+    Datum: formattedDate,
+    AntalEpostklaraBolag: segments['mail-only'].length,
+    AntalUtskicksklaraBolag: rows.length,
+    AntalBortfiltreradeRedanKöade: deliveryBuild.skippedAlreadyQueuedCount,
+    AntalBortfiltreradeUtanIdentitet: deliveryBuild.skippedMissingIdentityCount,
+    LeveranshistorikFil: deliveryHistoryFilePath,
+    AntalPosterILeveranshistorik: deliveryHistoryCommit.recipientCount,
+    Filer: files,
   };
 
   const manifestPath = path.join(rootDir, 'delivery-ready', 'manifest.json');

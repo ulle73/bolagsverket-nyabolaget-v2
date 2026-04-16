@@ -169,9 +169,9 @@ async function writeJsonCsvXlsx(baseFilePathWithoutExtension, companies) {
   ]);
 
   return {
-    json: jsonFilePath,
-    csv: csvFilePath,
-    xlsx: xlsxFilePath,
+    Jsonfil: jsonFilePath,
+    Csvfil: csvFilePath,
+    Xlsxfil: xlsxFilePath,
   };
 }
 
@@ -182,10 +182,10 @@ async function writeGroupedSegments(rootDir, audienceFolder, groupFolder, fileSt
     const fileBase = path.join(rootDir, audienceFolder, groupFolder, slug, fileStem);
     const files = await writeJsonCsvXlsx(fileBase, group.companies);
     written.push({
-      slug,
-      label: group.label,
-      count: group.companies.length,
-      files,
+      Slug: slug,
+      Etikett: group.label,
+      Antal: group.companies.length,
+      Filer: files,
     });
   }
 
@@ -247,12 +247,12 @@ export async function writeSalesExports(
   };
 
   const stats = {
-    targetDate: formattedDate,
-    rawCount: companies.length,
-    masterCount: segments.master.length,
-    mailOnlyCount: segments['mail-only'].length,
-    countyCount: grouped.byCounty.master.length,
-    industryCount: grouped.byIndustry.master.length,
+    Datum: formattedDate,
+    AntalRåposter: companies.length,
+    AntalMasterposter: segments.master.length,
+    AntalEpostposter: segments['mail-only'].length,
+    AntalLänsgrupper: grouped.byCounty.master.length,
+    AntalBranschgrupper: grouped.byIndustry.master.length,
   };
   const statsFilePath = path.join(rootDir, 'stats.json');
 

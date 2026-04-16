@@ -45,15 +45,15 @@ export async function runCli(
   } = {},
 ) {
   if (args.includes('--help') || args.includes('-h')) {
-    write('Usage: node src/cli.js [YYYY-MM-DD]\n');
-    write('If no date is provided, the script uses yesterday in local server time.\n');
+    write('Användning: node src/cli.js [YYYY-MM-DD]\n');
+    write('Om inget datum anges används gårdagens datum i serverns lokala tid.\n');
     return 0;
   }
 
   const targetDate = resolveTargetDate(args, now);
 
   try {
-    write(`Running SCB pipeline for ${targetDate}\n`);
+    write(`Kör SCB-pipeline för ${targetDate}\n`);
 
     const result = await fetchRegistrationDate(targetDate);
     const salesExports = await writeSales(result.companies, result.targetDate);
@@ -61,19 +61,19 @@ export async function runCli(
     const industryExports = await writeIndustry(result.companies, result.targetDate);
 
     write(
-      `Saved raw SCB data (${result.count} rows) for ${result.targetDate} to ${result.filePath} and ${result.xlsxFilePath}\n`,
+      `Sparade rådata från SCB (${result.count} rader) för ${result.targetDate} till ${result.filePath} och ${result.xlsxFilePath}\n`,
     );
-    write(`Created sales exports in ${salesExports.rootDir}\n`);
-    write(`Master CSV: ${salesExports.files.master.csv}\n`);
-    write(`Mail-only CSV: ${salesExports.files['mail-only'].csv}\n`);
-    write(`Delivery-ready CSV: ${deliveryReady.files.csv}\n`);
-    write(`Delivery-ready manifest: ${deliveryReady.manifestPath}\n`);
-    write(`Delivery history: ${deliveryReady.deliveryHistoryFilePath}\n`);
-    write(`Industry manifest: ${industryExports.manifestPath}\n`);
-    write(`Stats JSON: ${salesExports.statsFilePath}\n`);
+    write(`Skapade försäljningsexporter i ${salesExports.rootDir}\n`);
+    write(`Master CSV: ${salesExports.files.master.Csvfil}\n`);
+    write(`Mail-only CSV: ${salesExports.files['mail-only'].Csvfil}\n`);
+    write(`Utskicksklar CSV: ${deliveryReady.files.Csvfil}\n`);
+    write(`Utskicksklar manifest: ${deliveryReady.manifestPath}\n`);
+    write(`Leveranshistorik: ${deliveryReady.deliveryHistoryFilePath}\n`);
+    write(`Branschmanifest: ${industryExports.manifestPath}\n`);
+    write(`Statistik JSON: ${salesExports.statsFilePath}\n`);
     return 0;
   } catch (error) {
-    write(`SCB fetch failed for ${targetDate}: ${error.message}\n`);
+    write(`SCB-körning misslyckades för ${targetDate}: ${error.message}\n`);
     return 1;
   }
 }
