@@ -1,0 +1,31 @@
+[
+  {
+    "OrgNr": "0111185211",
+    "PeOrgNr": "200111185211",
+    "Företagsnamn": "Nilsson, Daniel",
+    "Firma": "",
+    "Juridisk form": "Fysiska personer",
+    "Privat/Publikt": "Ej aktiebolag",
+    "Registreringsdatum": "2026-03-02",
+    "Startdatum": "2026-03-02",
+    "Slutdatum": "",
+    "Bolagsstatus": "Normalläge",
+    "Företagsstatus": "Är verksam",
+    "Bransch_1": "Detaljhandel med tidningar",
+    "Bransch_1, kod": "47621",
+    "Säteskommun": "Stockholm",
+    "Säteslän": "Stockholm",
+    "ARegion": "Stockholm/Södertälje",
+    "PostAdress": "HELGAGATAN 36 G LGH 1002",
+    "PostNr": "118 58",
+    "PostOrt": "STOCKHOLM",
+    "E-post": "",
+    "Telefon": "",
+    "Fskattstatus": "Är registrerad för F-skatt",
+    "Momsstatus": "Har aldrig varit registrerad för moms",
+    "Arbetsgivarstatus": "Har aldrig varit registrerad som arbetsgivare",
+    "Storleksklass SME": "0 anställda",
+    "Utskick": "Postadress är OK",
+    "Reklam": "Tar emot reklam, ej telefonnummerspärrat"
+  }
+]
