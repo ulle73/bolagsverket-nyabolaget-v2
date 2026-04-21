@@ -1,6 +1,7 @@
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
+import { enrichAndSaveCompaniesWithAllabolag } from './allabolag-enrichment.js';
 import { fetchAndSaveCompaniesByExactRegistrationDate } from './scb.js';
 import { writeSalesExports } from './sales-exports.js';
 import { writeDeliveryReady } from './delivery-ready.js';
@@ -38,6 +39,7 @@ export async function runCli(
   args = process.argv.slice(2),
   {
     fetchRegistrationDate = fetchAndSaveCompaniesByExactRegistrationDate,
+    enrichCompanies = enrichAndSaveCompaniesWithAllabolag,
     writeSales = writeSalesExports,
     writeDelivery = writeDeliveryReady,
     writeIndustry = writeIndustryExports,
@@ -65,20 +67,37 @@ export async function runCli(
     const result = await fetchRegistrationDate(targetDate, {
       outputDir: runtimePaths.rawDir,
     });
-    const salesExports = await writeSales(result.companies, result.targetDate, {
-      outputRoot: runtimePaths.exportsDir,
-    });
-    const deliveryReady = await writeDelivery(result.companies, result.targetDate, {
-      outputRoot: runtimePaths.exportsDir,
-      stateDir: runtimePaths.stateDir,
-    });
-    const industryExports = await writeIndustry(result.companies, result.targetDate, {
-      outputRoot: runtimePaths.exportsDir,
-    });
 
     write(
       `Sparade rådata från SCB (${result.count} rader) för ${result.targetDate} till ${result.filePath} och ${result.xlsxFilePath}\n`,
     );
+
+    if (result.count === 0) {
+      write(`Inga poster hittades för ${result.targetDate}. Inga exportmappar skapades.\n`);
+      return 0;
+    }
+
+    const enrichmentResult = await enrichCompanies(result.companies, result.targetDate, {
+      outputDir: runtimePaths.rawDir,
+      stateDir: runtimePaths.stateDir,
+      writeProgress: write,
+    });
+
+    write(
+      `Sparade Allabolag-checkpoint (${enrichmentResult.count} rader) fÃ¶r ${enrichmentResult.targetDate} till ${enrichmentResult.filePath} och ${enrichmentResult.xlsxFilePath}\n`,
+    );
+
+    const salesExports = await writeSales(enrichmentResult.companies, result.targetDate, {
+      outputRoot: runtimePaths.exportsDir,
+    });
+    const deliveryReady = await writeDelivery(enrichmentResult.companies, result.targetDate, {
+      outputRoot: runtimePaths.exportsDir,
+      stateDir: runtimePaths.stateDir,
+    });
+    const industryExports = await writeIndustry(enrichmentResult.companies, result.targetDate, {
+      outputRoot: runtimePaths.exportsDir,
+    });
+
     write(`Skapade försäljningsexporter i ${salesExports.rootDir}\n`);
     write(`Master CSV: ${salesExports.files.master.Csvfil}\n`);
     write(`Mail-only CSV: ${salesExports.files['mail-only'].Csvfil}\n`);
@@ -87,6 +106,8 @@ export async function runCli(
     write(`Leveranshistorik: ${deliveryReady.deliveryHistoryFilePath}\n`);
     write(`Branschmanifest: ${industryExports.manifestPath}\n`);
     write(`Statistik JSON: ${salesExports.statsFilePath}\n`);
+    write(`Allabolag-statistik: ${enrichmentResult.statsFilePath}\n`);
+    write(`Allabolag-cache: ${enrichmentResult.cacheFilePath}\n`);
     return 0;
   } catch (error) {
     write(`SCB-körning misslyckades för ${targetDate}: ${error.message}\n`);

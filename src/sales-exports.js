@@ -1,6 +1,13 @@
 import path from 'node:path';
 import { mkdir, writeFile } from 'node:fs/promises';
 
+import {
+  CONTACT_EXPORT_FIELDS,
+  buildContactExportFields,
+  getPrimaryEmail,
+  getPrimaryPhone,
+  isMarketingProtected,
+} from './company-contact.js';
 import { formatOutputDate } from './scb.js';
 import { writeObjectsXlsx } from './xlsx.js';
 
@@ -32,6 +39,7 @@ const SALES_EXPORT_FIELDS = [
   'Storleksklass SME',
   'Utskick',
   'Reklam',
+  ...CONTACT_EXPORT_FIELDS,
 ];
 
 const ALLOWED_COMPANY_STATUSES = new Set([
@@ -57,6 +65,35 @@ function isRelevantNewCompany(company) {
     !hasValue(company['Slutdatum']) &&
     cleanValue(company['Bolagsstatus']) === 'Normalläge' &&
     ALLOWED_COMPANY_STATUSES.has(cleanValue(company['Företagsstatus']))
+  );
+}
+
+function isExcludedCompanyName(companyName) {
+  const normalizedName = cleanValue(companyName ?? '');
+
+  if (!normalizedName) {
+    return false;
+  }
+
+  return (
+    /\bholding(s)?\b/i.test(normalizedName) ||
+    /aktieholding/i.test(normalizedName) ||
+    /^wint startup \d+ ab$/i.test(normalizedName) ||
+    /^magnora project infra \d+ ab$/i.test(normalizedName)
+  );
+}
+
+function isExcludedIndustry(industryName) {
+  const normalizedIndustry = cleanValue(industryName ?? '');
+  return /holdingverksamhet/i.test(normalizedIndustry);
+}
+
+function isIncludedForSale(company) {
+  return (
+    isRelevantNewCompany(company) &&
+    !isMarketingProtected(company) &&
+    !isExcludedCompanyName(company['Företagsnamn']) &&
+    !isExcludedIndustry(company['Bransch_1'])
   );
 }
 
@@ -98,17 +135,33 @@ export function sanitizeCompanyForSale(company) {
   const sanitized = {};
 
   for (const fieldName of SALES_EXPORT_FIELDS) {
+    if (fieldName === 'E-post') {
+      sanitized[fieldName] = getPrimaryEmail(company);
+      continue;
+    }
+
+    if (fieldName === 'Telefon') {
+      sanitized[fieldName] = getPrimaryPhone(company);
+      continue;
+    }
+
+    if (CONTACT_EXPORT_FIELDS.includes(fieldName)) {
+      continue;
+    }
+
     sanitized[fieldName] = cleanValue(company[fieldName] ?? '');
   }
+
+  Object.assign(sanitized, buildContactExportFields(company));
 
   return sanitized;
 }
 
 export function buildSalesSegments(companies) {
-  const relevantSource = companies.filter(isRelevantNewCompany);
+  const relevantSource = companies.filter(isIncludedForSale);
   const full = relevantSource.map(sanitizeCompanyForSale);
   const mailOnlySource = relevantSource.filter((company) =>
-    hasValue(company['E-post']),
+    hasValue(getPrimaryEmail(company)),
   );
   const mailOnly = mailOnlySource.map(sanitizeCompanyForSale);
 
@@ -199,6 +252,13 @@ export async function writeSalesExports(
 ) {
   const formattedDate = formatOutputDate(targetDate);
   const rootDir = path.join(path.resolve(outputRoot), formattedDate);
+  if (companies.length === 0) {
+    return {
+      targetDate: formattedDate,
+      rootDir,
+      skipped: true,
+    };
+  }
   const fileStem = formattedDate;
   const segments = buildSalesSegments(companies);
 
@@ -251,6 +311,14 @@ export async function writeSalesExports(
     AntalRåposter: companies.length,
     AntalMasterposter: segments.master.length,
     AntalEpostposter: segments['mail-only'].length,
+    AntalTelefonnummer: segments.master.filter((company) => hasValue(company['Telefon']))
+      .length,
+    AntalKontaktspÃ¤rradeBolag: companies.filter((company) => isMarketingProtected(company))
+      .length,
+    AntalAllabolagEpost: segments.master.filter((company) => hasValue(company['Allabolag e-post']))
+      .length,
+    AntalKontaktpersoner: segments.master.filter((company) => hasValue(company['Kontaktperson namn']))
+      .length,
     AntalLänsgrupper: grouped.byCounty.master.length,
     AntalBranschgrupper: grouped.byIndustry.master.length,
   };

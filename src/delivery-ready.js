@@ -1,6 +1,12 @@
 import path from 'node:path';
 import { mkdir, writeFile } from 'node:fs/promises';
 
+import {
+  CONTACT_EXPORT_FIELDS,
+  copyContactExportFields,
+  getPrimaryEmail,
+  getPrimaryPhone,
+} from './company-contact.js';
 import { formatOutputDate } from './scb.js';
 import { buildSalesSegments } from './sales-exports.js';
 import { writeObjectsXlsx } from './xlsx.js';
@@ -19,6 +25,7 @@ const DELIVERY_READY_FIELDS = [
   'Säteskommun',
   'Bransch',
   'Telefon',
+  ...CONTACT_EXPORT_FIELDS,
 ];
 
 function cleanValue(value) {
@@ -30,17 +37,57 @@ function fallbackValue(value, fallback) {
   return cleaned || fallback;
 }
 
+function slugifySegment(value) {
+  const normalized = String(value ?? '')
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '');
+
+  return normalized || 'unknown';
+}
+
 function toDeliveryReadyRow(company) {
   return {
-    'E-post': cleanValue(company['E-post'] ?? ''),
+    'E-post': cleanValue(getPrimaryEmail(company)),
     'Företagsnamn': cleanValue(company['Företagsnamn'] ?? ''),
     'OrgNr': cleanValue(company['OrgNr'] ?? ''),
     'Registreringsdatum': cleanValue(company['Registreringsdatum'] ?? ''),
     'Säteslän': fallbackValue(company['Säteslän'], 'Okänt län'),
     'Säteskommun': fallbackValue(company['Säteskommun'], 'Okänd kommun'),
     'Bransch': fallbackValue(company['Bransch_1'], 'Okänd'),
-    'Telefon': cleanValue(company['Telefon'] ?? ''),
+    'Telefon': cleanValue(getPrimaryPhone(company)),
+    ...copyContactExportFields(company),
   };
+}
+
+function mapDeliveryEntriesToRows(entries) {
+  return entries.map((entry) => toDeliveryReadyRow(entry.row));
+}
+
+function groupDeliveryEntries(entries, fieldName, { exclude = [], fallbackLabel = '' } = {}) {
+  const groups = new Map();
+
+  for (const entry of entries) {
+    const rawValue = cleanValue(entry.row?.[fieldName]);
+    const label = rawValue || fallbackLabel;
+
+    if (!label || exclude.includes(label)) {
+      continue;
+    }
+
+    const slug = slugifySegment(label);
+    const group = groups.get(slug) ?? {
+      label,
+      entries: [],
+    };
+
+    group.entries.push(entry);
+    groups.set(slug, group);
+  }
+
+  return groups;
 }
 
 function toCsv(rows, headers) {
@@ -92,9 +139,36 @@ async function writeDeliveryReadyFiles(basePath, rows) {
   };
 }
 
+async function writeGroupedDeliveryReady(rootDir, audienceFolder, groupFolder, fileStem, groups) {
+  const written = [];
+
+  for (const [slug, group] of groups.entries()) {
+    const files = await writeDeliveryReadyFiles(
+      path.join(rootDir, audienceFolder, groupFolder, slug, `${fileStem}-delivery-ready`),
+      mapDeliveryEntriesToRows(group.entries),
+    );
+
+    written.push({
+      Slug: slug,
+      Etikett: group.label,
+      Antal: group.entries.length,
+      Filer: files,
+    });
+  }
+
+  return written;
+}
+
 export async function writeDeliveryReady(companies, targetDate, options = {}) {
   const formattedDate = formatOutputDate(targetDate);
   const rootDir = path.join(path.resolve(options.outputRoot ?? 'exports'), formattedDate);
+  if (companies.length === 0) {
+    return {
+      targetDate: formattedDate,
+      rootDir,
+      skipped: true,
+    };
+  }
   const stateDir = options.stateDir ?? 'state';
   const segments = buildSalesSegments(companies);
   const { filePath: deliveryHistoryFilePath, data: deliveryHistory } =
@@ -106,11 +180,38 @@ export async function writeDeliveryReady(companies, targetDate, options = {}) {
     formattedDate,
   );
 
-  const rows = deliveryBuild.entries.map((entry) => toDeliveryReadyRow(entry.row));
+  const rows = mapDeliveryEntriesToRows(deliveryBuild.entries);
   const files = await writeDeliveryReadyFiles(
     path.join(rootDir, 'delivery-ready', formattedDate),
     rows,
   );
+  const mirrored = {
+    mailOnly: await writeDeliveryReadyFiles(
+      path.join(rootDir, 'mail-only', `${formattedDate}-delivery-ready`),
+      rows,
+    ),
+    byCounty: await writeGroupedDeliveryReady(
+      rootDir,
+      'by-lan',
+      'mail-only',
+      formattedDate,
+      groupDeliveryEntries(deliveryBuild.entries, 'Säteslän'),
+    ),
+    byIndustry: await writeGroupedDeliveryReady(
+      rootDir,
+      'by-industry',
+      'mail-only',
+      formattedDate,
+      groupDeliveryEntries(deliveryBuild.entries, 'Bransch_1', { exclude: ['Okänd'] }),
+    ),
+    byIndustryAll: await writeGroupedDeliveryReady(
+      rootDir,
+      'by-industry-all',
+      'mail-only',
+      formattedDate,
+      groupDeliveryEntries(deliveryBuild.entries, 'Bransch_1', { fallbackLabel: 'Okänd' }),
+    ),
+  };
 
   const deliveryHistoryCommit = await commitDeliveryHistory(
     deliveryBuild.entries,
@@ -123,10 +224,17 @@ export async function writeDeliveryReady(companies, targetDate, options = {}) {
     AntalEpostklaraBolag: segments['mail-only'].length,
     AntalUtskicksklaraBolag: rows.length,
     AntalBortfiltreradeRedanKöade: deliveryBuild.skippedAlreadyQueuedCount,
+    AntalBortfiltreradeDublettmail: deliveryBuild.skippedDuplicateEmailCount,
     AntalBortfiltreradeUtanIdentitet: deliveryBuild.skippedMissingIdentityCount,
     LeveranshistorikFil: deliveryHistoryFilePath,
     AntalPosterILeveranshistorik: deliveryHistoryCommit.recipientCount,
     Filer: files,
+    SpegladeFiler: {
+      MailOnly: mirrored.mailOnly,
+      AntalLänsgrupper: mirrored.byCounty.length,
+      AntalBranschgrupper: mirrored.byIndustry.length,
+      AntalBranschgrupperAlla: mirrored.byIndustryAll.length,
+    },
   };
 
   const manifestPath = path.join(rootDir, 'delivery-ready', 'manifest.json');
@@ -135,6 +243,7 @@ export async function writeDeliveryReady(companies, targetDate, options = {}) {
   return {
     rootDir,
     files,
+    mirrored,
     manifest,
     manifestPath,
     deliveryHistoryFilePath,

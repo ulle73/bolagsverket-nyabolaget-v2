@@ -1,0 +1,25 @@
+{
+  "Datum": "2026-04-13",
+  "AntalEpostklaraBolag": 703,
+  "AntalUtskicksklaraBolag": 692,
+  "AntalBortfiltreradeRedanKöade": 0,
+  "AntalBortfiltreradeDublettmail": 11,
+  "AntalBortfiltreradeUtanIdentitet": 0,
+  "LeveranshistorikFil": "C:\\Users\\ryd\\.openclaw\\workspace\\bolagsverket-nyabolaget-v2\\state\\leveranshistorik.json",
+  "AntalPosterILeveranshistorik": 1489,
+  "Filer": {
+    "Jsonfil": "C:\\Users\\ryd\\.openclaw\\workspace\\bolagsverket-nyabolaget-v2\\exports\\2026-04-13\\delivery-ready\\2026-04-13.json",
+    "Csvfil": "C:\\Users\\ryd\\.openclaw\\workspace\\bolagsverket-nyabolaget-v2\\exports\\2026-04-13\\delivery-ready\\2026-04-13.csv",
+    "Xlsxfil": "C:\\Users\\ryd\\.openclaw\\workspace\\bolagsverket-nyabolaget-v2\\exports\\2026-04-13\\delivery-ready\\2026-04-13.xlsx"
+  },
+  "SpegladeFiler": {
+    "MailOnly": {
+      "Jsonfil": "C:\\Users\\ryd\\.openclaw\\workspace\\bolagsverket-nyabolaget-v2\\exports\\2026-04-13\\mail-only\\2026-04-13-delivery-ready.json",
+      "Csvfil": "C:\\Users\\ryd\\.openclaw\\workspace\\bolagsverket-nyabolaget-v2\\exports\\2026-04-13\\mail-only\\2026-04-13-delivery-ready.csv",
+      "Xlsxfil": "C:\\Users\\ryd\\.openclaw\\workspace\\bolagsverket-nyabolaget-v2\\exports\\2026-04-13\\mail-only\\2026-04-13-delivery-ready.xlsx"
+    },
+    "AntalLänsgrupper": 22,
+    "AntalBranschgrupper": 48,
+    "AntalBranschgrupperAlla": 49
+  }
+}

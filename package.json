@@ -4,9 +4,11 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "process": "node src/cli.js"
+    "process": "node src/cli.js",
+    "enrich:allabolag": "node src/allabolag-enrichment-cli.js"
   },
   "dependencies": {
-    "exceljs": "^4.4.0"
+    "exceljs": "^4.4.0",
+    "puppeteer": "^24.42.0"
   }
 }

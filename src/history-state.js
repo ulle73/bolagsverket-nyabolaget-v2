@@ -49,14 +49,40 @@ export async function loadDeliveryHistory({ stateDir = 'state' } = {}) {
   };
 }
 
+function buildLatestQueuedDateByEmail(historyData) {
+  const mottagare = historyData?.mottagare ?? historyData?.recipients ?? {};
+  const latestQueuedDateByEmail = new Map();
+
+  for (const entry of Object.values(mottagare)) {
+    const email = normalizeEmail(entry?.['E-post'] ?? entry?.email);
+    const latestQueuedDate = normalizeText(entry?.SenasteKödatum ?? entry?.lastQueuedDate);
+
+    if (!email || !latestQueuedDate) {
+      continue;
+    }
+
+    const current = latestQueuedDateByEmail.get(email);
+
+    if (!current || latestQueuedDate > current) {
+      latestQueuedDateByEmail.set(email, latestQueuedDate);
+    }
+  }
+
+  return latestQueuedDateByEmail;
+}
+
 export function buildDeliveryEntries(rows, historyData, targetDate) {
   const mottagare = historyData?.mottagare ?? historyData?.recipients ?? {};
+  const latestQueuedDateByEmail = buildLatestQueuedDateByEmail(historyData);
+  const seenEmails = new Set();
   const entries = [];
   let skippedAlreadyQueuedCount = 0;
+  let skippedDuplicateEmailCount = 0;
   let skippedMissingIdentityCount = 0;
 
   for (const row of rows) {
     const deliveryKey = buildDeliveryIdentity(row);
+    const email = normalizeEmail(row?.['E-post']);
 
     if (!deliveryKey) {
       skippedMissingIdentityCount += 1;
@@ -65,10 +91,23 @@ export function buildDeliveryEntries(rows, historyData, targetDate) {
 
     const existing = mottagare[deliveryKey];
     const senasteKodag = existing?.SenasteKödatum ?? existing?.lastQueuedDate;
+    const senasteKodagForEpost = latestQueuedDateByEmail.get(email);
 
-    if (senasteKodag && senasteKodag !== targetDate) {
+    if (
+      (senasteKodag && senasteKodag !== targetDate) ||
+      (senasteKodagForEpost && senasteKodagForEpost !== targetDate)
+    ) {
       skippedAlreadyQueuedCount += 1;
       continue;
+    }
+
+    if (email && seenEmails.has(email)) {
+      skippedDuplicateEmailCount += 1;
+      continue;
+    }
+
+    if (email) {
+      seenEmails.add(email);
     }
 
     entries.push({
@@ -80,6 +119,7 @@ export function buildDeliveryEntries(rows, historyData, targetDate) {
   return {
     entries,
     skippedAlreadyQueuedCount,
+    skippedDuplicateEmailCount,
     skippedMissingIdentityCount,
   };
 }

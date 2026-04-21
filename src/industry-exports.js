@@ -1,6 +1,7 @@
 import path from 'node:path';
 import { mkdir, writeFile } from 'node:fs/promises';
 
+import { CONTACT_EXPORT_FIELDS } from './company-contact.js';
 import { formatOutputDate } from './scb.js';
 import { buildSalesSegments } from './sales-exports.js';
 import { writeObjectsXlsx } from './xlsx.js';
@@ -33,6 +34,7 @@ const INDUSTRY_FIELDS = [
   'Storleksklass SME',
   'Utskick',
   'Reklam',
+  ...CONTACT_EXPORT_FIELDS,
 ];
 
 function cleanValue(value) {
@@ -127,6 +129,13 @@ async function writeAudience(rootDir, audienceFolder, rows, formattedDate) {
 export async function writeIndustryExports(companies, targetDate, { outputRoot = 'exports' } = {}) {
   const formattedDate = formatOutputDate(targetDate);
   const rootDir = path.join(path.resolve(outputRoot), formattedDate);
+  if (companies.length === 0) {
+    return {
+      targetDate: formattedDate,
+      rootDir,
+      skipped: true,
+    };
+  }
   const segments = buildSalesSegments(companies);
 
   const master = await writeAudience(rootDir, 'master', segments.master, formattedDate);

@@ -1,0 +1,309 @@
+{
+"pageProps": {
+"_sentryTraceData": "1430ec426d9f9e72c6fceb7e92cec673-4bfccefa9a32cd7c-0",
+"_sentryBaggage": "sentry-environment=prod,sentry-public_key=40ced408e2ce85401dcd16b2e538d5e3,sentry-trace_id=1430ec426d9f9e72c6fceb7e92cec673,sentry-sampled=false,sentry-sample_rand=0.10984138034944824,sentry-sample_rate=0.001",
+"rolePersons": {
+"businessPersons": [],
+"hits": 0,
+"currentPage": 1,
+"pages": 0
+},
+"hydrationData": {
+"searchStore": {
+"inactiveCompanies": {
+"hits": 0,
+"pages": 0,
+"currentPage": 1,
+"companies": []
+},
+"shareholders": null,
+"companies": {
+"companies": [
+{
+"mainOffice": null,
+"name": "Silicon Support AB",
+"orgnr": "5595798322",
+"businessUnitId": null,
+"businessUnitType": "MAIN",
+"companyId": "2KJLDMAI0000",
+"listingId": "2KJLDMAI0000",
+"customerId": "5595798322",
+"phone": null,
+"phone2": null,
+"mobile": null,
+"mobile2": null,
+"faxNumber": null,
+"homePage": null,
+"email": null,
+"marketingProtection": false,
+"industries": [],
+"location": {
+"countryPart": "Hela Sverige",
+"county": "Stockholm",
+"municipality": "Lidingö",
+"coordinates": null
+},
+"currentIndustry": {
+"code": "0",
+"name": "",
+"description": null,
+"companyId": null
+},
+"visitorAddress": null,
+"postalAddress": {
+"addressLine": "Roskullsvägen 12",
+"boxAddressLine": null,
+"zipCode": "181 62",
+"postPlace": "Lidingö"
+},
+"description": null,
+"advertType": null,
+"logo": null,
+"searchResultImage": null,
+"legalName": "Silicon Support AB",
+"revenue": null,
+"currency": null,
+"profit": null,
+"companyAccountsLastUpdatedDate": null,
+"employees": "0",
+"contactPerson": {
+"type": "Person",
+"name": "Karl Jesper Engvall",
+"role": "Verkställande direktör",
+"id": "53242531",
+"birthDate": "05.06.1964",
+"businessPerson": true
+},
+"status": null,
+"statusRemarks": [],
+"certificates": [],
+"rating": null,
+"searchHighlights": null
+}
+],
+"hits": 1,
+"pages": 1,
+"currentPage": 1,
+"filters": [
+{
+"displayName": "Landsdel",
+"name": "countrypartnavigator",
+"filterType": "countrypart",
+"filters": [
+{
+"displayName": "Hela Sverige",
+"hits": 1
+}
+]
+},
+{
+"displayName": "Bransjer",
+"name": "industrynavigator",
+"filterType": "navindustrynames",
+"filters": [
+{
+"displayName": "",
+"hits": 1
+}
+]
+},
+{
+"displayName": "Kommune",
+"name": "municipalitynavigator",
+"filterType": "municipality",
+"filters": [
+{
+"displayName": "Lidingö",
+"hits": 1
+}
+]
+},
+{
+"displayName": "Fylke",
+"name": "countynavigator",
+"filterType": "county",
+"filters": [
+{
+"displayName": "Stockholm",
+"hits": 1
+}
+]
+},
+{
+"displayName": "Poststed",
+"name": "postplacenavigator",
+"filterType": "postplace",
+"filters": []
+},
+{
+"displayName": "samplerFilter",
+"name": null,
+"filterType": "specialNeeds",
+"filters": []
+}
+],
+"sorting": {
+"currentSort": "relevance",
+"sorts": [
+{
+"active": true,
+"sortType": "relevance"
+},
+{
+"active": false,
+"sortType": "revenueAsc"
+},
+{
+"active": false,
+"sortType": "revenueDesc"
+},
+{
+"active": false,
+"sortType": "numEmployeesAsc"
+},
+{
+"active": false,
+"sortType": "numEmployeesDesc"
+}
+]
+}
+},
+"companiesByName": {
+"companies": [],
+"hits": 0,
+"pages": 0,
+"currentPage": 1,
+"filters": [
+{
+"displayName": "Landsdel",
+"name": "countrypartnavigator",
+"filterType": "countrypart",
+"filters": []
+},
+{
+"displayName": "Bransjer",
+"name": "industrynavigator",
+"filterType": "navindustrynames",
+"filters": []
+},
+{
+"displayName": "Kommune",
+"name": "municipalitynavigator",
+"filterType": "municipality",
+"filters": []
+},
+{
+"displayName": "Fylke",
+"name": "countynavigator",
+"filterType": "county",
+"filters": []
+},
+{
+"displayName": "Poststed",
+"name": "postplacenavigator",
+"filterType": "postplace",
+"filters": []
+},
+{
+"displayName": "samplerFilter",
+"name": null,
+"filterType": "specialNeeds",
+"filters": []
+}
+],
+"sorting": {
+"currentSort": "relevance",
+"sorts": [
+{
+"active": true,
+"sortType": "relevance"
+},
+{
+"active": false,
+"sortType": "revenueAsc"
+},
+{
+"active": false,
+"sortType": "revenueDesc"
+},
+{
+"active": false,
+"sortType": "numEmployeesAsc"
+},
+{
+"active": false,
+"sortType": "numEmployeesDesc"
+}
+]
+}
+},
+"sort": "relevance",
+"sorts": [
+{
+"active": true,
+"sortType": "relevance"
+},
+{
+"active": false,
+"sortType": "revenueAsc"
+},
+{
+"active": false,
+"sortType": "revenueDesc"
+},
+{
+"active": false,
+"sortType": "numEmployeesAsc"
+},
+{
+"active": false,
+"sortType": "numEmployeesDesc"
+}
+],
+"query": "5595798322",
+"proffIndustry": null,
+"countryPartFilter": null,
+"countyFilter": null,
+"municipalityFilter": null,
+"postplaceFilter": null
+}
+}
+},
+"hydrationData": {
+"appStore": {
+"site": "allabolag.se",
+"siteName": "Allabolag.se",
+"languages": [
+"sv"
+],
+"defaultLanguage": "sv",
+"theme": "allabolag",
+"country": "SE",
+"defaultDataSource": "UC",
+"baseUrl": "https://www.allabolag.se",
+"defaultSEO": {
+"twitter": {
+"handle": "@allabolag"
+},
+"noindex": false,
+"nofollow": false
+},
+"recaptchaSiteKey": "6Lcml1IpAAAAAJqIk107_blbYBC9dboXoOMX66xW",
+"googleMapsApiKey": "AIzaSyBTO1M39p0Ztoe0rMK1KTfUmGkdyhQ1GYs",
+"lang": "sv",
+"siteOwner": {
+"name": "UC Affärsinformation",
+"address": "Klarabergsviadukten 63",
+"zipcode": "111 64",
+"city": "Stockholm"
+},
+"activeCustomer": null
+}
+},
+"i18n": {
+"serverInstance": null,
+"initialLanguage": "sv",
+"initialStore": null
+},
+"__N_SSP": true
+}

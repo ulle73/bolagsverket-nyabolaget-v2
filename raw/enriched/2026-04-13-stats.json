@@ -1,0 +1,14 @@
+{
+  "Datum": "2026-04-13",
+  "AntalRåposter": 3808,
+  "AntalAktiebolag": 1044,
+  "AntalUppslagningarFrånCache": 0,
+  "AntalUppslagningarViaPuppeteer": 1044,
+  "AntalBolagMedAllabolagEpost": 0,
+  "AntalBolagMedKontaktperson": 1042,
+  "Statusfördelning": {
+    "not-applicable": 2764,
+    "enriched": 1043,
+    "not-found": 1
+  }
+}
