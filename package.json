@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "exceljs": "^4.4.0",
+    "playwright": "^1.59.1",
     "puppeteer": "^24.42.0"
   }
 }

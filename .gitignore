@@ -7,3 +7,6 @@ scb/*.pfx
 # .DS_Store
 desktop.ini
 .tmp.driveupload/
+
+# Browser profile artifacts from Puppeteer / scraping runs
+.eniro-browser-profile/
