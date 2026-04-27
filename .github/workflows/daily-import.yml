@@ -49,7 +49,7 @@ jobs:
       SCB_PASSWORD: ${{ secrets.SCB_PASSWORD }}
       SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
       SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
-      SCB_PFX_PATH: ${{ runner.temp }}/scb-client.pfx
+      SCB_PFX_PATH: ${{ github.workspace }}/.runtime/scb-client.pfx
       SYNC_LOOKBACK_DAYS: '10'
     steps:
       - name: Checkout
@@ -73,6 +73,7 @@ jobs:
       - name: Restore SCB certificate
         shell: bash
         run: |
+          mkdir -p "$(dirname "$SCB_PFX_PATH")"
           echo "${{ secrets.SCB_PFX_BASE64 }}" | base64 --decode > "$SCB_PFX_PATH"
 
       - name: Run scheduled daily sync
@@ -95,7 +96,7 @@ jobs:
       SCB_PASSWORD: ${{ secrets.SCB_PASSWORD }}
       SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
       SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
-      SCB_PFX_PATH: ${{ runner.temp }}/scb-client.pfx
+      SCB_PFX_PATH: ${{ github.workspace }}/.runtime/scb-client.pfx
       SYNC_LOOKBACK_DAYS: '10'
     steps:
       - name: Checkout
@@ -119,6 +120,7 @@ jobs:
       - name: Restore SCB certificate
         shell: bash
         run: |
+          mkdir -p "$(dirname "$SCB_PFX_PATH")"
           echo "${{ secrets.SCB_PFX_BASE64 }}" | base64 --decode > "$SCB_PFX_PATH"
 
       - name: Run manual daily sync
