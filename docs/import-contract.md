@@ -5,7 +5,7 @@
 ## Källor
 
 - SCB rådata per `Registreringsdatum`
-- Allabolag-berikning för Aktiebolag
+- Allabolag-berikning är avstängd och ska inte köras i pipeline eller manuella kommandon
 
 ## Publiceringsprincip
 
@@ -50,7 +50,8 @@ Varje publicerad rad i `company_snapshots` ska innehålla:
 - `email` = primär leveransbar e-post
 - `phone` = primärt leveransbart telefonnummer
 - `industry` = samma som `industry_label`
-- `marketing_protected` kommer från Allabolag när sådan data finns
+- `marketing_protected` kommer bara från SCB/rådata om fältet redan finns; Allabolag fyller inte längre på detta
+- `allabolag_*`-fält finns kvar av bakåtkompatibilitetsskäl men fylls inte på av importpipelinen
 
 ## Listdefinitioner
 
@@ -67,9 +68,9 @@ Följande listor är derivat av canonical snapshot-data och ska inte lagras som 
 ## Kommandon
 
 - `npm run process -- 2026-04-13`
-  - hämtar SCB, berikar via Allabolag, publicerar snapshot och skriver exportfiler
+  - hämtar SCB, publicerar snapshot och skriver exportfiler utan Allabolag-berikning
 - `npm run publish:snapshot -- 2026-04-13`
-  - publicerar befintlig `raw/enriched/YYYY-MM-DD.json` eller fallback `raw/YYYY-MM-DD.json`
+  - publicerar befintlig råfil `raw/YYYY-MM-DD.json`; äldre `raw/enriched/YYYY-MM-DD.json` kan fortfarande läsas om filen finns
 - `npm run sync:daily`
   - kör rullande backfill för senaste 10 dagarna för att täcka SCB:s veckosläpp och tisdagssläpp vid röd dag
 - `npm run sync:range -- --from=2026-04-07 --to=2026-04-14`
