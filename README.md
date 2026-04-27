@@ -5,10 +5,11 @@ Daglig data-pipeline för `foretagslistor.se`.
 Det här repot ansvarar för:
 
 - SCB-hämtning per registreringsdatum
-- Allabolag-berikning
 - normalisering till canonical snapshot-rader
 - publicering till Supabase
 - derivatfiler för `master`, `mail-only`, `phone-only`, `by-lan`, `by-industry` och `delivery-ready`
+
+Allabolag-berikning är avstängd. Importpipelinen ska fortsätta använda SCB-raderna direkt så att sparning, filtrering, export och publicering fungerar som tidigare utan externa uppslagningar.
 
 ## Produktionsprincip
 
@@ -100,7 +101,6 @@ Den schemalagda daily-körningen ska ligga på en self-hosted runner med persist
 
 State som måste överleva mellan körningar:
 
-- Allabolag-cache
 - leveranshistorik
 - daily sync state
 - rå- och exportfiler
