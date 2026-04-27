@@ -22,8 +22,6 @@ const DELIVERY_READY_FIELDS = [
   'Säteskommun',
   'Bransch',
   'Telefon',
-  'Kontaktperson namn',
-  'Kontaktperson roll',
 ];
 
 function cleanValue(value) {
@@ -55,8 +53,6 @@ function toDeliveryReadyRow(company) {
     'Säteskommun': fallbackValue(company['Säteskommun'], 'Okänd kommun'),
     'Bransch': fallbackValue(company['Bransch_1'], 'Okänd'),
     'Telefon': cleanValue(getPrimaryPhone(company)),
-    'Kontaktperson namn': cleanValue(company['Kontaktperson namn'] ?? ''),
-    'Kontaktperson roll': cleanValue(company['Kontaktperson roll'] ?? ''),
   };
 }
 
