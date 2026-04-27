@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "process": "node src/cli.js",
-    "enrich:allabolag": "node src/allabolag-enrichment-cli.js",
+    "enrich:allabolag": "node -e \"console.log('Allabolag enrichment is disabled; run npm run process instead.')\"",
     "publish:snapshot": "node src/publish-snapshot-cli.js",
     "sync:daily": "node src/daily-sync.js",
     "sync:range": "node src/sync-range.js",

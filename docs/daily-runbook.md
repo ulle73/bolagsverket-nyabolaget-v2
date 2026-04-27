@@ -2,7 +2,9 @@
 
 ## Syfte
 
-Köra den dagliga SCB -> Allabolag -> Supabase-pipelinen och hålla `foretagslistor.se` uppdaterad med publicerade snapshots som är färska nog att säljas ifrån.
+Köra den dagliga SCB -> Supabase-pipelinen och hålla `foretagslistor.se` uppdaterad med publicerade snapshots som är färska nog att säljas ifrån.
+
+Allabolag-berikning är avstängd. Pipelinen ska använda SCB-raderna direkt och därefter fortsätta med samma normalisering, publicering och exportsteg som tidigare.
 
 ## Produktionskrav
 
@@ -12,7 +14,6 @@ Det här ska köras på en self-hosted runner med persistent `DATA_DIR`.
 
 - `raw/`
 - `exports/`
-- `state/allabolag-cache.json`
 - `state/leveranshistorik.json`
 - `state/telefonleveranshistorik.json`
 - `state/daily-sync-state.json`
@@ -38,10 +39,9 @@ npm run sync:daily
 Det kör senaste 10 dagarna, äldst först. Det är avsiktligt längre än en vecka för att täcka SCB:s normala måndagssläpp, tisdagssläpp vid röd dag och mindre driftglapp. Varje datum går igenom:
 
 1. SCB-hämtning
-2. Allabolag-berikning
-3. canonical normalisering
-4. snapshot-publicering till Supabase
-5. derivatfiler för försäljning och leverans
+2. canonical normalisering
+3. snapshot-publicering till Supabase
+4. derivatfiler för försäljning och leverans
 
 `sync:daily` kräver Supabase-publicering och kommer att faila om publicering inte kan göras.
 
@@ -82,7 +82,7 @@ Publicera befintliga filer för ett datum:
 npm run publish:snapshot -- 2026-04-13
 ```
 
-Om du medvetet vill publicera från råfil i stället för berikad fil krävs explicit flagga:
+Om du medvetet vill publicera från råfil krävs explicit flagga när ingen tidigare kompatibel fil finns:
 
 ```bash
 npm run publish:snapshot -- 2026-04-13 --allow-raw-fallback
@@ -146,8 +146,7 @@ cat "$DATA_DIR/state/daily-sync-state.json"
 ## Återhämtning
 
 - Om SCB-hämtningen misslyckar: kör om `npm run process -- YYYY-MM-DD --require-publish`
-- Om publiceringen misslyckar men `raw/enriched` finns: kör om `npm run publish:snapshot -- YYYY-MM-DD`
-- Om berikad fil saknas: kör om hela datumet via `npm run process -- YYYY-MM-DD`
+- Om publiceringen misslyckar: kör om hela datumet via `npm run process -- YYYY-MM-DD --require-publish`
 - Om exportfilerna är trasiga men snapshoten är publicerad: kör om `npm run process -- YYYY-MM-DD --require-publish`
 
 ## Produktionsscheduler
