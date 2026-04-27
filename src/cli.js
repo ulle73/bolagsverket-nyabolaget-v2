@@ -1,7 +1,6 @@
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-import { enrichAndSaveCompaniesWithAllabolag } from './allabolag-enrichment.js';
 import { fetchAndSaveCompaniesByExactRegistrationDate } from './scb.js';
 import { writeSalesExports } from './sales-exports.js';
 import { writeDeliveryReady } from './delivery-ready.js';
@@ -40,11 +39,30 @@ export function isCliEntrypoint(modulePath, argvPath) {
   return path.resolve(modulePath) === path.resolve(argvPath);
 }
 
+function buildPassthroughEnrichmentResult(companies, targetDate, options = {}) {
+  const sourceResult = options.sourceResult ?? {};
+
+  return {
+    companies,
+    count: companies.length,
+    targetDate,
+    filePath: sourceResult.filePath,
+    xlsxFilePath: sourceResult.xlsxFilePath,
+    stats: {
+      Datum: targetDate,
+      AntalRåposter: companies.length,
+      Status: 'allabolag-enrichment-disabled',
+    },
+    statsFilePath: '',
+    cacheFilePath: '',
+  };
+}
+
 export async function runCli(
   args = process.argv.slice(2),
   {
     fetchRegistrationDate = fetchAndSaveCompaniesByExactRegistrationDate,
-    enrichCompanies = enrichAndSaveCompaniesWithAllabolag,
+    enrichCompanies = buildPassthroughEnrichmentResult,
     writeSales = writeSalesExports,
     writeDelivery = writeDeliveryReady,
     writeIndustry = writeIndustryExports,
@@ -100,10 +118,11 @@ export async function runCli(
       outputDir: runtimePaths.rawDir,
       stateDir: runtimePaths.stateDir,
       writeProgress: write,
+      sourceResult: result,
     });
 
     write(
-      `Sparade Allabolag-checkpoint (${enrichmentResult.count} rader) för ${enrichmentResult.targetDate} till ${enrichmentResult.filePath} och ${enrichmentResult.xlsxFilePath}\n`,
+      `Hoppar över Allabolag-berikning (${enrichmentResult.count} rader går vidare oförändrade från SCB).\n`,
     );
 
     const normalizedRows = normalizeRows(enrichmentResult.companies, result.targetDate);
@@ -114,8 +133,8 @@ export async function runCli(
         rawRowCount: result.count,
         details: {
           rawFilePath: result.filePath,
-          enrichedFilePath: enrichmentResult.filePath,
-          xlsxFilePath: enrichmentResult.xlsxFilePath,
+          enrichedFilePath: '',
+          xlsxFilePath: result.xlsxFilePath,
         },
       });
 
@@ -154,8 +173,6 @@ export async function runCli(
     write(`Telefonleveranshistorik: ${deliveryReady.phoneDeliveryHistoryFilePath}\n`);
     write(`Branschmanifest: ${industryExports.manifestPath}\n`);
     write(`Statistik JSON: ${salesExports.statsFilePath}\n`);
-    write(`Allabolag-statistik: ${enrichmentResult.statsFilePath}\n`);
-    write(`Allabolag-cache: ${enrichmentResult.cacheFilePath}\n`);
     return 0;
   } catch (error) {
     write(`SCB-körning misslyckades för ${targetDate}: ${error.message}\n`);
