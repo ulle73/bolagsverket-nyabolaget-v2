@@ -21,6 +21,8 @@ const DELIVERY_READY_FIELDS = [
   'Säteslän',
   'Säteskommun',
   'Bransch',
+  'PostAdress',
+  'PostNr',
   'Telefon',
 ];
 
@@ -52,6 +54,8 @@ function toDeliveryReadyRow(company) {
     'Säteslän': fallbackValue(company['Säteslän'], 'Okänt län'),
     'Säteskommun': fallbackValue(company['Säteskommun'], 'Okänd kommun'),
     'Bransch': fallbackValue(company['Bransch_1'], 'Okänd'),
+    'PostAdress': cleanValue(company['PostAdress'] ?? ''),
+    'PostNr': cleanValue(company['PostNr'] ?? ''),
     'Telefon': cleanValue(getPrimaryPhone(company)),
   };
 }
