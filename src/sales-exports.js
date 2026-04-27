@@ -164,17 +164,24 @@ export function buildSalesSegments(companies) {
     hasValue(getPrimaryEmail(company)),
   );
   const mailOnly = mailOnlySource.map(sanitizeCompanyForSale);
+  const phoneOnlySource = relevantSource.filter((company) =>
+    hasValue(getPrimaryPhone(company)),
+  );
+  const phoneOnly = phoneOnlySource.map(sanitizeCompanyForSale);
 
   return {
     master: full,
     'mail-only': mailOnly,
+    'phone-only': phoneOnly,
     byCounty: {
       master: groupBy(full, 'Säteslän'),
       'mail-only': groupBy(mailOnly, 'Säteslän'),
+      'phone-only': groupBy(phoneOnly, 'Säteslän'),
     },
     byIndustry: {
       master: groupBy(full, 'Bransch_1', { exclude: ['Okänd'] }),
       'mail-only': groupBy(mailOnly, 'Bransch_1', { exclude: ['Okänd'] }),
+      'phone-only': groupBy(phoneOnly, 'Bransch_1', { exclude: ['Okänd'] }),
     },
   };
 }
@@ -270,6 +277,10 @@ export async function writeSalesExports(
     path.join(rootDir, 'mail-only', fileStem),
     segments['mail-only'],
   );
+  const phoneOnlyFiles = await writeJsonCsvXlsx(
+    path.join(rootDir, 'phone-only', fileStem),
+    segments['phone-only'],
+  );
 
   const grouped = {
     byCounty: {
@@ -287,6 +298,13 @@ export async function writeSalesExports(
         fileStem,
         segments.byCounty['mail-only'],
       ),
+      'phone-only': await writeGroupedSegments(
+        rootDir,
+        'by-lan',
+        'phone-only',
+        fileStem,
+        segments.byCounty['phone-only'],
+      ),
     },
     byIndustry: {
       master: await writeGroupedSegments(
@@ -303,6 +321,13 @@ export async function writeSalesExports(
         fileStem,
         segments.byIndustry['mail-only'],
       ),
+      'phone-only': await writeGroupedSegments(
+        rootDir,
+        'by-industry',
+        'phone-only',
+        fileStem,
+        segments.byIndustry['phone-only'],
+      ),
     },
   };
 
@@ -311,9 +336,10 @@ export async function writeSalesExports(
     AntalRåposter: companies.length,
     AntalMasterposter: segments.master.length,
     AntalEpostposter: segments['mail-only'].length,
+    AntalTelefonposter: segments['phone-only'].length,
     AntalTelefonnummer: segments.master.filter((company) => hasValue(company['Telefon']))
       .length,
-    AntalKontaktspÃ¤rradeBolag: companies.filter((company) => isMarketingProtected(company))
+    AntalKontaktspärradeBolag: companies.filter((company) => isMarketingProtected(company))
       .length,
     AntalAllabolagEpost: segments.master.filter((company) => hasValue(company['Allabolag e-post']))
       .length,
@@ -332,6 +358,7 @@ export async function writeSalesExports(
     files: {
       master: masterFiles,
       'mail-only': mailOnlyFiles,
+      'phone-only': phoneOnlyFiles,
     },
     grouped,
     stats,

@@ -140,11 +140,18 @@ export async function writeIndustryExports(companies, targetDate, { outputRoot =
 
   const master = await writeAudience(rootDir, 'master', segments.master, formattedDate);
   const mailOnly = await writeAudience(rootDir, 'mail-only', segments['mail-only'], formattedDate);
+  const phoneOnly = await writeAudience(
+    rootDir,
+    'phone-only',
+    segments['phone-only'],
+    formattedDate,
+  );
 
   const manifest = {
     Datum: formattedDate,
     AntalBranschgrupperMaster: master.length,
     AntalBranschgrupperEpost: mailOnly.length,
+    AntalBranschgrupperTelefon: phoneOnly.length,
   };
   const manifestPath = path.join(rootDir, 'by-industry-all', 'manifest.json');
   await writeJson(manifestPath, manifest);
@@ -153,6 +160,7 @@ export async function writeIndustryExports(companies, targetDate, { outputRoot =
     rootDir,
     master,
     mailOnly,
+    phoneOnly,
     manifestPath,
   };
 }

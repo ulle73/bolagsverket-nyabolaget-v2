@@ -2,8 +2,6 @@ import path from 'node:path';
 import { mkdir, writeFile } from 'node:fs/promises';
 
 import {
-  CONTACT_EXPORT_FIELDS,
-  copyContactExportFields,
   getPrimaryEmail,
   getPrimaryPhone,
 } from './company-contact.js';
@@ -20,12 +18,12 @@ const DELIVERY_READY_FIELDS = [
   'E-post',
   'Företagsnamn',
   'OrgNr',
-  'Registreringsdatum',
   'Säteslän',
   'Säteskommun',
   'Bransch',
   'Telefon',
-  ...CONTACT_EXPORT_FIELDS,
+  'Kontaktperson namn',
+  'Kontaktperson roll',
 ];
 
 function cleanValue(value) {
@@ -53,12 +51,12 @@ function toDeliveryReadyRow(company) {
     'E-post': cleanValue(getPrimaryEmail(company)),
     'Företagsnamn': cleanValue(company['Företagsnamn'] ?? ''),
     'OrgNr': cleanValue(company['OrgNr'] ?? ''),
-    'Registreringsdatum': cleanValue(company['Registreringsdatum'] ?? ''),
     'Säteslän': fallbackValue(company['Säteslän'], 'Okänt län'),
     'Säteskommun': fallbackValue(company['Säteskommun'], 'Okänd kommun'),
     'Bransch': fallbackValue(company['Bransch_1'], 'Okänd'),
     'Telefon': cleanValue(getPrimaryPhone(company)),
-    ...copyContactExportFields(company),
+    'Kontaktperson namn': cleanValue(company['Kontaktperson namn'] ?? ''),
+    'Kontaktperson roll': cleanValue(company['Kontaktperson roll'] ?? ''),
   };
 }
 
@@ -159,6 +157,38 @@ async function writeGroupedDeliveryReady(rootDir, audienceFolder, groupFolder, f
   return written;
 }
 
+async function writeMirroredAudienceDeliveryReady(rootDir, audienceFolder, fileStem, entries) {
+  const rows = mapDeliveryEntriesToRows(entries);
+
+  return {
+    files: await writeDeliveryReadyFiles(
+      path.join(rootDir, audienceFolder, `${fileStem}-delivery-ready`),
+      rows,
+    ),
+    byCounty: await writeGroupedDeliveryReady(
+      rootDir,
+      'by-lan',
+      audienceFolder,
+      fileStem,
+      groupDeliveryEntries(entries, 'Säteslän'),
+    ),
+    byIndustry: await writeGroupedDeliveryReady(
+      rootDir,
+      'by-industry',
+      audienceFolder,
+      fileStem,
+      groupDeliveryEntries(entries, 'Bransch_1', { exclude: ['Okänd'] }),
+    ),
+    byIndustryAll: await writeGroupedDeliveryReady(
+      rootDir,
+      'by-industry-all',
+      audienceFolder,
+      fileStem,
+      groupDeliveryEntries(entries, 'Bransch_1', { fallbackLabel: 'Okänd' }),
+    ),
+  };
+}
+
 export async function writeDeliveryReady(companies, targetDate, options = {}) {
   const formattedDate = formatOutputDate(targetDate);
   const rootDir = path.join(path.resolve(options.outputRoot ?? 'exports'), formattedDate);
@@ -173,67 +203,88 @@ export async function writeDeliveryReady(companies, targetDate, options = {}) {
   const segments = buildSalesSegments(companies);
   const { filePath: deliveryHistoryFilePath, data: deliveryHistory } =
     await loadDeliveryHistory({ stateDir });
+  const { filePath: phoneDeliveryHistoryFilePath, data: phoneDeliveryHistory } =
+    await loadDeliveryHistory({ stateDir, channel: 'phone' });
 
   const deliveryBuild = buildDeliveryEntries(
     segments['mail-only'],
     deliveryHistory,
     formattedDate,
   );
+  const phoneDeliveryBuild = buildDeliveryEntries(
+    segments['phone-only'],
+    phoneDeliveryHistory,
+    formattedDate,
+    { channel: 'phone' },
+  );
 
   const rows = mapDeliveryEntriesToRows(deliveryBuild.entries);
+  const phoneRows = mapDeliveryEntriesToRows(phoneDeliveryBuild.entries);
   const files = await writeDeliveryReadyFiles(
     path.join(rootDir, 'delivery-ready', formattedDate),
     rows,
   );
-  const mirrored = {
-    mailOnly: await writeDeliveryReadyFiles(
-      path.join(rootDir, 'mail-only', `${formattedDate}-delivery-ready`),
-      rows,
-    ),
-    byCounty: await writeGroupedDeliveryReady(
-      rootDir,
-      'by-lan',
-      'mail-only',
-      formattedDate,
-      groupDeliveryEntries(deliveryBuild.entries, 'Säteslän'),
-    ),
-    byIndustry: await writeGroupedDeliveryReady(
-      rootDir,
-      'by-industry',
-      'mail-only',
-      formattedDate,
-      groupDeliveryEntries(deliveryBuild.entries, 'Bransch_1', { exclude: ['Okänd'] }),
-    ),
-    byIndustryAll: await writeGroupedDeliveryReady(
-      rootDir,
-      'by-industry-all',
-      'mail-only',
-      formattedDate,
-      groupDeliveryEntries(deliveryBuild.entries, 'Bransch_1', { fallbackLabel: 'Okänd' }),
-    ),
-  };
+  const mirroredMailOnly = await writeMirroredAudienceDeliveryReady(
+    rootDir,
+    'mail-only',
+    formattedDate,
+    deliveryBuild.entries,
+  );
+  const mirroredPhoneOnly = await writeMirroredAudienceDeliveryReady(
+    rootDir,
+    'phone-only',
+    formattedDate,
+    phoneDeliveryBuild.entries,
+  );
 
   const deliveryHistoryCommit = await commitDeliveryHistory(
     deliveryBuild.entries,
     formattedDate,
     { stateDir },
   );
+  const phoneDeliveryHistoryCommit = await commitDeliveryHistory(
+    phoneDeliveryBuild.entries,
+    formattedDate,
+    { stateDir, channel: 'phone' },
+  );
+
+  const mirrored = {
+    mailOnly: mirroredMailOnly.files,
+    phoneOnly: mirroredPhoneOnly.files,
+    byCounty: mirroredMailOnly.byCounty,
+    byIndustry: mirroredMailOnly.byIndustry,
+    byIndustryAll: mirroredMailOnly.byIndustryAll,
+    phoneByCounty: mirroredPhoneOnly.byCounty,
+    phoneByIndustry: mirroredPhoneOnly.byIndustry,
+    phoneByIndustryAll: mirroredPhoneOnly.byIndustryAll,
+  };
 
   const manifest = {
     Datum: formattedDate,
     AntalEpostklaraBolag: segments['mail-only'].length,
+    AntalTelefonklaraBolag: segments['phone-only'].length,
     AntalUtskicksklaraBolag: rows.length,
+    AntalTelefonUtskicksklaraBolag: phoneRows.length,
     AntalBortfiltreradeRedanKöade: deliveryBuild.skippedAlreadyQueuedCount,
-    AntalBortfiltreradeDublettmail: deliveryBuild.skippedDuplicateEmailCount,
+    AntalBortfiltreradeDublettmail: deliveryBuild.skippedDuplicateContactCount,
     AntalBortfiltreradeUtanIdentitet: deliveryBuild.skippedMissingIdentityCount,
     LeveranshistorikFil: deliveryHistoryFilePath,
     AntalPosterILeveranshistorik: deliveryHistoryCommit.recipientCount,
+    AntalTelefonBortfiltreradeRedanKöade: phoneDeliveryBuild.skippedAlreadyQueuedCount,
+    AntalBortfiltreradeDublettnummer: phoneDeliveryBuild.skippedDuplicateContactCount,
+    AntalTelefonBortfiltreradeUtanIdentitet: phoneDeliveryBuild.skippedMissingIdentityCount,
+    TelefonleveranshistorikFil: phoneDeliveryHistoryFilePath,
+    AntalPosterITelefonleveranshistorik: phoneDeliveryHistoryCommit.recipientCount,
     Filer: files,
     SpegladeFiler: {
       MailOnly: mirrored.mailOnly,
+      PhoneOnly: mirrored.phoneOnly,
       AntalLänsgrupper: mirrored.byCounty.length,
       AntalBranschgrupper: mirrored.byIndustry.length,
       AntalBranschgrupperAlla: mirrored.byIndustryAll.length,
+      AntalTelefonLänsgrupper: mirrored.phoneByCounty.length,
+      AntalTelefonBranschgrupper: mirrored.phoneByIndustry.length,
+      AntalTelefonBranschgrupperAlla: mirrored.phoneByIndustryAll.length,
     },
   };
 
@@ -247,5 +298,6 @@ export async function writeDeliveryReady(companies, targetDate, options = {}) {
     manifest,
     manifestPath,
     deliveryHistoryFilePath,
+    phoneDeliveryHistoryFilePath,
   };
 }

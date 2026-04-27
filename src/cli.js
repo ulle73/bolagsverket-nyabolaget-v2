@@ -6,7 +6,12 @@ import { fetchAndSaveCompaniesByExactRegistrationDate } from './scb.js';
 import { writeSalesExports } from './sales-exports.js';
 import { writeDeliveryReady } from './delivery-ready.js';
 import { writeIndustryExports } from './industry-exports.js';
+import { normalizeForSupabaseRows } from './normalize-for-supabase.js';
+import { publishSnapshot } from './publish-snapshot.js';
+import { hydrateProcessEnv } from './env-file.js';
 import { resolveRuntimePaths } from './runtime-paths.js';
+import { hasSupabasePublishingConfig } from './supabase-client.js';
+import { assertProcessEnv, assertPublishEnv } from './env-contract.js';
 
 function formatLocalDate(date) {
   const year = date.getFullYear();
@@ -43,6 +48,12 @@ export async function runCli(
     writeSales = writeSalesExports,
     writeDelivery = writeDeliveryReady,
     writeIndustry = writeIndustryExports,
+    normalizeRows = normalizeForSupabaseRows,
+    publish = publishSnapshot,
+    canPublish = hasSupabasePublishingConfig,
+    assertProcess = assertProcessEnv,
+    assertPublish = assertPublishEnv,
+    loadEnv = () => hydrateProcessEnv(),
     write = (message) => process.stdout.write(message),
     now = new Date(),
   } = {},
@@ -55,9 +66,17 @@ export async function runCli(
   }
 
   const targetDate = resolveTargetDate(args, now);
+  const requirePublish = args.includes('--require-publish');
   const runtimePaths = await resolveRuntimePaths();
 
   try {
+    await loadEnv();
+    assertProcess();
+
+    if (requirePublish) {
+      assertPublish();
+    }
+
     write(`Kör SCB-pipeline för ${targetDate}\n`);
 
     if (runtimePaths.baseDir) {
@@ -84,8 +103,34 @@ export async function runCli(
     });
 
     write(
-      `Sparade Allabolag-checkpoint (${enrichmentResult.count} rader) fÃ¶r ${enrichmentResult.targetDate} till ${enrichmentResult.filePath} och ${enrichmentResult.xlsxFilePath}\n`,
+      `Sparade Allabolag-checkpoint (${enrichmentResult.count} rader) för ${enrichmentResult.targetDate} till ${enrichmentResult.filePath} och ${enrichmentResult.xlsxFilePath}\n`,
     );
+
+    const normalizedRows = normalizeRows(enrichmentResult.companies, result.targetDate);
+
+    if (await canPublish()) {
+      const publishResult = await publish(normalizedRows, {
+        snapshotDate: enrichmentResult.targetDate,
+        rawRowCount: result.count,
+        details: {
+          rawFilePath: result.filePath,
+          enrichedFilePath: enrichmentResult.filePath,
+          xlsxFilePath: enrichmentResult.xlsxFilePath,
+        },
+      });
+
+      write(
+        `Publicerade snapshot ${publishResult.snapshotDate} till Supabase (${publishResult.rowCount} rader, ${publishResult.batchCount} batcher)\n`,
+      );
+    } else {
+      if (requirePublish) {
+        throw new Error(
+          'Supabase-publicering krävs för den här körningen men SUPABASE_URL eller SUPABASE_SERVICE_ROLE_KEY saknas.',
+        );
+      }
+
+      write('Hoppar över snapshot-publicering eftersom SUPABASE_URL eller SUPABASE_SERVICE_ROLE_KEY saknas.\n');
+    }
 
     const salesExports = await writeSales(enrichmentResult.companies, result.targetDate, {
       outputRoot: runtimePaths.exportsDir,
@@ -101,9 +146,12 @@ export async function runCli(
     write(`Skapade försäljningsexporter i ${salesExports.rootDir}\n`);
     write(`Master CSV: ${salesExports.files.master.Csvfil}\n`);
     write(`Mail-only CSV: ${salesExports.files['mail-only'].Csvfil}\n`);
+    write(`Phone-only CSV: ${salesExports.files['phone-only'].Csvfil}\n`);
     write(`Utskicksklar CSV: ${deliveryReady.files.Csvfil}\n`);
+    write(`Phone-only delivery-ready CSV: ${deliveryReady.mirrored.phoneOnly.Csvfil}\n`);
     write(`Utskicksklar manifest: ${deliveryReady.manifestPath}\n`);
     write(`Leveranshistorik: ${deliveryReady.deliveryHistoryFilePath}\n`);
+    write(`Telefonleveranshistorik: ${deliveryReady.phoneDeliveryHistoryFilePath}\n`);
     write(`Branschmanifest: ${industryExports.manifestPath}\n`);
     write(`Statistik JSON: ${salesExports.statsFilePath}\n`);
     write(`Allabolag-statistik: ${enrichmentResult.statsFilePath}\n`);

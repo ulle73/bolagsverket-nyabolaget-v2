@@ -5,9 +5,16 @@
   "type": "module",
   "scripts": {
     "process": "node src/cli.js",
-    "enrich:allabolag": "node src/allabolag-enrichment-cli.js"
+    "enrich:allabolag": "node src/allabolag-enrichment-cli.js",
+    "publish:snapshot": "node src/publish-snapshot-cli.js",
+    "sync:daily": "node src/daily-sync.js",
+    "sync:range": "node src/sync-range.js",
+    "process:admin-requests": "node src/admin-import-requests.js",
+    "verify:publication": "node src/verify-publication.js",
+    "test": "node --test"
   },
   "dependencies": {
+    "@supabase/supabase-js": "^2.49.1",
     "exceljs": "^4.4.0",
     "playwright": "^1.59.1",
     "puppeteer": "^24.42.0"
