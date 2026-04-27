@@ -141,6 +141,51 @@ function resolveBrowserExecutablePath() {
   return candidates.find((candidate) => existsSync(candidate));
 }
 
+function coerceBooleanFlag(value) {
+  if (typeof value === 'boolean') {
+    return value;
+  }
+
+  if (typeof value === 'string') {
+    const normalized = value.trim().toLowerCase();
+    if (normalized === 'true' || normalized === '1' || normalized === 'yes') {
+      return true;
+    }
+
+    if (normalized === 'false' || normalized === '0' || normalized === 'no') {
+      return false;
+    }
+  }
+
+  return null;
+}
+
+export function shouldDisableBrowserSandbox(options = {}) {
+  const explicit =
+    coerceBooleanFlag(options.disableSandbox) ??
+    coerceBooleanFlag(process.env.ALLABOLAG_DISABLE_SANDBOX);
+
+  if (explicit !== null) {
+    return explicit;
+  }
+
+  return process.platform === 'linux' && process.env.GITHUB_ACTIONS === 'true';
+}
+
+export function resolveBrowserArgs(options = {}) {
+  const args = [
+    '--disable-blink-features=AutomationControlled',
+    '--no-first-run',
+    '--no-default-browser-check',
+  ];
+
+  if (shouldDisableBrowserSandbox(options)) {
+    args.push('--no-sandbox', '--disable-setuid-sandbox');
+  }
+
+  return args;
+}
+
 async function readJsonFile(filePath, fallbackValue) {
   try {
     const text = await readFile(filePath, 'utf8');
@@ -504,11 +549,7 @@ async function launchBrowser(options = {}) {
   const launchOptions = {
     headless: true,
     protocolTimeout: resolveProtocolTimeout(options),
-    args: [
-      '--disable-blink-features=AutomationControlled',
-      '--no-first-run',
-      '--no-default-browser-check',
-    ],
+    args: resolveBrowserArgs(options),
   };
 
   if (executablePath) {
