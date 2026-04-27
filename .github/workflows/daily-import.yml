@@ -38,7 +38,8 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  sync:
+  sync-scheduled:
+    if: github.event_name == 'schedule'
     runs-on:
       - self-hosted
       - linux
@@ -75,27 +76,63 @@ jobs:
           echo "${{ secrets.SCB_PFX_BASE64 }}" | base64 --decode > "$SCB_PFX_PATH"
 
       - name: Run scheduled daily sync
-        if: github.event_name == 'schedule'
         run: npm run sync:daily -- --lookback=$SYNC_LOOKBACK_DAYS
 
       - name: Process queued admin requests after scheduled sync
-        if: github.event_name == 'schedule'
         env:
           ADMIN_IMPORT_DAILY_ALREADY_RAN: '1'
         run: npm run process:admin-requests
 
+      - name: Verify latest published snapshot freshness
+        if: always()
+        run: npm run verify:publication -- --max-age-days=9
+
+  sync-manual:
+    if: github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    env:
+      DATA_DIR: ${{ github.workspace }}/.runtime-data
+      SCB_PASSWORD: ${{ secrets.SCB_PASSWORD }}
+      SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+      SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+      SCB_PFX_PATH: ${{ runner.temp }}/scb-client.pfx
+      SYNC_LOOKBACK_DAYS: '10'
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Validate runtime data directory
+        shell: bash
+        run: |
+          test -n "$DATA_DIR"
+          mkdir -p "$DATA_DIR/raw" "$DATA_DIR/exports" "$DATA_DIR/state"
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Restore SCB certificate
+        shell: bash
+        run: |
+          echo "${{ secrets.SCB_PFX_BASE64 }}" | base64 --decode > "$SCB_PFX_PATH"
+
       - name: Run manual daily sync
-        if: github.event_name == 'workflow_dispatch' && inputs.run_mode == 'daily'
+        if: inputs.run_mode == 'daily'
         run: npm run sync:daily -- --lookback=${{ inputs.lookback_days }}
 
       - name: Run manual range sync
-        if: github.event_name == 'workflow_dispatch' && inputs.run_mode == 'range'
+        if: inputs.run_mode == 'range'
         run: npm run sync:range -- --from=${{ inputs.from_date }} --to=${{ inputs.to_date }}
 
       - name: Process admin requests on demand
-        if: github.event_name == 'workflow_dispatch' && inputs.run_mode == 'process_admin_requests'
+        if: inputs.run_mode == 'process_admin_requests'
         run: npm run process:admin-requests
 
       - name: Verify latest published snapshot freshness
-        if: github.event_name == 'schedule' || (github.event_name == 'workflow_dispatch' && (inputs.verify_publication == true || inputs.verify_publication == 'true'))
+        if: inputs.verify_publication == true || inputs.verify_publication == 'true'
         run: npm run verify:publication -- --max-age-days=9

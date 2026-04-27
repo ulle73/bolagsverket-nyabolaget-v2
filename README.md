@@ -96,7 +96,7 @@ För full pipeline:
 
 ## Drift
 
-Kör detta på en self-hosted runner med persistent `DATA_DIR`.
+Den schemalagda daily-körningen ska ligga på en self-hosted runner med persistent `DATA_DIR`.
 
 State som måste överleva mellan körningar:
 
@@ -104,6 +104,8 @@ State som måste överleva mellan körningar:
 - leveranshistorik
 - daily sync state
 - rå- och exportfiler
+
+Manuella adminkörningar via `foretagslistor.se/admin` kan däremot köras direkt via GitHub Actions `workflow_dispatch` på GitHub-hosted Linux. Då används en temporär runtime-mapp bara för den enskilda körningen, medan publiceringen till Supabase fortfarande sker på samma sätt som vanligt.
 
 ## Webbadmin
 
