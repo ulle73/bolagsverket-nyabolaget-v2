@@ -1,0 +1,1115 @@
+{
+  "version": 1,
+  "mottagare": {
+    "5595518480::0793212414": {
+      "Leveransnyckel": "5595518480::0793212414",
+      "OrgNr": "5595518480",
+      "Telefon": "0793212414",
+      "Företagsnamn": "Awad transport AB",
+      "FörstaKödatum": "2025-11-03",
+      "SenasteKödatum": "2025-11-03",
+      "FörstaKötid": "2026-04-23T11:14:26.555Z",
+      "SenasteKötid": "2026-04-23T11:14:26.555Z"
+    },
+    "5401091458::0708951212": {
+      "Leveransnyckel": "5401091458::0708951212",
+      "OrgNr": "5401091458",
+      "Telefon": "0708951212",
+      "Företagsnamn": "Björnevad, Rolf",
+      "FörstaKödatum": "2025-11-03",
+      "SenasteKödatum": "2025-11-03",
+      "FörstaKötid": "2026-04-23T11:14:26.555Z",
+      "SenasteKötid": "2026-04-23T11:14:26.555Z"
+    },
+    "7504212981::0706464081": {
+      "Leveransnyckel": "7504212981::0706464081",
+      "OrgNr": "7504212981",
+      "Telefon": "0706464081",
+      "Företagsnamn": "Björkemar, Anna",
+      "FörstaKödatum": "2025-11-03",
+      "SenasteKödatum": "2025-11-03",
+      "FörstaKötid": "2026-04-23T11:14:26.555Z",
+      "SenasteKötid": "2026-04-23T11:14:26.555Z"
+    },
+    "8511265020::0700244527": {
+      "Leveransnyckel": "8511265020::0700244527",
+      "OrgNr": "8511265020",
+      "Telefon": "0700244527",
+      "Företagsnamn": "Bintmaktoum, Sheikha Maytha",
+      "FörstaKödatum": "2025-11-03",
+      "SenasteKödatum": "2025-11-03",
+      "FörstaKötid": "2026-04-23T11:14:26.555Z",
+      "SenasteKötid": "2026-04-23T11:14:26.555Z"
+    },
+    "8810045594::0738102037": {
+      "Leveransnyckel": "8810045594::0738102037",
+      "OrgNr": "8810045594",
+      "Telefon": "0738102037",
+      "Företagsnamn": "Johansson, Tommy",
+      "FörstaKödatum": "2025-11-03",
+      "SenasteKödatum": "2025-11-03",
+      "FörstaKötid": "2026-04-23T11:14:26.555Z",
+      "SenasteKötid": "2026-04-23T11:14:26.555Z"
+    },
+    "8812075052::0704177435": {
+      "Leveransnyckel": "8812075052::0704177435",
+      "OrgNr": "8812075052",
+      "Telefon": "0704177435",
+      "Företagsnamn": "Berisha, Visar",
+      "FörstaKödatum": "2025-11-03",
+      "SenasteKödatum": "2025-11-03",
+      "FörstaKötid": "2026-04-23T11:14:26.555Z",
+      "SenasteKötid": "2026-04-23T11:14:26.555Z"
+    },
+    "9509091014::0700919695": {
+      "Leveransnyckel": "9509091014::0700919695",
+      "OrgNr": "9509091014",
+      "Telefon": "0700919695",
+      "Företagsnamn": "Iamsam-Ang, Best",
+      "FörstaKödatum": "2025-11-03",
+      "SenasteKödatum": "2025-11-03",
+      "FörstaKötid": "2026-04-23T11:14:26.555Z",
+      "SenasteKötid": "2026-04-23T11:14:26.555Z"
+    },
+    "9609175337::0761536583": {
+      "Leveransnyckel": "9609175337::0761536583",
+      "OrgNr": "9609175337",
+      "Telefon": "0761536583",
+      "Företagsnamn": "Attai, Maisam",
+      "FörstaKödatum": "2025-11-03",
+      "SenasteKödatum": "2025-11-03",
+      "FörstaKötid": "2026-04-23T11:14:26.555Z",
+      "SenasteKötid": "2026-04-23T11:14:26.555Z"
+    },
+    "0201023736::0763925536": {
+      "Leveransnyckel": "0201023736::0763925536",
+      "OrgNr": "0201023736",
+      "Telefon": "0763925536",
+      "Företagsnamn": "Alhosari, Tomas",
+      "FörstaKödatum": "2025-11-03",
+      "SenasteKödatum": "2025-11-03",
+      "FörstaKötid": "2026-04-23T11:14:26.555Z",
+      "SenasteKötid": "2026-04-23T11:14:26.555Z"
+    },
+    "0409071230::0793143743": {
+      "Leveransnyckel": "0409071230::0793143743",
+      "OrgNr": "0409071230",
+      "Telefon": "0793143743",
+      "Företagsnamn": "Berhe, Sened Teklebrhan",
+      "FörstaKödatum": "2025-11-03",
+      "SenasteKödatum": "2025-11-03",
+      "FörstaKötid": "2026-04-23T11:14:26.555Z",
+      "SenasteKötid": "2026-04-23T11:14:26.555Z"
+    },
+    "0009300054::0735361772": {
+      "Leveransnyckel": "0009300054::0735361772",
+      "OrgNr": "0009300054",
+      "Telefon": "0735361772",
+      "Företagsnamn": "Gustafsson, Victor",
+      "FörstaKödatum": "2025-10-20",
+      "SenasteKödatum": "2025-10-20",
+      "FörstaKötid": "2026-04-23T11:23:19.329Z",
+      "SenasteKötid": "2026-04-23T11:23:19.329Z"
+    },
+    "0207133703::0723519288": {
+      "Leveransnyckel": "0207133703::0723519288",
+      "OrgNr": "0207133703",
+      "Telefon": "0723519288",
+      "Företagsnamn": "Lindblom, Sandra Ayat Isabella",
+      "FörstaKödatum": "2025-10-20",
+      "SenasteKödatum": "2025-10-20",
+      "FörstaKötid": "2026-04-23T11:23:19.329Z",
+      "SenasteKötid": "2026-04-23T11:23:19.329Z"
+    },
+    "5595490177::0248797930": {
+      "Leveransnyckel": "5595490177::0248797930",
+      "OrgNr": "5595490177",
+      "Telefon": "0248797930",
+      "Företagsnamn": "Reycore AB",
+      "FörstaKödatum": "2025-10-20",
+      "SenasteKödatum": "2025-10-20",
+      "FörstaKötid": "2026-04-23T11:23:19.329Z",
+      "SenasteKötid": "2026-04-23T11:23:19.329Z"
+    },
+    "5595492355::029740171": {
+      "Leveransnyckel": "5595492355::029740171",
+      "OrgNr": "5595492355",
+      "Telefon": "029740171",
+      "Företagsnamn": "Mikkans Kiosk & Spel AB",
+      "FörstaKödatum": "2025-10-20",
+      "SenasteKödatum": "2025-10-20",
+      "FörstaKötid": "2026-04-23T11:23:19.329Z",
+      "SenasteKötid": "2026-04-23T11:23:19.329Z"
+    },
+    "5595492371::0738335208": {
+      "Leveransnyckel": "5595492371::0738335208",
+      "OrgNr": "5595492371",
+      "Telefon": "0738335208",
+      "Företagsnamn": "Servicebutiken i Gällivare AB",
+      "FörstaKödatum": "2025-10-20",
+      "SenasteKödatum": "2025-10-20",
+      "FörstaKötid": "2026-04-23T11:23:19.329Z",
+      "SenasteKötid": "2026-04-23T11:23:19.329Z"
+    },
+    "5595493031::0858080808": {
+      "Leveransnyckel": "5595493031::0858080808",
+      "OrgNr": "5595493031",
+      "Telefon": "0858080808",
+      "Företagsnamn": "Uqesh AB",
+      "FörstaKödatum": "2025-10-20",
+      "SenasteKödatum": "2025-10-20",
+      "FörstaKötid": "2026-04-23T11:23:19.329Z",
+      "SenasteKötid": "2026-04-23T11:23:19.329Z"
+    },
+    "5595493072::0761585172": {
+      "Leveransnyckel": "5595493072::0761585172",
+      "OrgNr": "5595493072",
+      "Telefon": "0761585172",
+      "Företagsnamn": "SCANDI EXPRESS AB",
+      "FörstaKödatum": "2025-10-20",
+      "SenasteKödatum": "2025-10-20",
+      "FörstaKötid": "2026-04-23T11:23:19.329Z",
+      "SenasteKötid": "2026-04-23T11:23:19.329Z"
+    },
+    "5595493957::0703651440": {
+      "Leveransnyckel": "5595493957::0703651440",
+      "OrgNr": "5595493957",
+      "Telefon": "0703651440",
+      "Företagsnamn": "Pär Karl Krister Karlsson Bygg AB",
+      "FörstaKödatum": "2025-10-20",
+      "SenasteKödatum": "2025-10-20",
+      "FörstaKötid": "2026-04-23T11:23:19.329Z",
+      "SenasteKötid": "2026-04-23T11:23:19.329Z"
+    },
+    "5595497271::04271047": {
+      "Leveransnyckel": "5595497271::04271047",
+      "OrgNr": "5595497271",
+      "Telefon": "04271047",
+      "Företagsnamn": "AM Matmarknad AB",
+      "FörstaKödatum": "2025-10-20",
+      "SenasteKödatum": "2025-10-20",
+      "FörstaKötid": "2026-04-23T11:23:19.329Z",
+      "SenasteKötid": "2026-04-23T11:23:19.329Z"
+    },
+    "5595497305::012040083": {
+      "Leveransnyckel": "5595497305::012040083",
+      "OrgNr": "5595497305",
+      "Telefon": "012040083",
+      "Företagsnamn": "Sjöberga Livs AB",
+      "FörstaKödatum": "2025-10-20",
+      "SenasteKödatum": "2025-10-20",
+      "FörstaKötid": "2026-04-23T11:23:19.329Z",
+      "SenasteKötid": "2026-04-23T11:23:19.329Z"
+    },
+    "6109167756::0702062961": {
+      "Leveransnyckel": "6109167756::0702062961",
+      "OrgNr": "6109167756",
+      "Telefon": "0702062961",
+      "Företagsnamn": "Schleicher, Clemens",
+      "FörstaKödatum": "2025-10-20",
+      "SenasteKödatum": "2025-10-20",
+      "FörstaKötid": "2026-04-23T11:23:19.329Z",
+      "SenasteKötid": "2026-04-23T11:23:19.329Z"
+    },
+    "6502178947::0763450990": {
+      "Leveransnyckel": "6502178947::0763450990",
+      "OrgNr": "6502178947",
+      "Telefon": "0763450990",
+      "Företagsnamn": "Lindberg, Susanna",
+      "FörstaKödatum": "2025-10-20",
+      "SenasteKödatum": "2025-10-20",
+      "FörstaKötid": "2026-04-23T11:23:19.329Z",
+      "SenasteKötid": "2026-04-23T11:23:19.329Z"
+    },
+    "6802077831::0734364396": {
+      "Leveransnyckel": "6802077831::0734364396",
+      "OrgNr": "6802077831",
+      "Telefon": "0734364396",
+      "Företagsnamn": "Löfgren, Tom",
+      "FörstaKödatum": "2025-10-20",
+      "SenasteKödatum": "2025-10-20",
+      "FörstaKötid": "2026-04-23T11:23:19.329Z",
+      "SenasteKötid": "2026-04-23T11:23:19.329Z"
+    },
+    "7308023220::0702973600": {
+      "Leveransnyckel": "7308023220::0702973600",
+      "OrgNr": "7308023220",
+      "Telefon": "0702973600",
+      "Företagsnamn": "Åkerblom, Cecilia",
+      "FörstaKödatum": "2025-10-20",
+      "SenasteKödatum": "2025-10-20",
+      "FörstaKötid": "2026-04-23T11:23:19.329Z",
+      "SenasteKötid": "2026-04-23T11:23:19.329Z"
+    },
+    "7806041914::0721888000": {
+      "Leveransnyckel": "7806041914::0721888000",
+      "OrgNr": "7806041914",
+      "Telefon": "0721888000",
+      "Företagsnamn": "Krol, Mattis",
+      "FörstaKödatum": "2025-10-20",
+      "SenasteKödatum": "2025-10-20",
+      "FörstaKötid": "2026-04-23T11:23:19.329Z",
+      "SenasteKötid": "2026-04-23T11:23:19.329Z"
+    },
+    "8109293590::0735322835": {
+      "Leveransnyckel": "8109293590::0735322835",
+      "OrgNr": "8109293590",
+      "Telefon": "0735322835",
+      "Företagsnamn": "Paulsson, Magnus",
+      "FörstaKödatum": "2025-10-20",
+      "SenasteKödatum": "2025-10-20",
+      "FörstaKötid": "2026-04-23T11:23:19.329Z",
+      "SenasteKötid": "2026-04-23T11:23:19.329Z"
+    },
+    "8307086614::0709927205": {
+      "Leveransnyckel": "8307086614::0709927205",
+      "OrgNr": "8307086614",
+      "Telefon": "0709927205",
+      "Företagsnamn": "Cederborg, Johan",
+      "FörstaKödatum": "2025-10-20",
+      "SenasteKödatum": "2025-10-20",
+      "FörstaKötid": "2026-04-23T11:23:19.329Z",
+      "SenasteKötid": "2026-04-23T11:23:19.329Z"
+    },
+    "8712142416::0725370111": {
+      "Leveransnyckel": "8712142416::0725370111",
+      "OrgNr": "8712142416",
+      "Telefon": "0725370111",
+      "Företagsnamn": "Redo, Johan",
+      "FörstaKödatum": "2025-10-20",
+      "SenasteKödatum": "2025-10-20",
+      "FörstaKötid": "2026-04-23T11:23:19.329Z",
+      "SenasteKötid": "2026-04-23T11:23:19.329Z"
+    },
+    "9212213533::0735965620": {
+      "Leveransnyckel": "9212213533::0735965620",
+      "OrgNr": "9212213533",
+      "Telefon": "0735965620",
+      "Företagsnamn": "Moscoso Santos, Jonathan",
+      "FörstaKödatum": "2025-10-20",
+      "SenasteKödatum": "2025-10-20",
+      "FörstaKötid": "2026-04-23T11:23:19.329Z",
+      "SenasteKötid": "2026-04-23T11:23:19.329Z"
+    },
+    "9302222139::0733240051": {
+      "Leveransnyckel": "9302222139::0733240051",
+      "OrgNr": "9302222139",
+      "Telefon": "0733240051",
+      "Företagsnamn": "Ljungberg Olsson, Frank",
+      "FörstaKödatum": "2025-10-20",
+      "SenasteKödatum": "2025-10-20",
+      "FörstaKötid": "2026-04-23T11:23:19.329Z",
+      "SenasteKötid": "2026-04-23T11:23:19.329Z"
+    },
+    "9311284948::0769022289": {
+      "Leveransnyckel": "9311284948::0769022289",
+      "OrgNr": "9311284948",
+      "Telefon": "0769022289",
+      "Företagsnamn": "Ciprijanovic, Katarina",
+      "FörstaKödatum": "2025-10-20",
+      "SenasteKödatum": "2025-10-20",
+      "FörstaKötid": "2026-04-23T11:23:19.329Z",
+      "SenasteKötid": "2026-04-23T11:23:19.329Z"
+    },
+    "9509035623::0722583733": {
+      "Leveransnyckel": "9509035623::0722583733",
+      "OrgNr": "9509035623",
+      "Telefon": "0722583733",
+      "Företagsnamn": "Deeb, Yasmen",
+      "FörstaKödatum": "2025-10-20",
+      "SenasteKödatum": "2025-10-20",
+      "FörstaKötid": "2026-04-23T11:23:19.329Z",
+      "SenasteKötid": "2026-04-23T11:23:19.329Z"
+    },
+    "6704294831::0734132292": {
+      "Leveransnyckel": "6704294831::0734132292",
+      "OrgNr": "6704294831",
+      "Telefon": "0734132292",
+      "Företagsnamn": "Seldén, Lennart",
+      "FörstaKödatum": "2026-04-20",
+      "SenasteKödatum": "2026-04-20",
+      "FörstaKötid": "2026-04-27T14:14:46.331Z",
+      "SenasteKötid": "2026-04-27T14:14:46.331Z"
+    },
+    "9802237686::0737032141": {
+      "Leveransnyckel": "9802237686::0737032141",
+      "OrgNr": "9802237686",
+      "Telefon": "0737032141",
+      "Företagsnamn": "Kuzmic, Ariana",
+      "FörstaKödatum": "2026-04-20",
+      "SenasteKödatum": "2026-04-20",
+      "FörstaKötid": "2026-04-27T14:14:46.331Z",
+      "SenasteKötid": "2026-04-27T14:14:46.331Z"
+    },
+    "0302269105::0722227823": {
+      "Leveransnyckel": "0302269105::0722227823",
+      "OrgNr": "0302269105",
+      "Telefon": "0722227823",
+      "Företagsnamn": "Lundgren, Jennifer",
+      "FörstaKödatum": "2026-03-30",
+      "SenasteKödatum": "2026-03-30",
+      "FörstaKötid": "2026-04-27T15:21:17.224Z",
+      "SenasteKötid": "2026-04-27T16:16:34.844Z"
+    },
+    "5595785873::0702550808": {
+      "Leveransnyckel": "5595785873::0702550808",
+      "OrgNr": "5595785873",
+      "Telefon": "0702550808",
+      "Företagsnamn": "DaNo Bygg AB",
+      "FörstaKödatum": "2026-03-30",
+      "SenasteKödatum": "2026-03-30",
+      "FörstaKötid": "2026-04-27T15:21:17.224Z",
+      "SenasteKötid": "2026-04-27T16:16:34.844Z"
+    },
+    "6606171848::0709382736": {
+      "Leveransnyckel": "6606171848::0709382736",
+      "OrgNr": "6606171848",
+      "Telefon": "0709382736",
+      "Företagsnamn": "Haddouche, Fatma Zohra",
+      "FörstaKödatum": "2026-03-30",
+      "SenasteKödatum": "2026-03-30",
+      "FörstaKötid": "2026-04-27T15:21:17.224Z",
+      "SenasteKötid": "2026-04-27T16:16:34.844Z"
+    },
+    "7101241292::0722841627": {
+      "Leveransnyckel": "7101241292::0722841627",
+      "OrgNr": "7101241292",
+      "Telefon": "0722841627",
+      "Företagsnamn": "Bogatyrev, Rashid",
+      "FörstaKödatum": "2026-03-30",
+      "SenasteKödatum": "2026-03-30",
+      "FörstaKötid": "2026-04-27T15:21:17.224Z",
+      "SenasteKötid": "2026-04-27T16:16:34.844Z"
+    },
+    "5592509169::0406745199": {
+      "Leveransnyckel": "5592509169::0406745199",
+      "OrgNr": "5592509169",
+      "Telefon": "0406745199",
+      "Företagsnamn": "MedioNova AB",
+      "FörstaKödatum": "2020-04-14",
+      "SenasteKödatum": "2020-04-14",
+      "FörstaKötid": "2026-04-29T16:17:10.649Z",
+      "SenasteKötid": "2026-04-29T16:17:10.649Z"
+    },
+    "5592510183::0728893087": {
+      "Leveransnyckel": "5592510183::0728893087",
+      "OrgNr": "5592510183",
+      "Telefon": "0728893087",
+      "Företagsnamn": "Pranari Massage & Beauty Spa AB",
+      "FörstaKödatum": "2020-04-14",
+      "SenasteKödatum": "2020-04-14",
+      "FörstaKötid": "2026-04-29T16:17:10.649Z",
+      "SenasteKötid": "2026-04-29T16:17:10.649Z"
+    },
+    "5592510365::0707261095": {
+      "Leveransnyckel": "5592510365::0707261095",
+      "OrgNr": "5592510365",
+      "Telefon": "0707261095",
+      "Företagsnamn": "AIRHälsan AB",
+      "FörstaKödatum": "2020-04-14",
+      "SenasteKödatum": "2020-04-14",
+      "FörstaKötid": "2026-04-29T16:17:10.649Z",
+      "SenasteKötid": "2026-04-29T16:17:10.649Z"
+    },
+    "5592511967::0102650030": {
+      "Leveransnyckel": "5592511967::0102650030",
+      "OrgNr": "5592511967",
+      "Telefon": "0102650030",
+      "Företagsnamn": "G.O.A.T Sports AB",
+      "FörstaKödatum": "2020-04-14",
+      "SenasteKödatum": "2020-04-14",
+      "FörstaKötid": "2026-04-29T16:17:10.649Z",
+      "SenasteKötid": "2026-04-29T16:17:10.649Z"
+    },
+    "5592512619::0760343101": {
+      "Leveransnyckel": "5592512619::0760343101",
+      "OrgNr": "5592512619",
+      "Telefon": "0760343101",
+      "Företagsnamn": "KBMT Affärskonsult AB",
+      "FörstaKödatum": "2020-04-14",
+      "SenasteKödatum": "2020-04-14",
+      "FörstaKötid": "2026-04-29T16:17:10.649Z",
+      "SenasteKötid": "2026-04-29T16:17:10.649Z"
+    },
+    "5592513070::0706048008": {
+      "Leveransnyckel": "5592513070::0706048008",
+      "OrgNr": "5592513070",
+      "Telefon": "0706048008",
+      "Företagsnamn": "LD Järnväg & Planering AB",
+      "FörstaKödatum": "2020-04-14",
+      "SenasteKödatum": "2020-04-14",
+      "FörstaKötid": "2026-04-29T16:17:10.649Z",
+      "SenasteKötid": "2026-04-29T16:17:10.649Z"
+    },
+    "5592513112::0771202040": {
+      "Leveransnyckel": "5592513112::0771202040",
+      "OrgNr": "5592513112",
+      "Telefon": "0771202040",
+      "Företagsnamn": "STS Education Group AB",
+      "FörstaKödatum": "2020-04-14",
+      "SenasteKödatum": "2020-04-14",
+      "FörstaKötid": "2026-04-29T16:17:10.649Z",
+      "SenasteKötid": "2026-04-29T16:17:10.649Z"
+    },
+    "5592513328::037292070": {
+      "Leveransnyckel": "5592513328::037292070",
+      "OrgNr": "5592513328",
+      "Telefon": "037292070",
+      "Företagsnamn": "Care1 AB",
+      "FörstaKödatum": "2020-04-14",
+      "SenasteKödatum": "2020-04-14",
+      "FörstaKötid": "2026-04-29T16:17:10.649Z",
+      "SenasteKötid": "2026-04-29T16:17:10.649Z"
+    },
+    "5592517667::0739138880": {
+      "Leveransnyckel": "5592517667::0739138880",
+      "OrgNr": "5592517667",
+      "Telefon": "0739138880",
+      "Företagsnamn": "Riwe Consulting AB",
+      "FörstaKödatum": "2020-04-14",
+      "SenasteKödatum": "2020-04-14",
+      "FörstaKötid": "2026-04-29T16:17:10.649Z",
+      "SenasteKötid": "2026-04-29T16:17:10.649Z"
+    },
+    "5592518046::0734404254": {
+      "Leveransnyckel": "5592518046::0734404254",
+      "OrgNr": "5592518046",
+      "Telefon": "0734404254",
+      "Företagsnamn": "Byggbolaget Mellby AB",
+      "FörstaKödatum": "2020-04-14",
+      "SenasteKödatum": "2020-04-14",
+      "FörstaKötid": "2026-04-29T16:17:10.649Z",
+      "SenasteKötid": "2026-04-29T16:17:10.649Z"
+    },
+    "5592518335::0703347979": {
+      "Leveransnyckel": "5592518335::0703347979",
+      "OrgNr": "5592518335",
+      "Telefon": "0703347979",
+      "Företagsnamn": "Electronomics AB",
+      "FörstaKödatum": "2020-04-14",
+      "SenasteKödatum": "2020-04-14",
+      "FörstaKötid": "2026-04-29T16:17:10.649Z",
+      "SenasteKötid": "2026-04-29T16:17:10.649Z"
+    },
+    "5592518376::0470575570": {
+      "Leveransnyckel": "5592518376::0470575570",
+      "OrgNr": "5592518376",
+      "Telefon": "0470575570",
+      "Företagsnamn": "Ove Karlsson Brunnsborrning AB",
+      "FörstaKödatum": "2020-04-14",
+      "SenasteKödatum": "2020-04-14",
+      "FörstaKötid": "2026-04-29T16:17:10.649Z",
+      "SenasteKötid": "2026-04-29T16:17:10.649Z"
+    },
+    "7696385710::0706747620": {
+      "Leveransnyckel": "7696385710::0706747620",
+      "OrgNr": "7696385710",
+      "Telefon": "0706747620",
+      "Företagsnamn": "Tiveden Music ekonomisk förening",
+      "FörstaKödatum": "2020-04-14",
+      "SenasteKödatum": "2020-04-14",
+      "FörstaKötid": "2026-04-29T16:17:10.649Z",
+      "SenasteKötid": "2026-04-29T16:17:10.649Z"
+    },
+    "7696385942::0730797903": {
+      "Leveransnyckel": "7696385942::0730797903",
+      "OrgNr": "7696385942",
+      "Telefon": "0730797903",
+      "Företagsnamn": "Biosfärområde Vindelälven-Juhttátahkka ekonomisk förening",
+      "FörstaKödatum": "2020-04-14",
+      "SenasteKödatum": "2020-04-14",
+      "FörstaKötid": "2026-04-29T16:17:10.649Z",
+      "SenasteKötid": "2026-04-29T16:17:10.649Z"
+    },
+    "6812097118::0706061967": {
+      "Leveransnyckel": "6812097118::0706061967",
+      "OrgNr": "6812097118",
+      "Telefon": "0706061967",
+      "Företagsnamn": "Lagerby, Christian",
+      "FörstaKödatum": "2020-04-14",
+      "SenasteKödatum": "2020-04-14",
+      "FörstaKötid": "2026-04-29T16:17:10.649Z",
+      "SenasteKötid": "2026-04-29T16:17:10.649Z"
+    },
+    "8507020512::0793366627": {
+      "Leveransnyckel": "8507020512::0793366627",
+      "OrgNr": "8507020512",
+      "Telefon": "0793366627",
+      "Företagsnamn": "Hidalgo Casablanca, Alexander",
+      "FörstaKödatum": "2020-04-14",
+      "SenasteKödatum": "2020-04-14",
+      "FörstaKötid": "2026-04-29T16:17:10.649Z",
+      "SenasteKötid": "2026-04-29T16:17:10.649Z"
+    },
+    "5566207618::0703326210": {
+      "Leveransnyckel": "5566207618::0703326210",
+      "OrgNr": "5566207618",
+      "Telefon": "0703326210",
+      "Företagsnamn": "College Club Sweden AB",
+      "FörstaKödatum": "2002-04-16",
+      "SenasteKödatum": "2002-04-16",
+      "FörstaKötid": "2026-04-29T19:12:33.554Z",
+      "SenasteKötid": "2026-04-29T19:12:33.554Z"
+    },
+    "5566236195::026513700": {
+      "Leveransnyckel": "5566236195::026513700",
+      "OrgNr": "5566236195",
+      "Telefon": "026513700",
+      "Företagsnamn": "WORLD INFOGROUP I NORDEN AB",
+      "FörstaKödatum": "2002-04-16",
+      "SenasteKödatum": "2002-04-16",
+      "FörstaKötid": "2026-04-29T19:12:33.554Z",
+      "SenasteKötid": "2026-04-29T19:12:33.554Z"
+    },
+    "5566239199::090778171": {
+      "Leveransnyckel": "5566239199::090778171",
+      "OrgNr": "5566239199",
+      "Telefon": "090778171",
+      "Företagsnamn": "Adelphos Healthcare AB",
+      "FörstaKödatum": "2002-04-16",
+      "SenasteKödatum": "2002-04-16",
+      "FörstaKötid": "2026-04-29T19:12:33.554Z",
+      "SenasteKötid": "2026-04-29T19:12:33.554Z"
+    },
+    "5566240601::087302600": {
+      "Leveransnyckel": "5566240601::087302600",
+      "OrgNr": "5566240601",
+      "Telefon": "087302600",
+      "Företagsnamn": "3S - SMART STRATEGY SOLUTIONS SWEDEN AB",
+      "FörstaKödatum": "2002-04-16",
+      "SenasteKödatum": "2002-04-16",
+      "FörstaKötid": "2026-04-29T19:12:33.554Z",
+      "SenasteKötid": "2026-04-29T19:12:33.554Z"
+    },
+    "5566245121::0704794521": {
+      "Leveransnyckel": "5566245121::0704794521",
+      "OrgNr": "5566245121",
+      "Telefon": "0704794521",
+      "Företagsnamn": "MARTIN OCH GERMUNDS BYGG AKTIEBOLAG",
+      "FörstaKödatum": "2002-04-16",
+      "SenasteKödatum": "2002-04-16",
+      "FörstaKötid": "2026-04-29T19:12:33.554Z",
+      "SenasteKötid": "2026-04-29T19:12:33.554Z"
+    },
+    "5566246863::052072320": {
+      "Leveransnyckel": "5566246863::052072320",
+      "OrgNr": "5566246863",
+      "Telefon": "052072320",
+      "Företagsnamn": "Skakeltorp Sverige AB",
+      "FörstaKödatum": "2002-04-16",
+      "SenasteKödatum": "2002-04-16",
+      "FörstaKötid": "2026-04-29T19:12:33.554Z",
+      "SenasteKötid": "2026-04-29T19:12:33.554Z"
+    },
+    "5566247952::018358116": {
+      "Leveransnyckel": "5566247952::018358116",
+      "OrgNr": "5566247952",
+      "Telefon": "018358116",
+      "Företagsnamn": "BT VENTILATION AB",
+      "FörstaKödatum": "2002-04-16",
+      "SenasteKödatum": "2002-04-16",
+      "FörstaKötid": "2026-04-29T19:12:33.554Z",
+      "SenasteKötid": "2026-04-29T19:12:33.554Z"
+    },
+    "5566248125::0406117075": {
+      "Leveransnyckel": "5566248125::0406117075",
+      "OrgNr": "5566248125",
+      "Telefon": "0406117075",
+      "Företagsnamn": "MEGASYS AB",
+      "FörstaKödatum": "2002-04-16",
+      "SenasteKödatum": "2002-04-16",
+      "FörstaKötid": "2026-04-29T19:12:33.554Z",
+      "SenasteKötid": "2026-04-29T19:12:33.554Z"
+    },
+    "5566248786::0855036506": {
+      "Leveransnyckel": "5566248786::0855036506",
+      "OrgNr": "5566248786",
+      "Telefon": "0855036506",
+      "Företagsnamn": "Hohe Mut AB",
+      "FörstaKödatum": "2002-04-16",
+      "SenasteKödatum": "2002-04-16",
+      "FörstaKötid": "2026-04-29T19:12:33.554Z",
+      "SenasteKötid": "2026-04-29T19:12:33.554Z"
+    },
+    "5566253059::0705534033": {
+      "Leveransnyckel": "5566253059::0705534033",
+      "OrgNr": "5566253059",
+      "Telefon": "0705534033",
+      "Företagsnamn": "YXENHULTS ENTREPRENAD AB",
+      "FörstaKödatum": "2002-04-16",
+      "SenasteKödatum": "2002-04-16",
+      "FörstaKötid": "2026-04-29T19:12:33.554Z",
+      "SenasteKötid": "2026-04-29T19:12:33.554Z"
+    },
+    "5566253745::019241244": {
+      "Leveransnyckel": "5566253745::019241244",
+      "OrgNr": "5566253745",
+      "Telefon": "019241244",
+      "Företagsnamn": "ML-TRÄ AB",
+      "FörstaKödatum": "2002-04-16",
+      "SenasteKödatum": "2002-04-16",
+      "FörstaKötid": "2026-04-29T19:12:33.554Z",
+      "SenasteKötid": "2026-04-29T19:12:33.554Z"
+    },
+    "5566255369::0705424270": {
+      "Leveransnyckel": "5566255369::0705424270",
+      "OrgNr": "5566255369",
+      "Telefon": "0705424270",
+      "Företagsnamn": "B-TEC MASKIN AB",
+      "FörstaKödatum": "2002-04-16",
+      "SenasteKödatum": "2002-04-16",
+      "FörstaKötid": "2026-04-29T19:12:33.554Z",
+      "SenasteKötid": "2026-04-29T19:12:33.554Z"
+    },
+    "5566255658::0370694900": {
+      "Leveransnyckel": "5566255658::0370694900",
+      "OrgNr": "5566255658",
+      "Telefon": "0370694900",
+      "Företagsnamn": "Nyfosa Takläggaren 8 Fastighets AB",
+      "FörstaKödatum": "2002-04-16",
+      "SenasteKödatum": "2002-04-16",
+      "FörstaKötid": "2026-04-29T19:12:33.554Z",
+      "SenasteKötid": "2026-04-29T19:12:33.554Z"
+    },
+    "5566255757::0705451787": {
+      "Leveransnyckel": "5566255757::0705451787",
+      "OrgNr": "5566255757",
+      "Telefon": "0705451787",
+      "Företagsnamn": "BÖRJE PERSSON FÖRSÄKRING AB",
+      "FörstaKödatum": "2002-04-16",
+      "SenasteKödatum": "2002-04-16",
+      "FörstaKötid": "2026-04-29T19:12:33.554Z",
+      "SenasteKötid": "2026-04-29T19:12:33.554Z"
+    },
+    "5566256540::0707469000": {
+      "Leveransnyckel": "5566256540::0707469000",
+      "OrgNr": "5566256540",
+      "Telefon": "0707469000",
+      "Företagsnamn": "FOCO 17 AB",
+      "FörstaKödatum": "2002-04-16",
+      "SenasteKödatum": "2002-04-16",
+      "FörstaKötid": "2026-04-29T19:12:33.554Z",
+      "SenasteKötid": "2026-04-29T19:12:33.554Z"
+    },
+    "5566256656::042120906": {
+      "Leveransnyckel": "5566256656::042120906",
+      "OrgNr": "5566256656",
+      "Telefon": "042120906",
+      "Företagsnamn": "SYDJOUREN I HELSINGBORG AB",
+      "FörstaKödatum": "2002-04-16",
+      "SenasteKödatum": "2002-04-16",
+      "FörstaKötid": "2026-04-29T19:12:33.554Z",
+      "SenasteKötid": "2026-04-29T19:12:33.554Z"
+    },
+    "5566256961::0322671810": {
+      "Leveransnyckel": "5566256961::0322671810",
+      "OrgNr": "5566256961",
+      "Telefon": "0322671810",
+      "Företagsnamn": "Be-Ge Therm AB",
+      "FörstaKödatum": "2002-04-16",
+      "SenasteKödatum": "2002-04-16",
+      "FörstaKötid": "2026-04-29T19:12:33.554Z",
+      "SenasteKötid": "2026-04-29T19:12:33.554Z"
+    },
+    "5566258223::048088968": {
+      "Leveransnyckel": "5566258223::048088968",
+      "OrgNr": "5566258223",
+      "Telefon": "048088968",
+      "Företagsnamn": "LJ Dunö AB",
+      "FörstaKödatum": "2002-04-16",
+      "SenasteKödatum": "2002-04-16",
+      "FörstaKötid": "2026-04-29T19:12:33.554Z",
+      "SenasteKötid": "2026-04-29T19:12:33.554Z"
+    },
+    "5566258280::042256160": {
+      "Leveransnyckel": "5566258280::042256160",
+      "OrgNr": "5566258280",
+      "Telefon": "042256160",
+      "Företagsnamn": "TNC SERVICE AB",
+      "FörstaKödatum": "2002-04-16",
+      "SenasteKödatum": "2002-04-16",
+      "FörstaKötid": "2026-04-29T19:12:33.554Z",
+      "SenasteKötid": "2026-04-29T19:12:33.554Z"
+    },
+    "5566258355::0176237409": {
+      "Leveransnyckel": "5566258355::0176237409",
+      "OrgNr": "5566258355",
+      "Telefon": "0176237409",
+      "Företagsnamn": "TED BENGTSSON BYGGFIRMA AB",
+      "FörstaKödatum": "2002-04-16",
+      "SenasteKödatum": "2002-04-16",
+      "FörstaKötid": "2026-04-29T19:12:33.554Z",
+      "SenasteKötid": "2026-04-29T19:12:33.554Z"
+    },
+    "5566258876::0733710200": {
+      "Leveransnyckel": "5566258876::0733710200",
+      "OrgNr": "5566258876",
+      "Telefon": "0733710200",
+      "Företagsnamn": "Triggercloud AB",
+      "FörstaKödatum": "2002-04-16",
+      "SenasteKödatum": "2002-04-16",
+      "FörstaKötid": "2026-04-29T19:12:33.554Z",
+      "SenasteKötid": "2026-04-29T19:12:33.554Z"
+    },
+    "5566258926::086613235": {
+      "Leveransnyckel": "5566258926::086613235",
+      "OrgNr": "5566258926",
+      "Telefon": "086613235",
+      "Företagsnamn": "Mischief Silver AB",
+      "FörstaKödatum": "2002-04-16",
+      "SenasteKödatum": "2002-04-16",
+      "FörstaKötid": "2026-04-29T19:12:33.554Z",
+      "SenasteKötid": "2026-04-29T19:12:33.554Z"
+    },
+    "5566260427::0703243540": {
+      "Leveransnyckel": "5566260427::0703243540",
+      "OrgNr": "5566260427",
+      "Telefon": "0703243540",
+      "Företagsnamn": "SOLLEFTEÅ SÅG & BORRTEKNIK SBT AB",
+      "FörstaKödatum": "2002-04-16",
+      "SenasteKödatum": "2002-04-16",
+      "FörstaKötid": "2026-04-29T19:12:33.554Z",
+      "SenasteKötid": "2026-04-29T19:12:33.554Z"
+    },
+    "5566260914::052220692": {
+      "Leveransnyckel": "5566260914::052220692",
+      "OrgNr": "5566260914",
+      "Telefon": "052220692",
+      "Företagsnamn": "M KARLSSONS RÖR AB",
+      "FörstaKödatum": "2002-04-16",
+      "SenasteKödatum": "2002-04-16",
+      "FörstaKötid": "2026-04-29T19:12:33.554Z",
+      "SenasteKötid": "2026-04-29T19:12:33.554Z"
+    },
+    "5566261995::0873350000": {
+      "Leveransnyckel": "5566261995::0873350000",
+      "OrgNr": "5566261995",
+      "Telefon": "0873350000",
+      "Företagsnamn": "RAPIDO KLARA TRANSPORTER AKTIEBOLAG",
+      "FörstaKödatum": "2002-04-16",
+      "SenasteKödatum": "2002-04-16",
+      "FörstaKötid": "2026-04-29T19:12:33.554Z",
+      "SenasteKötid": "2026-04-29T19:12:33.554Z"
+    },
+    "5566262464::0706581363": {
+      "Leveransnyckel": "5566262464::0706581363",
+      "OrgNr": "5566262464",
+      "Telefon": "0706581363",
+      "Företagsnamn": "BRÖDERNA PALLINS EFTERTRÄDARE AB",
+      "FörstaKödatum": "2002-04-16",
+      "SenasteKödatum": "2002-04-16",
+      "FörstaKötid": "2026-04-29T19:12:33.554Z",
+      "SenasteKötid": "2026-04-29T19:12:33.554Z"
+    },
+    "5566262977::086660320": {
+      "Leveransnyckel": "5566262977::086660320",
+      "OrgNr": "5566262977",
+      "Telefon": "086660320",
+      "Företagsnamn": "Naughty Spirits Aktiebolag",
+      "FörstaKödatum": "2002-04-16",
+      "SenasteKödatum": "2002-04-16",
+      "FörstaKötid": "2026-04-29T19:12:33.554Z",
+      "SenasteKötid": "2026-04-29T19:12:33.554Z"
+    },
+    "5566263082::013331004": {
+      "Leveransnyckel": "5566263082::013331004",
+      "OrgNr": "5566263082",
+      "Telefon": "013331004",
+      "Företagsnamn": "Hulu Förvaltning AB",
+      "FörstaKödatum": "2002-04-16",
+      "SenasteKödatum": "2002-04-16",
+      "FörstaKötid": "2026-04-29T19:12:33.554Z",
+      "SenasteKötid": "2026-04-29T19:12:33.554Z"
+    },
+    "5566264320::0705100451": {
+      "Leveransnyckel": "5566264320::0705100451",
+      "OrgNr": "5566264320",
+      "Telefon": "0705100451",
+      "Företagsnamn": "SOLAZ AB",
+      "FörstaKödatum": "2002-04-16",
+      "SenasteKödatum": "2002-04-16",
+      "FörstaKötid": "2026-04-29T19:12:33.554Z",
+      "SenasteKötid": "2026-04-29T19:12:33.554Z"
+    },
+    "7179054585::076135162": {
+      "Leveransnyckel": "7179054585::076135162",
+      "OrgNr": "7179054585",
+      "Telefon": "076135162",
+      "Företagsnamn": "KAKUÅSENS VÄGSAMFÄLLIGHET",
+      "FörstaKödatum": "2002-04-16",
+      "SenasteKödatum": "2002-04-16",
+      "FörstaKötid": "2026-04-29T19:12:33.554Z",
+      "SenasteKötid": "2026-04-29T19:12:33.554Z"
+    },
+    "7696082135::087757305": {
+      "Leveransnyckel": "7696082135::087757305",
+      "OrgNr": "7696082135",
+      "Telefon": "087757305",
+      "Företagsnamn": "BOSTADSRÄTTSFÖRENINGEN TRYCKPRESSEN 4",
+      "FörstaKödatum": "2002-04-16",
+      "SenasteKödatum": "2002-04-16",
+      "FörstaKötid": "2026-04-29T19:12:33.554Z",
+      "SenasteKötid": "2026-04-29T19:12:33.554Z"
+    },
+    "7696082150::0705907916": {
+      "Leveransnyckel": "7696082150::0705907916",
+      "OrgNr": "7696082150",
+      "Telefon": "0705907916",
+      "Företagsnamn": "BOSTADSRÄTTSFÖRENINGEN GAMLA BRUKET",
+      "FörstaKödatum": "2002-04-16",
+      "SenasteKödatum": "2002-04-16",
+      "FörstaKötid": "2026-04-29T19:12:33.554Z",
+      "SenasteKötid": "2026-04-29T19:12:33.554Z"
+    },
+    "7696082184::013209135": {
+      "Leveransnyckel": "7696082184::013209135",
+      "OrgNr": "7696082184",
+      "Telefon": "013209135",
+      "Företagsnamn": "DEF.WASTE EKONOMISK FÖRENING",
+      "FörstaKödatum": "2002-04-16",
+      "SenasteKödatum": "2002-04-16",
+      "FörstaKötid": "2026-04-29T19:12:33.554Z",
+      "SenasteKötid": "2026-04-29T19:12:33.554Z"
+    },
+    "7696082226::0155262328": {
+      "Leveransnyckel": "7696082226::0155262328",
+      "OrgNr": "7696082226",
+      "Telefon": "0155262328",
+      "Företagsnamn": "BOSTADSRÄTTSFÖRENINGEN BORGAREN I TROSA",
+      "FörstaKödatum": "2002-04-16",
+      "SenasteKödatum": "2002-04-16",
+      "FörstaKötid": "2026-04-29T19:12:33.554Z",
+      "SenasteKötid": "2026-04-29T19:12:33.554Z"
+    },
+    "8024117122::086996000": {
+      "Leveransnyckel": "8024117122::086996000",
+      "OrgNr": "8024117122",
+      "Telefon": "086996000",
+      "Företagsnamn": "ELSA & OLOF ERIKSSON STIFTELSE",
+      "FörstaKödatum": "2002-04-16",
+      "SenasteKödatum": "2002-04-16",
+      "FörstaKötid": "2026-04-29T19:12:33.554Z",
+      "SenasteKötid": "2026-04-29T19:12:33.554Z"
+    },
+    "8024117205::084719701": {
+      "Leveransnyckel": "8024117205::084719701",
+      "OrgNr": "8024117205",
+      "Telefon": "084719701",
+      "Företagsnamn": "LÖVSTA SKYTTEFÖRENING",
+      "FörstaKödatum": "2002-04-16",
+      "SenasteKödatum": "2002-04-16",
+      "FörstaKötid": "2026-04-29T19:12:33.554Z",
+      "SenasteKötid": "2026-04-29T19:12:33.554Z"
+    },
+    "8024117262::087358278": {
+      "Leveransnyckel": "8024117262::087358278",
+      "OrgNr": "8024117262",
+      "Telefon": "087358278",
+      "Företagsnamn": "IDEELLA FÖRENINGEN TRUE BUDDHA XIUDETANG SWEDEN",
+      "FörstaKödatum": "2002-04-16",
+      "SenasteKödatum": "2002-04-16",
+      "FörstaKötid": "2026-04-29T19:12:33.554Z",
+      "SenasteKötid": "2026-04-29T19:12:33.554Z"
+    },
+    "8176067141::018500979": {
+      "Leveransnyckel": "8176067141::018500979",
+      "OrgNr": "8176067141",
+      "Telefon": "018500979",
+      "Företagsnamn": "BRYGGAN",
+      "FörstaKödatum": "2002-04-16",
+      "SenasteKödatum": "2002-04-16",
+      "FörstaKötid": "2026-04-29T19:12:33.554Z",
+      "SenasteKötid": "2026-04-29T19:12:33.554Z"
+    },
+    "8328010841::049165045": {
+      "Leveransnyckel": "8328010841::049165045",
+      "OrgNr": "8328010841",
+      "Telefon": "049165045",
+      "Företagsnamn": "MÖCKHULTS BYALAG",
+      "FörstaKödatum": "2002-04-16",
+      "SenasteKödatum": "2002-04-16",
+      "FörstaKötid": "2026-04-29T19:12:33.554Z",
+      "SenasteKötid": "2026-04-29T19:12:33.554Z"
+    },
+    "8559008514::0737596058": {
+      "Leveransnyckel": "8559008514::0737596058",
+      "OrgNr": "8559008514",
+      "Telefon": "0737596058",
+      "Företagsnamn": "TÅNGA HEDS4H",
+      "FörstaKödatum": "2002-04-16",
+      "SenasteKödatum": "2002-04-16",
+      "FörstaKötid": "2026-04-29T19:12:33.554Z",
+      "SenasteKötid": "2026-04-29T19:12:33.554Z"
+    },
+    "8655010729::032032520": {
+      "Leveransnyckel": "8655010729::032032520",
+      "OrgNr": "8655010729",
+      "Telefon": "032032520",
+      "Företagsnamn": "MARKS SERBISKA FÖRENING - CAR LAZAR",
+      "FörstaKödatum": "2002-04-16",
+      "SenasteKödatum": "2002-04-16",
+      "FörstaKötid": "2026-04-29T19:12:33.554Z",
+      "SenasteKötid": "2026-04-29T19:12:33.554Z"
+    },
+    "8932034476::064034066": {
+      "Leveransnyckel": "8932034476::064034066",
+      "OrgNr": "8932034476",
+      "Telefon": "064034066",
+      "Företagsnamn": "RISE/TULLERÅSEN BYALAG",
+      "FörstaKödatum": "2002-04-16",
+      "SenasteKödatum": "2002-04-16",
+      "FörstaKötid": "2026-04-29T19:12:33.554Z",
+      "SenasteKötid": "2026-04-29T19:12:33.554Z"
+    },
+    "8988014836::092410907": {
+      "Leveransnyckel": "8988014836::092410907",
+      "OrgNr": "8988014836",
+      "Telefon": "092410907",
+      "Företagsnamn": "SJUKVÅRDSPARTIET I LULEÅ",
+      "FörstaKödatum": "2002-04-16",
+      "SenasteKödatum": "2002-04-16",
+      "FörstaKötid": "2026-04-29T19:12:33.554Z",
+      "SenasteKötid": "2026-04-29T19:12:33.554Z"
+    },
+    "9696848473::087845133": {
+      "Leveransnyckel": "9696848473::087845133",
+      "OrgNr": "9696848473",
+      "Telefon": "087845133",
+      "Företagsnamn": "P.C. SPORRONG MUSIK HANDELSBOLAG",
+      "FörstaKödatum": "2002-04-16",
+      "SenasteKödatum": "2002-04-16",
+      "FörstaKötid": "2026-04-29T19:12:33.554Z",
+      "SenasteKötid": "2026-04-29T19:12:33.554Z"
+    },
+    "9696848556::0738356122": {
+      "Leveransnyckel": "9696848556::0738356122",
+      "OrgNr": "9696848556",
+      "Telefon": "0738356122",
+      "Företagsnamn": "SLIMMINGE STALL & FRITID HANDELSBOLAG",
+      "FörstaKödatum": "2002-04-16",
+      "SenasteKödatum": "2002-04-16",
+      "FörstaKötid": "2026-04-29T19:12:33.554Z",
+      "SenasteKötid": "2026-04-29T19:12:33.554Z"
+    },
+    "9696848564::0498245065": {
+      "Leveransnyckel": "9696848564::0498245065",
+      "OrgNr": "9696848564",
+      "Telefon": "0498245065",
+      "Företagsnamn": "TODEJ HANDELSBOLAG",
+      "FörstaKödatum": "2002-04-16",
+      "SenasteKödatum": "2002-04-16",
+      "FörstaKötid": "2026-04-29T19:12:33.554Z",
+      "SenasteKötid": "2026-04-29T19:12:33.554Z"
+    },
+    "9696848820::032018430": {
+      "Leveransnyckel": "9696848820::032018430",
+      "OrgNr": "9696848820",
+      "Telefon": "032018430",
+      "Företagsnamn": "KOOPER SYSTEM HANDELSBOLAG",
+      "FörstaKödatum": "2002-04-16",
+      "SenasteKödatum": "2002-04-16",
+      "FörstaKötid": "2026-04-29T19:12:33.554Z",
+      "SenasteKötid": "2026-04-29T19:12:33.554Z"
+    },
+    "9696849042::011161730": {
+      "Leveransnyckel": "9696849042::011161730",
+      "OrgNr": "9696849042",
+      "Telefon": "011161730",
+      "Företagsnamn": "KNEIPPENS SPELBUTIK KOMMANDITBOLAG",
+      "FörstaKödatum": "2002-04-16",
+      "SenasteKödatum": "2002-04-16",
+      "FörstaKötid": "2026-04-29T19:12:33.554Z",
+      "SenasteKötid": "2026-04-29T19:12:33.554Z"
+    },
+    "4509139657::04299000": {
+      "Leveransnyckel": "4509139657::04299000",
+      "OrgNr": "4509139657",
+      "Telefon": "04299000",
+      "Företagsnamn": "Jensen, Kurt Ivar",
+      "FörstaKödatum": "2002-04-16",
+      "SenasteKödatum": "2002-04-16",
+      "FörstaKötid": "2026-04-29T19:12:33.554Z",
+      "SenasteKötid": "2026-04-29T19:12:33.554Z"
+    },
+    "5909250408::040480355": {
+      "Leveransnyckel": "5909250408::040480355",
+      "OrgNr": "5909250408",
+      "Telefon": "040480355",
+      "Företagsnamn": "Persson, Anje Elisabeth",
+      "FörstaKödatum": "2002-04-16",
+      "SenasteKödatum": "2002-04-16",
+      "FörstaKötid": "2026-04-29T19:12:33.554Z",
+      "SenasteKötid": "2026-04-29T19:12:33.554Z"
+    },
+    "6109221330::0702391775": {
+      "Leveransnyckel": "6109221330::0702391775",
+      "OrgNr": "6109221330",
+      "Telefon": "0702391775",
+      "Företagsnamn": "Einarsson, Guðmundur",
+      "FörstaKödatum": "2002-04-16",
+      "SenasteKödatum": "2002-04-16",
+      "FörstaKötid": "2026-04-29T19:12:33.554Z",
+      "SenasteKötid": "2026-04-29T19:12:33.554Z"
+    },
+    "6207302669::0709900506": {
+      "Leveransnyckel": "6207302669::0709900506",
+      "OrgNr": "6207302669",
+      "Telefon": "0709900506",
+      "Företagsnamn": "Gabor, Kate",
+      "FörstaKödatum": "2002-04-16",
+      "SenasteKödatum": "2002-04-16",
+      "FörstaKötid": "2026-04-29T19:12:33.554Z",
+      "SenasteKötid": "2026-04-29T19:12:33.554Z"
+    },
+    "6605052122::014250718": {
+      "Leveransnyckel": "6605052122::014250718",
+      "OrgNr": "6605052122",
+      "Telefon": "014250718",
+      "Företagsnamn": "Brand Kvist, Mai",
+      "FörstaKödatum": "2002-04-16",
+      "SenasteKödatum": "2002-04-16",
+      "FörstaKötid": "2026-04-29T19:12:33.554Z",
+      "SenasteKötid": "2026-04-29T19:12:33.554Z"
+    },
+    "7106262772::0739836931": {
+      "Leveransnyckel": "7106262772::0739836931",
+      "OrgNr": "7106262772",
+      "Telefon": "0739836931",
+      "Företagsnamn": "Davidsson, Peter",
+      "FörstaKödatum": "2002-04-16",
+      "SenasteKödatum": "2002-04-16",
+      "FörstaKötid": "2026-04-29T19:12:33.554Z",
+      "SenasteKötid": "2026-04-29T19:12:33.554Z"
+    },
+    "7601201705::015210313": {
+      "Leveransnyckel": "7601201705::015210313",
+      "OrgNr": "7601201705",
+      "Telefon": "015210313",
+      "Företagsnamn": "Zetterberg, Veronica",
+      "FörstaKödatum": "2002-04-16",
+      "SenasteKödatum": "2002-04-16",
+      "FörstaKötid": "2026-04-29T19:12:33.554Z",
+      "SenasteKötid": "2026-04-29T19:12:33.554Z"
+    },
+    "7606285588::0739624352": {
+      "Leveransnyckel": "7606285588::0739624352",
+      "OrgNr": "7606285588",
+      "Telefon": "0739624352",
+      "Företagsnamn": "Hökfelt, Marjut",
+      "FörstaKödatum": "2002-04-16",
+      "SenasteKödatum": "2002-04-16",
+      "FörstaKötid": "2026-04-29T19:12:33.554Z",
+      "SenasteKötid": "2026-04-29T19:12:33.554Z"
+    },
+    "7910134894::0702572572": {
+      "Leveransnyckel": "7910134894::0702572572",
+      "OrgNr": "7910134894",
+      "Telefon": "0702572572",
+      "Företagsnamn": "Sandin, Christofer",
+      "FörstaKödatum": "2002-04-16",
+      "SenasteKödatum": "2002-04-16",
+      "FörstaKötid": "2026-04-29T19:12:33.554Z",
+      "SenasteKötid": "2026-04-29T19:12:33.554Z"
+    }
+  }
+}

@@ -1,4 +1,4 @@
-import { createSupabaseServiceClient } from './supabase-client.js';
+import { createSupabaseServiceClient, isArchiveDate } from './supabase-client.js';
 
 const DEFAULT_BATCH_SIZE = 500;
 
@@ -78,15 +78,27 @@ export async function publishSnapshot(
     batchSize = DEFAULT_BATCH_SIZE,
     repository,
     client,
+    write = () => {},
   } = {},
 ) {
   if (!snapshotDate) {
     throw new Error('snapshotDate is required for publishSnapshot.');
   }
 
+  let resolvedClient = client;
+  let targetLabel = 'active';
+
+  if (!repository && !resolvedClient) {
+    const result = await createSupabaseServiceClient({ snapshotDate });
+    resolvedClient = result.client;
+    targetLabel = result.target;
+  }
+
   const repo =
     repository ??
-    createSupabaseSnapshotRepository(client ?? (await createSupabaseServiceClient()));
+    createSupabaseSnapshotRepository(resolvedClient);
+
+  write(`Publicerar till ${targetLabel} databas (${isArchiveDate(snapshotDate) ? 'arkiv' : 'aktiv'})...\n`);
 
   const startedAt = new Date().toISOString();
   const importRunId = await repo.createImportRun({
@@ -152,6 +164,7 @@ export async function publishSnapshot(
       snapshotDate,
       rowCount: normalizedRows.length,
       batchCount: batches.length,
+      target: targetLabel,
     };
   } catch (error) {
     const failedAt = new Date().toISOString();

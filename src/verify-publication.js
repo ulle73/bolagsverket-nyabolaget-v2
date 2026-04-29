@@ -86,7 +86,10 @@ export async function runVerifyPublication(
     now = new Date(),
     loadEnv = () => hydrateProcessEnv(),
     assertEnv = () => assertPublishEnv(),
-    createClient = () => createSupabaseServiceClient(),
+    createClient = async () => {
+      const result = await createSupabaseServiceClient();
+      return result.client;
+    },
     fetchSnapshot = (targetDate, client) => fetchPublishedSnapshot(targetDate, client),
   } = {},
 ) {

@@ -1,0 +1,86 @@
+{
+  "version": 1,
+  "updatedAt": "2026-04-27T09:12:41.377Z",
+  "dates": {
+    "2026-04-17": {
+      "snapshotDate": "2026-04-17",
+      "status": "completed",
+      "startedAt": "2026-04-27T09:12:40.944Z",
+      "completedAt": "2026-04-27T09:12:40.949Z",
+      "exitCode": 0,
+      "errorMessage": null
+    },
+    "2026-04-18": {
+      "snapshotDate": "2026-04-18",
+      "status": "completed",
+      "startedAt": "2026-04-27T09:12:40.957Z",
+      "completedAt": "2026-04-27T09:12:40.969Z",
+      "exitCode": 0,
+      "errorMessage": null
+    },
+    "2026-04-19": {
+      "snapshotDate": "2026-04-19",
+      "status": "completed",
+      "startedAt": "2026-04-27T09:12:41.010Z",
+      "completedAt": "2026-04-27T09:12:41.078Z",
+      "exitCode": 0,
+      "errorMessage": null
+    },
+    "2026-04-20": {
+      "snapshotDate": "2026-04-20",
+      "status": "completed",
+      "startedAt": "2026-04-27T09:12:41.172Z",
+      "completedAt": "2026-04-27T09:12:41.198Z",
+      "exitCode": 0,
+      "errorMessage": null
+    },
+    "2026-04-21": {
+      "snapshotDate": "2026-04-21",
+      "status": "completed",
+      "startedAt": "2026-04-27T09:12:41.213Z",
+      "completedAt": "2026-04-27T09:12:41.226Z",
+      "exitCode": 0,
+      "errorMessage": null
+    },
+    "2026-04-22": {
+      "snapshotDate": "2026-04-22",
+      "status": "completed",
+      "startedAt": "2026-04-27T09:12:41.234Z",
+      "completedAt": "2026-04-27T09:12:41.245Z",
+      "exitCode": 0,
+      "errorMessage": null
+    },
+    "2026-04-23": {
+      "snapshotDate": "2026-04-23",
+      "status": "completed",
+      "startedAt": "2026-04-27T09:12:41.262Z",
+      "completedAt": "2026-04-27T09:12:41.366Z",
+      "exitCode": 0,
+      "errorMessage": null
+    },
+    "2026-04-14": {
+      "snapshotDate": "2026-04-14",
+      "status": "completed",
+      "startedAt": "2026-04-27T09:12:40.178Z",
+      "completedAt": "2026-04-27T09:12:40.336Z",
+      "exitCode": 0,
+      "errorMessage": null
+    },
+    "2026-04-15": {
+      "snapshotDate": "2026-04-15",
+      "status": "completed",
+      "startedAt": "2026-04-27T09:12:40.444Z",
+      "completedAt": "2026-04-27T09:12:40.660Z",
+      "exitCode": 0,
+      "errorMessage": null
+    },
+    "2026-04-16": {
+      "snapshotDate": "2026-04-16",
+      "status": "completed",
+      "startedAt": "2026-04-27T09:12:40.927Z",
+      "completedAt": "2026-04-27T09:12:40.937Z",
+      "exitCode": 0,
+      "errorMessage": null
+    }
+  }
+}

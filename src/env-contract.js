@@ -1,5 +1,9 @@
 export const PROCESS_REQUIRED_ENV = ['SCB_PASSWORD', 'SCB_PFX_PATH'];
+
+// At least the active DB must be configured for publishing.
+// Archive DB vars are optional (falls back to active if missing).
 export const PUBLISH_REQUIRED_ENV = ['SUPABASE_URL', 'SUPABASE_SERVICE_ROLE_KEY'];
+
 export const DAILY_SYNC_REQUIRED_ENV = [
   ...PROCESS_REQUIRED_ENV,
   ...PUBLISH_REQUIRED_ENV,

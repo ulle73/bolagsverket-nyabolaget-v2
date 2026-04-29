@@ -1,10 +1,4 @@
-import {
-  cleanValue,
-  getPrimaryEmail,
-  getPrimaryPhone,
-  hasValue,
-  isMarketingProtected,
-} from './company-contact.js';
+import { cleanValue, getPrimaryEmail, getPrimaryPhone } from './company-contact.js';
 import { formatOutputDate } from './scb.js';
 
 function cleanText(value, fallback = null) {
@@ -42,42 +36,12 @@ function normalizeOrgNumber(value, company) {
   return peOrgNr.slice(-10) || null;
 }
 
-function normalizeAllabolagPhone(company) {
-  const candidates = [
-    company?.phone,
-    company?.mobile,
-    company?.phone2,
-    company?.mobile2,
-    company?.faxNumber,
-  ];
-
-  for (const candidate of candidates) {
-    const cleaned = cleanText(candidate);
-
-    if (cleaned) {
-      return cleaned;
-    }
-  }
-
-  return null;
-}
-
-function normalizeContactName(company) {
-  if (company?.contactPerson && typeof company.contactPerson === 'object') {
-    return cleanText(company.contactPerson.name);
-  }
-
-  return cleanText(company?.['Kontaktperson namn']);
-}
-
-function normalizeContactRole(company) {
-  if (company?.contactPerson && typeof company.contactPerson === 'object') {
-    return cleanText(company.contactPerson.role);
-  }
-
-  return cleanText(company?.['Kontaktperson roll']);
-}
-
+/**
+ * Normalizes a raw company object into a Supabase row.
+ *
+ * Stores EXACTLY the fields from the master export (exports/{date}/master.json).
+ * No raw_payload, no enrichment source columns, no internal fields.
+ */
 export function normalizeForSupabaseRow(company, targetDate, options = {}) {
   const snapshotDate = formatOutputDate(targetDate);
   const importedAt = options.importedAt ?? new Date().toISOString();
@@ -87,36 +51,37 @@ export function normalizeForSupabaseRow(company, targetDate, options = {}) {
     throw new Error(`Missing OrgNr for row on ${snapshotDate}.`);
   }
 
-  const industryLabel = cleanText(company?.['Bransch_1'], 'Okänd');
-  const primaryEmail = cleanText(getPrimaryEmail(company));
-  const primaryPhone = cleanText(getPrimaryPhone(company));
-
   return {
     snapshot_id: options.snapshotId ?? null,
     snapshot_date: snapshotDate,
     org_number: orgNumber,
+    pe_org_number: cleanText(company?.PeOrgNr),
     company_name: cleanText(company?.['Företagsnamn'] ?? company?.Firma, 'Okänt bolag'),
+    firma: cleanText(company?.Firma),
     legal_form: cleanText(company?.['Juridisk form']),
+    private_public: cleanText(company?.['Privat/Publikt']),
     registration_date: normalizeDate(company?.Registreringsdatum ?? company?.Startdatum) ?? snapshotDate,
+    start_date: normalizeDate(company?.Startdatum),
+    end_date: normalizeDate(company?.Slutdatum),
     company_status: cleanText(company?.Bolagsstatus),
     business_status: cleanText(company?.Företagsstatus),
     county: cleanText(company?.['Säteslän'], 'Ej svenskt län'),
     municipality: cleanText(company?.['Säteskommun'], 'Okänd kommun'),
     industry_code: cleanText(company?.['Bransch_1, kod']),
-    industry_label: industryLabel,
-    industry: industryLabel,
-    scb_email: cleanText(company?.['E-post']),
-    scb_phone: cleanText(company?.Telefon),
-    allabolag_email: cleanText(company?.email ?? company?.['Allabolag e-post']),
-    allabolag_phone: normalizeAllabolagPhone(company),
-    email: primaryEmail,
-    phone: primaryPhone,
-    contact_name: normalizeContactName(company),
-    contact_role: normalizeContactRole(company),
-    marketing_protected: isMarketingProtected(company),
-    allabolag_lookup_status: cleanText(company?.allabolagLookupStatus, hasValue(company?.contactPerson) ? 'enriched' : 'not-applicable'),
+    industry: cleanText(company?.['Bransch_1'], 'Okänd'),
+    a_region: cleanText(company?.ARegion),
+    postal_address: cleanText(company?.PostAdress),
+    postal_code: cleanText(company?.PostNr),
+    postal_city: cleanText(company?.PostOrt),
+    email: cleanText(getPrimaryEmail(company)),
+    phone: cleanText(getPrimaryPhone(company)),
+    f_tax_status: cleanText(company?.Fskattstatus),
+    vat_status: cleanText(company?.Momsstatus),
+    employer_status: cleanText(company?.Arbetsgivarstatus),
+    size_class: cleanText(company?.['Storleksklass SME']),
+    mailing_status: cleanText(company?.Utskick),
+    advertising_status: cleanText(company?.Reklam),
     imported_at: importedAt,
-    raw_payload: company,
   };
 }
 

@@ -121,7 +121,12 @@ export async function processAdminImportRequests(
     now = new Date(),
     loadEnv = () => hydrateProcessEnv(),
     assertEnv = () => assertDailySyncEnv(),
-    createClient = () => createSupabaseServiceClient(),
+    createClient = async () => {
+      // Admin import requests live in the ACTIVE database (where the dashboard is).
+      // The actual data publishing routes to archive/active automatically per date.
+      const result = await createSupabaseServiceClient();
+      return result.client;
+    },
     createRepositoryForClient = (client) => createRepository(client),
     runDaily = (dailyArgs) => runDailySync(dailyArgs),
     runRange = (rangeArgs) => runSyncRange(rangeArgs),
