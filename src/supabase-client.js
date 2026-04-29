@@ -6,7 +6,7 @@ import { readEnvValues } from './env-file.js';
  * dates on or after go to the active DB.
  * Format: YYYY-MM-DD
  */
-const ARCHIVE_CUTOFF_DATE = '2025-01-01';
+const ARCHIVE_CUTOFF_DATE = '2019-01-01';
 
 export async function readSupabaseConfig({ envPath = '.env' } = {}) {
   const envValues = await readEnvValues(envPath);

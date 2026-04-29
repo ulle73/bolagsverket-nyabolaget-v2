@@ -53,7 +53,7 @@ Tillåt rådata-fallback uttryckligen:
 npm run publish:snapshot -- 2026-04-13 --allow-raw-fallback
 ```
 
-Kör rullande backfill för senaste 10 dagarna:
+Kör rullande backfill för senaste 10 dagarna (publicerar automatiskt):
 
 ```bash
 npm run sync:daily
@@ -61,11 +61,21 @@ npm run sync:daily
 
 Det kommandot ska köras varje dag även om SCB oftast bara ger nya företag en gång i veckan. Normalt kommer släppet på måndag, eller tisdag om måndagen är röd dag.
 
-Kör ett manuellt datumintervall:
+Kör ett manuellt datumintervall (publicerar automatiskt till rätt databas):
 
 ```bash
-npm run sync:range -- --from=2026-04-07 --to=2026-04-14
+# För backfill till arkiv (datum före 2019-01-01)
+npm run sync:range -- --from=2008-01-01 --to=2018-12-31
 ```
+
+## Arkiv-hantering (Dual-DB)
+
+Pipelinen routar automatiskt data baserat på snapshot-datum:
+
+- **Arkiv (< 2019-01-01):** Hamnar i `SUPABASE_ARCHIVE_URL` (Projekt: `foretagslistor-se-archive`)
+- **Aktiv (≥ 2019-01-01):** Hamnar i `SUPABASE_URL` (Projekt: `foretagslistor-se-active`)
+
+Se till att både de vanliga och `SUPABASE_ARCHIVE_*` variablerna är satta i din `.env` för att historisk import ska fungera.
 
 Processa köade adminförfrågningar från `foretagslistor.se`:
 
