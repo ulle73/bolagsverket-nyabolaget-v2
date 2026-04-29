@@ -49,6 +49,8 @@ jobs:
       SCB_PASSWORD: ${{ secrets.SCB_PASSWORD }}
       SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
       SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+      SUPABASE_ARCHIVE_URL: ${{ secrets.SUPABASE_ARCHIVE_URL }}
+      SUPABASE_ARCHIVE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_ARCHIVE_SERVICE_ROLE_KEY }}
       SCB_PFX_PATH: ${{ github.workspace }}/.runtime/scb-client.pfx
       SYNC_LOOKBACK_DAYS: '10'
     steps:
@@ -96,6 +98,8 @@ jobs:
       SCB_PASSWORD: ${{ secrets.SCB_PASSWORD }}
       SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
       SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+      SUPABASE_ARCHIVE_URL: ${{ secrets.SUPABASE_ARCHIVE_URL }}
+      SUPABASE_ARCHIVE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_ARCHIVE_SERVICE_ROLE_KEY }}
       SCB_PFX_PATH: ${{ github.workspace }}/.runtime/scb-client.pfx
       SYNC_LOOKBACK_DAYS: '10'
     steps:

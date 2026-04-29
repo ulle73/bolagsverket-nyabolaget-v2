@@ -58,18 +58,19 @@ export function isArchiveDate(snapshotDate) {
  * - Dates before ARCHIVE_CUTOFF_DATE → archive DB
  * - Dates on or after → active DB
  *
- * Falls back to active if archive is not configured.
+ * Archive dates require archive credentials. Do not silently fall back to the
+ * active database because that can publish historical data to the wrong store.
  */
 export async function createSupabaseServiceClient({ snapshotDate, ...options } = {}) {
   const config = await readSupabaseConfig(options);
 
-  const useArchive =
-    snapshotDate &&
-    isArchiveDate(snapshotDate) &&
-    config.archiveUrl &&
-    config.archiveServiceRoleKey;
+  if (snapshotDate && isArchiveDate(snapshotDate)) {
+    if (!config.archiveUrl || !config.archiveServiceRoleKey) {
+      throw new Error(
+        'Missing SUPABASE_ARCHIVE_URL or SUPABASE_ARCHIVE_SERVICE_ROLE_KEY for archive snapshot publishing.',
+      );
+    }
 
-  if (useArchive) {
     return {
       client: buildClient(config.archiveUrl, config.archiveServiceRoleKey),
       target: 'archive',

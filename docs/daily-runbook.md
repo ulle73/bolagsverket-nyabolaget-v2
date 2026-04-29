@@ -27,6 +27,8 @@ Kör inte den här pipelinen på Vercel eller på en ephemeral CI-runner utan mo
 - `SCB_PFX_PATH`
 - `SUPABASE_URL`
 - `SUPABASE_SERVICE_ROLE_KEY`
+- `SUPABASE_ARCHIVE_URL`
+- `SUPABASE_ARCHIVE_SERVICE_ROLE_KEY`
 
 ## Daglig körning
 
