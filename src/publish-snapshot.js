@@ -1,6 +1,6 @@
 import { createSupabaseServiceClient, isArchiveDate } from './supabase-client.js';
 
-const DEFAULT_BATCH_SIZE = 500;
+const DEFAULT_BATCH_SIZE = 2000;
 
 function chunkRows(rows, size = DEFAULT_BATCH_SIZE) {
   const chunks = [];
