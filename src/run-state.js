@@ -41,6 +41,21 @@ export async function loadDailySyncState(
   };
 }
 
+async function renameWithRetry(source, target, maxRetries = 5, delayMs = 1000) {
+  for (let attempt = 1; attempt <= maxRetries; attempt++) {
+    try {
+      await rename(source, target);
+      return;
+    } catch (error) {
+      if (error && error.code === 'EPERM' && attempt < maxRetries) {
+        await new Promise((resolve) => setTimeout(resolve, delayMs));
+        continue;
+      }
+      throw error;
+    }
+  }
+}
+
 export async function recordDailySyncState(
   snapshotDate,
   patch,
@@ -59,7 +74,7 @@ export async function recordDailySyncState(
   await mkdir(path.dirname(filePath), { recursive: true });
   const tempFilePath = `${filePath}.${process.pid}.${Date.now()}.tmp`;
   await writeFile(tempFilePath, JSON.stringify(data, null, 2), 'utf8');
-  await rename(tempFilePath, filePath);
+  await renameWithRetry(tempFilePath, filePath);
 
   return {
     filePath,

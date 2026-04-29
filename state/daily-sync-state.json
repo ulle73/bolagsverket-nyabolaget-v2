@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-04-27T09:12:41.377Z",
+  "updatedAt": "2026-04-29T22:13:55.609Z",
   "dates": {
     "2026-04-17": {
       "snapshotDate": "2026-04-17",
@@ -79,6 +79,486 @@
       "status": "completed",
       "startedAt": "2026-04-27T09:12:40.927Z",
       "completedAt": "2026-04-27T09:12:40.937Z",
+      "exitCode": 0,
+      "errorMessage": null
+    },
+    "2015-01-01": {
+      "snapshotDate": "2015-01-01",
+      "status": "completed",
+      "startedAt": "2026-04-29T22:04:39.361Z",
+      "completedAt": "2026-04-29T22:04:40.090Z",
+      "exitCode": 0,
+      "errorMessage": null
+    },
+    "2015-01-02": {
+      "snapshotDate": "2015-01-02",
+      "status": "completed",
+      "startedAt": "2026-04-29T22:04:40.097Z",
+      "completedAt": "2026-04-29T22:04:40.959Z",
+      "exitCode": 0,
+      "errorMessage": null
+    },
+    "2015-01-03": {
+      "snapshotDate": "2015-01-03",
+      "status": "completed",
+      "startedAt": "2026-04-29T22:04:40.965Z",
+      "completedAt": "2026-04-29T22:04:42.089Z",
+      "exitCode": 0,
+      "errorMessage": null
+    },
+    "2015-01-04": {
+      "snapshotDate": "2015-01-04",
+      "status": "completed",
+      "startedAt": "2026-04-29T22:04:42.094Z",
+      "completedAt": "2026-04-29T22:04:43.190Z",
+      "exitCode": 0,
+      "errorMessage": null
+    },
+    "2015-01-05": {
+      "snapshotDate": "2015-01-05",
+      "status": "completed",
+      "startedAt": "2026-04-29T22:04:43.196Z",
+      "completedAt": "2026-04-29T22:04:44.284Z",
+      "exitCode": 0,
+      "errorMessage": null
+    },
+    "2015-01-06": {
+      "snapshotDate": "2015-01-06",
+      "status": "completed",
+      "startedAt": "2026-04-29T22:04:44.288Z",
+      "completedAt": "2026-04-29T22:07:43.657Z",
+      "exitCode": 0,
+      "errorMessage": null
+    },
+    "2015-01-07": {
+      "snapshotDate": "2015-01-07",
+      "status": "completed",
+      "startedAt": "2026-04-29T22:07:43.705Z",
+      "completedAt": "2026-04-29T22:07:47.779Z",
+      "exitCode": 0,
+      "errorMessage": null
+    },
+    "2015-01-08": {
+      "snapshotDate": "2015-01-08",
+      "status": "completed",
+      "startedAt": "2026-04-29T22:07:47.785Z",
+      "completedAt": "2026-04-29T22:07:48.206Z",
+      "exitCode": 0,
+      "errorMessage": null
+    },
+    "2015-01-09": {
+      "snapshotDate": "2015-01-09",
+      "status": "completed",
+      "startedAt": "2026-04-29T22:07:48.213Z",
+      "completedAt": "2026-04-29T22:07:49.456Z",
+      "exitCode": 0,
+      "errorMessage": null
+    },
+    "2015-01-10": {
+      "snapshotDate": "2015-01-10",
+      "status": "completed",
+      "startedAt": "2026-04-29T22:07:49.461Z",
+      "completedAt": "2026-04-29T22:07:50.429Z",
+      "exitCode": 0,
+      "errorMessage": null
+    },
+    "2015-01-11": {
+      "snapshotDate": "2015-01-11",
+      "status": "completed",
+      "startedAt": "2026-04-29T22:07:50.437Z",
+      "completedAt": "2026-04-29T22:07:51.497Z",
+      "exitCode": 0,
+      "errorMessage": null
+    },
+    "2015-01-12": {
+      "snapshotDate": "2015-01-12",
+      "status": "completed",
+      "startedAt": "2026-04-29T22:07:51.504Z",
+      "completedAt": "2026-04-29T22:07:52.741Z",
+      "exitCode": 0,
+      "errorMessage": null
+    },
+    "2015-01-13": {
+      "snapshotDate": "2015-01-13",
+      "status": "completed",
+      "startedAt": "2026-04-29T22:07:52.747Z",
+      "completedAt": "2026-04-29T22:08:16.298Z",
+      "exitCode": 0,
+      "errorMessage": null
+    },
+    "2015-01-14": {
+      "snapshotDate": "2015-01-14",
+      "status": "completed",
+      "startedAt": "2026-04-29T22:08:16.310Z",
+      "completedAt": "2026-04-29T22:08:16.803Z",
+      "exitCode": 0,
+      "errorMessage": null
+    },
+    "2015-01-15": {
+      "snapshotDate": "2015-01-15",
+      "status": "completed",
+      "startedAt": "2026-04-29T22:08:16.809Z",
+      "completedAt": "2026-04-29T22:08:17.876Z",
+      "exitCode": 0,
+      "errorMessage": null
+    },
+    "2015-01-16": {
+      "snapshotDate": "2015-01-16",
+      "status": "completed",
+      "startedAt": "2026-04-29T22:08:17.882Z",
+      "completedAt": "2026-04-29T22:08:19.010Z",
+      "exitCode": 0,
+      "errorMessage": null
+    },
+    "2015-01-17": {
+      "snapshotDate": "2015-01-17",
+      "status": "completed",
+      "startedAt": "2026-04-29T22:08:19.016Z",
+      "completedAt": "2026-04-29T22:08:20.189Z",
+      "exitCode": 0,
+      "errorMessage": null
+    },
+    "2015-01-18": {
+      "snapshotDate": "2015-01-18",
+      "status": "completed",
+      "startedAt": "2026-04-29T22:08:20.195Z",
+      "completedAt": "2026-04-29T22:08:21.223Z",
+      "exitCode": 0,
+      "errorMessage": null
+    },
+    "2015-01-19": {
+      "snapshotDate": "2015-01-19",
+      "status": "completed",
+      "startedAt": "2026-04-29T22:08:21.230Z",
+      "completedAt": "2026-04-29T22:08:22.306Z",
+      "exitCode": 0,
+      "errorMessage": null
+    },
+    "2015-01-20": {
+      "snapshotDate": "2015-01-20",
+      "status": "completed",
+      "startedAt": "2026-04-29T22:08:22.311Z",
+      "completedAt": "2026-04-29T22:08:53.272Z",
+      "exitCode": 0,
+      "errorMessage": null
+    },
+    "2015-01-21": {
+      "snapshotDate": "2015-01-21",
+      "status": "completed",
+      "startedAt": "2026-04-29T22:08:53.280Z",
+      "completedAt": "2026-04-29T22:08:53.734Z",
+      "exitCode": 0,
+      "errorMessage": null
+    },
+    "2015-01-22": {
+      "snapshotDate": "2015-01-22",
+      "status": "completed",
+      "startedAt": "2026-04-29T22:08:53.741Z",
+      "completedAt": "2026-04-29T22:08:54.899Z",
+      "exitCode": 0,
+      "errorMessage": null
+    },
+    "2015-01-23": {
+      "snapshotDate": "2015-01-23",
+      "status": "completed",
+      "startedAt": "2026-04-29T22:08:54.904Z",
+      "completedAt": "2026-04-29T22:08:55.958Z",
+      "exitCode": 0,
+      "errorMessage": null
+    },
+    "2015-01-24": {
+      "snapshotDate": "2015-01-24",
+      "status": "completed",
+      "startedAt": "2026-04-29T22:08:55.964Z",
+      "completedAt": "2026-04-29T22:08:57.058Z",
+      "exitCode": 0,
+      "errorMessage": null
+    },
+    "2015-01-25": {
+      "snapshotDate": "2015-01-25",
+      "status": "completed",
+      "startedAt": "2026-04-29T22:08:57.064Z",
+      "completedAt": "2026-04-29T22:08:58.151Z",
+      "exitCode": 0,
+      "errorMessage": null
+    },
+    "2015-01-26": {
+      "snapshotDate": "2015-01-26",
+      "status": "completed",
+      "startedAt": "2026-04-29T22:08:58.156Z",
+      "completedAt": "2026-04-29T22:08:59.276Z",
+      "exitCode": 0,
+      "errorMessage": null
+    },
+    "2015-01-27": {
+      "snapshotDate": "2015-01-27",
+      "status": "completed",
+      "startedAt": "2026-04-29T22:08:59.282Z",
+      "completedAt": "2026-04-29T22:09:26.461Z",
+      "exitCode": 0,
+      "errorMessage": null
+    },
+    "2015-01-28": {
+      "snapshotDate": "2015-01-28",
+      "status": "completed",
+      "startedAt": "2026-04-29T22:09:26.469Z",
+      "completedAt": "2026-04-29T22:09:26.926Z",
+      "exitCode": 0,
+      "errorMessage": null
+    },
+    "2015-01-29": {
+      "snapshotDate": "2015-01-29",
+      "status": "completed",
+      "startedAt": "2026-04-29T22:09:26.933Z",
+      "completedAt": "2026-04-29T22:09:31.849Z",
+      "exitCode": 0,
+      "errorMessage": null
+    },
+    "2015-01-30": {
+      "snapshotDate": "2015-01-30",
+      "status": "completed",
+      "startedAt": "2026-04-29T22:09:31.870Z",
+      "completedAt": "2026-04-29T22:09:32.257Z",
+      "exitCode": 0,
+      "errorMessage": null
+    },
+    "2015-01-31": {
+      "snapshotDate": "2015-01-31",
+      "status": "completed",
+      "startedAt": "2026-04-29T22:09:32.265Z",
+      "completedAt": "2026-04-29T22:09:33.411Z",
+      "exitCode": 0,
+      "errorMessage": null
+    },
+    "2015-02-01": {
+      "snapshotDate": "2015-02-01",
+      "status": "completed",
+      "startedAt": "2026-04-29T22:09:33.417Z",
+      "completedAt": "2026-04-29T22:09:35.040Z",
+      "exitCode": 0,
+      "errorMessage": null
+    },
+    "2015-02-02": {
+      "snapshotDate": "2015-02-02",
+      "status": "completed",
+      "startedAt": "2026-04-29T22:09:35.057Z",
+      "completedAt": "2026-04-29T22:09:35.881Z",
+      "exitCode": 0,
+      "errorMessage": null
+    },
+    "2015-02-03": {
+      "snapshotDate": "2015-02-03",
+      "status": "completed",
+      "startedAt": "2026-04-29T22:09:35.901Z",
+      "completedAt": "2026-04-29T22:10:20.394Z",
+      "exitCode": 0,
+      "errorMessage": null
+    },
+    "2015-02-04": {
+      "snapshotDate": "2015-02-04",
+      "status": "completed",
+      "startedAt": "2026-04-29T22:10:20.401Z",
+      "completedAt": "2026-04-29T22:10:20.895Z",
+      "exitCode": 0,
+      "errorMessage": null
+    },
+    "2015-02-05": {
+      "snapshotDate": "2015-02-05",
+      "status": "completed",
+      "startedAt": "2026-04-29T22:10:20.903Z",
+      "completedAt": "2026-04-29T22:10:22.011Z",
+      "exitCode": 0,
+      "errorMessage": null
+    },
+    "2015-02-06": {
+      "snapshotDate": "2015-02-06",
+      "status": "completed",
+      "startedAt": "2026-04-29T22:10:22.020Z",
+      "completedAt": "2026-04-29T22:10:23.144Z",
+      "exitCode": 0,
+      "errorMessage": null
+    },
+    "2015-02-07": {
+      "snapshotDate": "2015-02-07",
+      "status": "completed",
+      "startedAt": "2026-04-29T22:10:23.160Z",
+      "completedAt": "2026-04-29T22:10:24.220Z",
+      "exitCode": 0,
+      "errorMessage": null
+    },
+    "2015-02-08": {
+      "snapshotDate": "2015-02-08",
+      "status": "completed",
+      "startedAt": "2026-04-29T22:10:24.225Z",
+      "completedAt": "2026-04-29T22:10:25.225Z",
+      "exitCode": 0,
+      "errorMessage": null
+    },
+    "2015-02-09": {
+      "snapshotDate": "2015-02-09",
+      "status": "completed",
+      "startedAt": "2026-04-29T22:10:25.232Z",
+      "completedAt": "2026-04-29T22:10:26.427Z",
+      "exitCode": 0,
+      "errorMessage": null
+    },
+    "2015-02-10": {
+      "snapshotDate": "2015-02-10",
+      "status": "completed",
+      "startedAt": "2026-04-29T22:10:26.434Z",
+      "completedAt": "2026-04-29T22:12:01.451Z",
+      "exitCode": 0,
+      "errorMessage": null
+    },
+    "2015-02-11": {
+      "snapshotDate": "2015-02-11",
+      "status": "completed",
+      "startedAt": "2026-04-29T22:12:01.493Z",
+      "completedAt": "2026-04-29T22:12:02.176Z",
+      "exitCode": 0,
+      "errorMessage": null
+    },
+    "2015-02-12": {
+      "snapshotDate": "2015-02-12",
+      "status": "completed",
+      "startedAt": "2026-04-29T22:12:02.183Z",
+      "completedAt": "2026-04-29T22:12:03.043Z",
+      "exitCode": 0,
+      "errorMessage": null
+    },
+    "2015-02-13": {
+      "snapshotDate": "2015-02-13",
+      "status": "completed",
+      "startedAt": "2026-04-29T22:12:03.052Z",
+      "completedAt": "2026-04-29T22:12:04.233Z",
+      "exitCode": 0,
+      "errorMessage": null
+    },
+    "2015-02-14": {
+      "snapshotDate": "2015-02-14",
+      "status": "completed",
+      "startedAt": "2026-04-29T22:12:04.242Z",
+      "completedAt": "2026-04-29T22:12:05.442Z",
+      "exitCode": 0,
+      "errorMessage": null
+    },
+    "2015-02-15": {
+      "snapshotDate": "2015-02-15",
+      "status": "completed",
+      "startedAt": "2026-04-29T22:12:05.453Z",
+      "completedAt": "2026-04-29T22:12:06.472Z",
+      "exitCode": 0,
+      "errorMessage": null
+    },
+    "2015-02-16": {
+      "snapshotDate": "2015-02-16",
+      "status": "completed",
+      "startedAt": "2026-04-29T22:12:06.485Z",
+      "completedAt": "2026-04-29T22:12:11.199Z",
+      "exitCode": 0,
+      "errorMessage": null
+    },
+    "2015-02-17": {
+      "snapshotDate": "2015-02-17",
+      "status": "completed",
+      "startedAt": "2026-04-29T22:12:11.208Z",
+      "completedAt": "2026-04-29T22:12:57.064Z",
+      "exitCode": 0,
+      "errorMessage": null
+    },
+    "2015-02-18": {
+      "snapshotDate": "2015-02-18",
+      "status": "completed",
+      "startedAt": "2026-04-29T22:12:57.075Z",
+      "completedAt": "2026-04-29T22:12:57.665Z",
+      "exitCode": 0,
+      "errorMessage": null
+    },
+    "2015-02-19": {
+      "snapshotDate": "2015-02-19",
+      "status": "completed",
+      "startedAt": "2026-04-29T22:12:57.683Z",
+      "completedAt": "2026-04-29T22:12:58.732Z",
+      "exitCode": 0,
+      "errorMessage": null
+    },
+    "2015-02-20": {
+      "snapshotDate": "2015-02-20",
+      "status": "completed",
+      "startedAt": "2026-04-29T22:12:58.750Z",
+      "completedAt": "2026-04-29T22:12:59.873Z",
+      "exitCode": 0,
+      "errorMessage": null
+    },
+    "2015-02-21": {
+      "snapshotDate": "2015-02-21",
+      "status": "completed",
+      "startedAt": "2026-04-29T22:12:59.886Z",
+      "completedAt": "2026-04-29T22:13:01.006Z",
+      "exitCode": 0,
+      "errorMessage": null
+    },
+    "2015-02-22": {
+      "snapshotDate": "2015-02-22",
+      "status": "completed",
+      "startedAt": "2026-04-29T22:13:01.072Z",
+      "completedAt": "2026-04-29T22:13:02.319Z",
+      "exitCode": 0,
+      "errorMessage": null
+    },
+    "2015-02-23": {
+      "snapshotDate": "2015-02-23",
+      "status": "completed",
+      "startedAt": "2026-04-29T22:13:02.435Z",
+      "completedAt": "2026-04-29T22:13:03.302Z",
+      "exitCode": 0,
+      "errorMessage": null
+    },
+    "2015-02-24": {
+      "snapshotDate": "2015-02-24",
+      "status": "completed",
+      "startedAt": "2026-04-29T22:13:03.320Z",
+      "completedAt": "2026-04-29T22:13:50.527Z",
+      "exitCode": 0,
+      "errorMessage": null
+    },
+    "2015-02-25": {
+      "snapshotDate": "2015-02-25",
+      "status": "completed",
+      "startedAt": "2026-04-29T22:13:50.536Z",
+      "completedAt": "2026-04-29T22:13:51.247Z",
+      "exitCode": 0,
+      "errorMessage": null
+    },
+    "2015-02-26": {
+      "snapshotDate": "2015-02-26",
+      "status": "completed",
+      "startedAt": "2026-04-29T22:13:51.296Z",
+      "completedAt": "2026-04-29T22:13:52.178Z",
+      "exitCode": 0,
+      "errorMessage": null
+    },
+    "2015-02-27": {
+      "snapshotDate": "2015-02-27",
+      "status": "completed",
+      "startedAt": "2026-04-29T22:13:52.194Z",
+      "completedAt": "2026-04-29T22:13:53.402Z",
+      "exitCode": 0,
+      "errorMessage": null
+    },
+    "2015-02-28": {
+      "snapshotDate": "2015-02-28",
+      "status": "completed",
+      "startedAt": "2026-04-29T22:13:53.418Z",
+      "completedAt": "2026-04-29T22:13:54.399Z",
+      "exitCode": 0,
+      "errorMessage": null
+    },
+    "2015-03-01": {
+      "snapshotDate": "2015-03-01",
+      "status": "completed",
+      "startedAt": "2026-04-29T22:13:54.412Z",
+      "completedAt": "2026-04-29T22:13:55.608Z",
       "exitCode": 0,
       "errorMessage": null
     }

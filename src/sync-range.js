@@ -4,7 +4,7 @@ import { fileURLToPath } from 'node:url';
 import { runCli } from './cli.js';
 import { hydrateProcessEnv } from './env-file.js';
 import { assertDailySyncEnv } from './env-contract.js';
-import { recordDailySyncState } from './run-state.js';
+import { recordDailySyncState, loadDailySyncState } from './run-state.js';
 import { resolveRuntimePaths } from './runtime-paths.js';
 
 function isCliEntrypoint(modulePath, argvPath) {
@@ -63,6 +63,7 @@ export async function runSyncRange(
     resolvePaths = () => resolveRuntimePaths(),
     recordState = (snapshotDate, patch, options) =>
       recordDailySyncState(snapshotDate, patch, options),
+    loadState = (options) => loadDailySyncState(options),
   } = {},
 ) {
   const fromDate = args.find((value) => value.startsWith('--from='))?.split('=')[1];
@@ -74,10 +75,20 @@ export async function runSyncRange(
   };
   let hasFailure = false;
 
+  const force = args.includes('--force');
+  const { data: stateData } = await loadState(stateOptions);
+
   await loadEnv();
   assertEnv();
 
   for (const date of dates) {
+    const existingStatus = stateData.dates[date]?.status;
+
+    if (!force && (existingStatus === 'completed' || existingStatus === 'published')) {
+      write(`Skippar ${date} (redan klar)\n`);
+      continue;
+    }
+
     const startedAt = new Date().toISOString();
     write(`Kör range-sync för ${date}\n`);
 
