@@ -80,7 +80,7 @@ export async function runCli(
     write('Användning: node src/cli.js [YYYY-MM-DD] [--require-publish]\n');
     write('Om inget datum anges används gårdagens datum i serverns lokala tid.\n');
     write(
-      'Datum före 2019-01-01 publiceras till arkiv-databasen när SUPABASE_ARCHIVE_* är konfigurerade.\n',
+      '- Dates < 2021-01-01 go to Archive DB.\n- Dates >= 2021-01-01 go to Active DB.\n',
     );
     write('Sätt DATA_DIR eller GOOGLE_DRIVE_DATA_DIR i .env för att skriva till delad Drive-mapp.\n');
     return 0;
