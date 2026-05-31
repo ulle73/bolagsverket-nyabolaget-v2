@@ -16,3 +16,7 @@ on:
           - process_admin_requests
       from_date:
         description: Start date for range runs (YYYY-MM-DD)
+        type: string
+        required: false
+      to_date:
+        description
