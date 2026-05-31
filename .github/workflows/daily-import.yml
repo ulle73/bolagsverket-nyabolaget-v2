@@ -19,4 +19,20 @@ on:
         type: string
         required: false
       to_date:
-        description
+        description: End date for range runs (YYYY-MM-DD)
+        type: string
+        required: false
+      lookback_days:
+        description: Lookback window for daily runs
+        type: string
+        required: false
+        default: '10'
+      verify_publication:
+        description: Verify snapshot freshness after run
+        type: boolean
+        required: false
+        default: false
+
+concurrency:
+  group: foretagslistor-daily-import
+ 
