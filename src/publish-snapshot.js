@@ -12,6 +12,44 @@ function chunkRows(rows, size = DEFAULT_BATCH_SIZE) {
   return chunks;
 }
 
+function sortValue(value) {
+  if (Array.isArray(value)) {
+    return value.map(sortValue);
+  }
+
+  if (value && typeof value === 'object') {
+    return Object.fromEntries(
+      Object.entries(value)
+        .sort(([left], [right]) => left.localeCompare(right))
+        .map(([key, nestedValue]) => [key, sortValue(nestedValue)]),
+    );
+  }
+
+  return value;
+}
+
+function buildExactRowSignature(row) {
+  return JSON.stringify(sortValue(row));
+}
+
+function dedupeExactRows(rows) {
+  const seen = new Set();
+  const dedupedRows = [];
+
+  for (const row of rows) {
+    const signature = buildExactRowSignature(row);
+
+    if (seen.has(signature)) {
+      continue;
+    }
+
+    seen.add(signature);
+    dedupedRows.push(row);
+  }
+
+  return dedupedRows;
+}
+
 export function createSupabaseSnapshotRepository(client) {
   return {
     async createImportRun(payload) {
@@ -97,6 +135,7 @@ export async function publishSnapshot(
   const repo =
     repository ??
     createSupabaseSnapshotRepository(resolvedClient);
+  const uniqueNormalizedRows = dedupeExactRows(normalizedRows);
 
   write(`Publicerar till ${targetLabel} databas (${isArchiveDate(snapshotDate) ? 'arkiv' : 'aktiv'})...\n`);
 
@@ -127,7 +166,7 @@ export async function publishSnapshot(
     await repo.deleteCompanySnapshots(snapshotDate);
 
     const batches = chunkRows(
-      normalizedRows.map((row) => ({
+      uniqueNormalizedRows.map((row) => ({
         ...row,
         snapshot_id: snapshotId,
       })),
@@ -147,14 +186,14 @@ export async function publishSnapshot(
       source_repo: sourceRepo,
       source_commit: sourceCommit,
       source_run_at: completedAt,
-      row_count: normalizedRows.length,
+      row_count: uniqueNormalizedRows.length,
       import_run_id: importRunId,
       updated_at: completedAt,
     });
 
     await repo.updateImportRun(importRunId, {
       status: 'published',
-      published_row_count: normalizedRows.length,
+      published_row_count: uniqueNormalizedRows.length,
       completed_at: completedAt,
       updated_at: completedAt,
     });
@@ -162,7 +201,7 @@ export async function publishSnapshot(
     return {
       importRunId,
       snapshotDate,
-      rowCount: normalizedRows.length,
+      rowCount: uniqueNormalizedRows.length,
       batchCount: batches.length,
       target: targetLabel,
     };

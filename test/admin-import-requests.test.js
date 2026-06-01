@@ -1,7 +1,10 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 
-import { processAdminImportRequests } from '../src/admin-import-requests.js';
+import {
+  processAdminImportRequests,
+  queueScheduledDailyImportRequest,
+} from '../src/admin-import-requests.js';
 
 test('processAdminImportRequests completes a queued daily request without rerunning daily sync when it already ran in the same workflow', async () => {
   let dailyRuns = 0;
@@ -107,4 +110,37 @@ test('processAdminImportRequests runs range backfills with explicit dates', asyn
       processedDates: ['2026-04-07', '2026-04-08', '2026-04-09'],
     },
   ]);
+});
+
+test('queueScheduledDailyImportRequest creates a pending daily admin request for the scheduler actor', async () => {
+  const createdRequests = [];
+  const writes = [];
+
+  const exitCode = await queueScheduledDailyImportRequest([], {
+    write: (message) => {
+      writes.push(message);
+    },
+    loadEnv: async () => {},
+    assertEnv: () => {},
+    createClient: async () => ({}),
+    createRepositoryForClient: () => ({
+      createDailyRequest: async (input) => {
+        createdRequests.push(input);
+        return {
+          id: 'req_scheduled_daily',
+          ...input,
+        };
+      },
+    }),
+    actorEmail: 'scheduler@foretagslistor.se',
+  });
+
+  assert.equal(exitCode, 0);
+  assert.deepEqual(createdRequests, [
+    {
+      actorEmail: 'scheduler@foretagslistor.se',
+      dispatchStatus: 'requested',
+    },
+  ]);
+  assert.match(writes.join(''), /req_scheduled_daily/);
 });

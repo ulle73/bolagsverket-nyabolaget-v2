@@ -73,6 +73,8 @@ Följande listor är derivat av canonical snapshot-data och ska inte lagras som 
   - publicerar befintlig råfil `raw/YYYY-MM-DD.json`; äldre `raw/enriched/YYYY-MM-DD.json` kan fortfarande läsas om filen finns
 - `npm run sync:daily`
   - kör rullande backfill för senaste 10 dagarna för att täcka SCB:s veckosläpp och tisdagssläpp vid röd dag
+- `npm run queue:scheduled-daily-request`
+  - skapar en schemalagd `daily`-förfrågan i `admin_import_requests` så att scheduler och `/admin` använder samma processväg
 - `npm run sync:range -- --from=2026-04-07 --to=2026-04-14`
   - kör ett explicit datumintervall äldst till nyast
 - `npm run process:admin-requests`
@@ -80,7 +82,7 @@ Följande listor är derivat av canonical snapshot-data och ska inte lagras som 
 
 ## Adminförfrågningar
 
-`foretagslistor.se` får skapa rader i `public.admin_import_requests`.
+`foretagslistor.se` och den schemalagda importworkflown får skapa rader i `public.admin_import_requests`.
 
 Importrepons ansvar är att:
 

@@ -2,10 +2,12 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 import { hydrateProcessEnv } from './env-file.js';
-import { assertDailySyncEnv } from './env-contract.js';
+import { assertDailySyncEnv, assertPublishEnv } from './env-contract.js';
 import { runDailySync, resolveDailyDates } from './daily-sync.js';
 import { runSyncRange, resolveRangeDates } from './sync-range.js';
 import { createSupabaseServiceClient } from './supabase-client.js';
+
+const DEFAULT_SCHEDULED_ACTOR_EMAIL = 'scheduler@foretagslistor.se';
 
 function isCliEntrypoint(modulePath, argvPath) {
   if (!argvPath) {
@@ -30,6 +32,30 @@ function createRepository(client) {
       }
 
       return data ?? [];
+    },
+    async createDailyRequest({
+      actorEmail = DEFAULT_SCHEDULED_ACTOR_EMAIL,
+      dispatchStatus = 'requested',
+    } = {}) {
+      const { data, error } = await client
+        .from('admin_import_requests')
+        .insert({
+          actor_email: actorEmail,
+          request_type: 'daily',
+          from_date: null,
+          to_date: null,
+          status: 'pending',
+          dispatch_status: dispatchStatus,
+          processed_dates_json: [],
+        })
+        .select('*')
+        .single();
+
+      if (error) {
+        throw new Error(error.message);
+      }
+
+      return data;
     },
     async markProcessing(id) {
       const timestamp = new Date().toISOString();
@@ -112,6 +138,34 @@ async function runSingleRequest(
     exitCode: await runRange([`--from=${request.from_date}`, `--to=${request.to_date}`]),
     processedDates,
   };
+}
+
+export async function queueScheduledDailyImportRequest(
+  args = process.argv.slice(2),
+  {
+    write = (message) => process.stdout.write(message),
+    actorEmail = process.env.SCHEDULED_IMPORT_ACTOR_EMAIL?.trim() || DEFAULT_SCHEDULED_ACTOR_EMAIL,
+    loadEnv = () => hydrateProcessEnv(),
+    assertEnv = () => assertPublishEnv(),
+    createClient = async () => {
+      const result = await createSupabaseServiceClient();
+      return result.client;
+    },
+    createRepositoryForClient = (client) => createRepository(client),
+  } = {},
+) {
+  await loadEnv();
+  assertEnv();
+
+  const client = await createClient();
+  const repository = createRepositoryForClient(client);
+  const request = await repository.createDailyRequest({
+    actorEmail,
+    dispatchStatus: 'requested',
+  });
+
+  write(`Skapade schemalagd admin-importförfrågan ${request.id} (daily)\n`);
+  return 0;
 }
 
 export async function processAdminImportRequests(

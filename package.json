@@ -9,6 +9,7 @@
     "publish:snapshot": "node src/publish-snapshot-cli.js",
     "sync:daily": "node src/daily-sync.js",
     "sync:range": "node src/sync-range.js",
+    "queue:scheduled-daily-request": "node src/queue-scheduled-daily-request.js",
     "process:admin-requests": "node src/admin-import-requests.js",
     "verify:publication": "node src/verify-publication.js",
     "test": "node --test"

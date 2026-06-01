@@ -40,12 +40,9 @@ concurrency:
 jobs:
   sync-scheduled:
     if: github.event_name == 'schedule'
-    runs-on:
-      - self-hosted
-      - linux
-      - x64
+    runs-on: ubuntu-latest
     env:
-      DATA_DIR: ${{ vars.FORETAGSLISTOR_DATA_DIR }}
+      DATA_DIR: ${{ github.workspace }}/.runtime-data
       SCB_PASSWORD: ${{ secrets.SCB_PASSWORD }}
       SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
       SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
@@ -78,12 +75,10 @@ jobs:
           mkdir -p "$(dirname "$SCB_PFX_PATH")"
           echo "${{ secrets.SCB_PFX_BASE64 }}" | base64 --decode > "$SCB_PFX_PATH"
 
-      - name: Run scheduled daily sync
-        run: npm run sync:daily -- --lookback=$SYNC_LOOKBACK_DAYS
+      - name: Queue scheduled daily admin request
+        run: npm run queue:scheduled-daily-request
 
-      - name: Process queued admin requests after scheduled sync
-        env:
-          ADMIN_IMPORT_DAILY_ALREADY_RAN: '1'
+      - name: Process queued admin requests
         run: npm run process:admin-requests
 
       - name: Verify latest published snapshot freshness

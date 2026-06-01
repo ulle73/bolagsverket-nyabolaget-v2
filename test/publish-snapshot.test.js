@@ -109,3 +109,44 @@ test('publishSnapshot replaces a snapshot date and marks the import run as publi
     'updateImportRun',
   ]);
 });
+
+test('publishSnapshot skips rows that are exact duplicates across all persisted fields', async () => {
+  let updateImportRunPayload;
+  const insertedBatches = [];
+
+  const repository = {
+    async createImportRun() {
+      return 'run_456';
+    },
+    async updateImportRun(id, patch) {
+      updateImportRunPayload = { id, patch };
+    },
+    async upsertDataSnapshot() {
+      return 'snapshot_456';
+    },
+    async deleteCompanySnapshots() {},
+    async insertCompanySnapshotBatch(rows) {
+      insertedBatches.push(rows);
+    },
+  };
+
+  const duplicateRow = buildRow('5595488353');
+  const uniqueRow = buildRow('5595488354');
+
+  const result = await publishSnapshot([duplicateRow, { ...duplicateRow }, uniqueRow], {
+    snapshotDate: '2026-04-13',
+    sourceCommit: 'def456',
+    batchSize: 10,
+    repository,
+  });
+
+  assert.equal(result.rowCount, 2);
+  assert.equal(insertedBatches.length, 1);
+  assert.equal(insertedBatches[0].length, 2);
+  assert.deepEqual(
+    insertedBatches[0].map((row) => row.org_number),
+    ['5595488353', '5595488354'],
+  );
+  assert.equal(updateImportRunPayload.id, 'run_456');
+  assert.equal(updateImportRunPayload.patch.published_row_count, 2);
+});

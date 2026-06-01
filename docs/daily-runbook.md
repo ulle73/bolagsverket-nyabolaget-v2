@@ -8,9 +8,10 @@ Allabolag-berikning är avstängd. Pipelinen ska använda SCB-raderna direkt och
 
 ## Produktionskrav
 
-Det här ska köras på en self-hosted runner med persistent `DATA_DIR`.
+Den här workflown körs på GitHub-hosted Linux och använder en temporär `DATA_DIR`
+per workflow-run.
 
-`DATA_DIR` måste överleva mellan körningar eftersom följande state är operativt viktigt:
+Det betyder att följande runtime-state bara finns under den aktuella körningen:
 
 - `raw/`
 - `exports/`
@@ -18,7 +19,7 @@ Det här ska köras på en self-hosted runner med persistent `DATA_DIR`.
 - `state/telefonleveranshistorik.json`
 - `state/daily-sync-state.json`
 
-Kör inte den här pipelinen på Vercel eller på en ephemeral CI-runner utan monterad persistent disk.
+Publiceringen till Supabase är fortfarande persistent. Lokal runtime-state i Actions-runnern är det inte.
 
 ## Krävs i miljön
 
@@ -32,7 +33,24 @@ Kör inte den här pipelinen på Vercel eller på en ephemeral CI-runner utan mo
 
 ## Daglig körning
 
-Standardkommandot är:
+Den schemalagda GitHub-workflown köar först en `daily`-förfrågan och processar sedan
+samma adminkö som `/admin` använder.
+
+Kösteget är:
+
+```bash
+npm run queue:scheduled-daily-request
+```
+
+Process-steget är:
+
+```bash
+npm run process:admin-requests
+```
+
+Själva `daily`-förfrågan kör därefter samma underliggande daily-sync som tidigare.
+
+Det lägre nivå-kommandot är:
 
 ```bash
 npm run sync:daily
@@ -54,15 +72,6 @@ npm run verify:publication -- --max-age-days=9
 ```
 
 Att vissa dagar ger `0` nya bolag är normalt. Pipelinen ska ändå köras dagligen; det viktiga är att senaste icke-tomma publicerade snapshot fortfarande ligger inom den veckovisa SCB-kadensen.
-
-Efter den schemalagda daily-körningen ska runnern också processa köade adminförfrågningar från `foretagslistor.se`.
-Det görs med:
-
-```bash
-npm run process:admin-requests
-```
-
-I den schemalagda GitHub-workflown ska det steget köras med `ADMIN_IMPORT_DAILY_ALREADY_RAN=1` så att en köad `daily`-förfrågan inte dubblar samma sync direkt efter nattens ordinarie körning.
 
 ## Enstaka datum
 
@@ -155,10 +164,10 @@ cat "$DATA_DIR/state/daily-sync-state.json"
 
 GitHub-workflown i `.github/workflows/daily-import.yml` är avsedd för:
 
-- self-hosted Linux-runner
-- persistent `FORETAGSLISTOR_DATA_DIR`
+- GitHub-hosted `ubuntu-latest`
+- temporär runtime-mapp i `${{ github.workspace }}/.runtime-data`
 - SCB-certifikat via secret
-- rullande 10-dagars backfill
+- en schemalagd `daily`-request som sedan processas av samma köprocessor som `/admin`
 
 Den workflown ska behandlas som den primära scheduler-konfigurationen för drift.
 

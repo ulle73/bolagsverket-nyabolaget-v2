@@ -83,6 +83,12 @@ Processa köade adminförfrågningar från `foretagslistor.se`:
 npm run process:admin-requests
 ```
 
+Köa en schemalagd daglig adminförfrågan:
+
+```bash
+npm run queue:scheduled-daily-request
+```
+
 Verifiera att senaste publicerade snapshot är färsk:
 
 ```bash
@@ -107,15 +113,15 @@ För full pipeline:
 
 ## Drift
 
-Den schemalagda daily-körningen ska ligga på en self-hosted runner med persistent `DATA_DIR`.
+Den schemalagda daily-körningen och manuella adminkörningar via `foretagslistor.se/admin`
+körs nu på samma GitHub-hosted workflowväg och via samma
+`admin_import_requests -> process:admin-requests`-flöde.
 
-State som måste överleva mellan körningar:
+Båda använder en temporär `DATA_DIR` i workflow-runnern för den enskilda körningen,
+medan publiceringen till Supabase fortfarande sker på samma sätt som vanligt.
 
-- leveranshistorik
-- daily sync state
-- rå- och exportfiler
-
-Manuella adminkörningar via `foretagslistor.se/admin` kan däremot köras direkt via GitHub Actions `workflow_dispatch` på GitHub-hosted Linux. Då används en temporär runtime-mapp bara för den enskilda körningen, medan publiceringen till Supabase fortfarande sker på samma sätt som vanligt.
+Det innebär att lokal filbaserad runtime-state som leveranshistorik, daily sync state,
+råfiler och exportfiler inte överlever mellan olika GitHub Actions-körningar.
 
 ## Webbadmin
 
