@@ -35,12 +35,13 @@ on:
 
 concurrency:
   group: foretagslistor-daily-import
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 jobs:
   sync-scheduled:
     if: github.event_name == 'schedule'
     runs-on: ubuntu-latest
+    timeout-minutes: 60
     env:
       DATA_DIR: ${{ github.workspace }}/.runtime-data
       SCB_PASSWORD: ${{ secrets.SCB_PASSWORD }}
@@ -88,6 +89,7 @@ jobs:
   sync-manual:
     if: github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
+    timeout-minutes: 60
     env:
       DATA_DIR: ${{ github.workspace }}/.runtime-data
       SCB_PASSWORD: ${{ secrets.SCB_PASSWORD }}
