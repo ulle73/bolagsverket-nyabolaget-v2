@@ -91,3 +91,20 @@ test('scheduled workflow queues and processes admin import requests instead of r
     'Expected scheduled job to use the normal admin-request flow without skip flags',
   );
 });
+
+test('manual process_admin_requests workflow accepts request_id targeting and forwards it to the processor', async () => {
+  const workflow = await readFile(WORKFLOW_PATH, 'utf8');
+
+  assert.match(
+    workflow,
+    /request_id:\s*\n\s*description:\s*Specific admin_import_requests row to process/,
+  );
+  assert.match(
+    workflow,
+    /args\+=\("--request-id=\$\{\{\s*inputs\.request_id\s*\}\}"\)/,
+  );
+  assert.match(
+    workflow,
+    /npm run process:admin-requests -- "\$\{args\[@\]\}"/,
+  );
+});

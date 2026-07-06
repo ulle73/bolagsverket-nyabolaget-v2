@@ -66,6 +66,7 @@ test('processAdminImportRequests completes a queued daily request without rerunn
 
 test('processAdminImportRequests runs range backfills with explicit dates', async () => {
   const seenArgs = [];
+  const seenListPendingCalls = [];
   const completedRequests = [];
 
   const exitCode = await processAdminImportRequests([], {
@@ -74,14 +75,21 @@ test('processAdminImportRequests runs range backfills with explicit dates', asyn
     assertEnv: () => {},
     createClient: async () => ({}),
     createRepositoryForClient: () => ({
-      listPending: async () => [
-        {
-          id: 'req_range',
-          request_type: 'range',
-          from_date: '2026-04-07',
-          to_date: '2026-04-09',
-        },
-      ],
+      listPending: async (limit, requestId) => {
+        seenListPendingCalls.push({
+          limit,
+          requestId,
+        });
+
+        return [
+          {
+            id: 'req_range',
+            request_type: 'range',
+            from_date: '2026-04-07',
+            to_date: '2026-04-09',
+          },
+        ];
+      },
       markProcessing: async () => {},
       markCompleted: async (id, processedDates) => {
         completedRequests.push({
@@ -100,10 +108,70 @@ test('processAdminImportRequests runs range backfills with explicit dates', asyn
   });
 
   assert.equal(exitCode, 0);
+  assert.deepEqual(seenListPendingCalls, [
+    {
+      limit: 10,
+      requestId: null,
+    },
+  ]);
   assert.deepEqual(seenArgs, [[
     '--from=2026-04-07',
     '--to=2026-04-09',
   ]]);
+  assert.deepEqual(completedRequests, [
+    {
+      id: 'req_range',
+      processedDates: ['2026-04-07', '2026-04-08', '2026-04-09'],
+    },
+  ]);
+});
+
+test('processAdminImportRequests can target one explicit pending request id', async () => {
+  const seenListPendingCalls = [];
+  const completedRequests = [];
+
+  const exitCode = await processAdminImportRequests(['--request-id=req_range'], {
+    write: () => {},
+    loadEnv: async () => {},
+    assertEnv: () => {},
+    createClient: async () => ({}),
+    createRepositoryForClient: () => ({
+      listPending: async (limit, requestId) => {
+        seenListPendingCalls.push({
+          limit,
+          requestId,
+        });
+
+        return [
+          {
+            id: 'req_range',
+            request_type: 'range',
+            from_date: '2026-04-07',
+            to_date: '2026-04-09',
+          },
+        ];
+      },
+      markProcessing: async () => {},
+      markCompleted: async (id, processedDates) => {
+        completedRequests.push({
+          id,
+          processedDates,
+        });
+      },
+      markFailed: async () => {
+        throw new Error('Request should not fail in this test');
+      },
+    }),
+    runRange: async () => 0,
+  });
+
+  assert.equal(exitCode, 0);
+  assert.deepEqual(seenListPendingCalls, [
+    {
+      limit: 10,
+      requestId: 'req_range',
+    },
+  ]);
   assert.deepEqual(completedRequests, [
     {
       id: 'req_range',

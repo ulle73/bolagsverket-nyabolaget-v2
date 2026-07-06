@@ -19,13 +19,19 @@ function isCliEntrypoint(modulePath, argvPath) {
 
 function createRepository(client) {
   return {
-    async listPending(limit = 10) {
-      const { data, error } = await client
+    async listPending(limit = 10, requestId = null) {
+      let query = client
         .from('admin_import_requests')
         .select('*')
-        .eq('status', 'pending')
-        .order('created_at', { ascending: true })
-        .limit(limit);
+        .eq('status', 'pending');
+
+      if (requestId) {
+        query = query.eq('id', requestId).limit(1);
+      } else {
+        query = query.order('created_at', { ascending: true }).limit(limit);
+      }
+
+      const { data, error } = await query;
 
       if (error) {
         throw new Error(error.message);
@@ -188,7 +194,9 @@ export async function processAdminImportRequests(
   } = {},
 ) {
   const limitArg = args.find((value) => value.startsWith('--limit='));
+  const requestIdArg = args.find((value) => value.startsWith('--request-id='));
   const limit = Number.parseInt(limitArg?.split('=')[1] ?? '10', 10);
+  const requestId = requestIdArg?.split('=')[1]?.trim() || null;
 
   await loadEnv();
   assertEnv();
@@ -197,9 +205,15 @@ export async function processAdminImportRequests(
   const repository = createRepositoryForClient(client);
   const pendingRequests = await repository.listPending(
     Number.isFinite(limit) && limit > 0 ? limit : 10,
+    requestId,
   );
 
   if (pendingRequests.length === 0) {
+    if (requestId) {
+      write(`Ingen väntande admin-importförfrågan hittades för ${requestId}.\n`);
+      return 0;
+    }
+
     write('Inga väntande admin-importförfrågningar.\n');
     return 0;
   }

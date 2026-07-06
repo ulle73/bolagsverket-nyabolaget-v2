@@ -32,6 +32,10 @@ on:
         type: boolean
         required: false
         default: false
+      request_id:
+        description: Specific admin_import_requests row to process
+        type: string
+        required: false
 
 concurrency:
   group: foretagslistor-daily-import
@@ -134,7 +138,13 @@ jobs:
 
       - name: Process admin requests on demand
         if: inputs.run_mode == 'process_admin_requests'
-        run: npm run process:admin-requests
+        shell: bash
+        run: |
+          args=()
+          if [ -n "${{ inputs.request_id }}" ]; then
+            args+=("--request-id=${{ inputs.request_id }}")
+          fi
+          npm run process:admin-requests -- "${args[@]}"
 
       - name: Verify latest published snapshot freshness
         if: inputs.verify_publication == true || inputs.verify_publication == 'true'
