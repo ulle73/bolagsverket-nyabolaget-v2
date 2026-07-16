@@ -12,6 +12,7 @@
     "queue:scheduled-daily-request": "node src/queue-scheduled-daily-request.js",
     "process:admin-requests": "node src/admin-import-requests.js",
     "verify:publication": "node src/verify-publication.js",
+    "revenue:enrich": "node revenue-enricher/enrich.js",
     "test": "node --test"
   },
   "dependencies": {

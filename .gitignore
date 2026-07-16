@@ -10,3 +10,8 @@ desktop.ini
 
 # Browser profile artifacts from Puppeteer / scraping runs
 .eniro-browser-profile/
+.allabolag-revenue-profile/
+
+# revenue-enricher checkpoint output
+revenue-enricher/oldest-revenue.json
+revenue-enricher/oldest-revenue-*.json
